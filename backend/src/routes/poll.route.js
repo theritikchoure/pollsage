@@ -15,6 +15,30 @@ module.exports = router;
 router.post("/", asyncHandler(addPoll));
 
 /**
+ * @route GET api/app/about-us
+ * @description get all about us keys
+ * @returns JSON
+ * @access public
+ */
+router.get("/:pollId", asyncHandler(getPoll));
+
+/**
+ * @route GET api/app/about-us
+ * @description get all about us keys
+ * @returns JSON
+ * @access public
+ */
+router.post("/submit/:pollId", asyncHandler(submitPoll));
+
+/**
+ * @route GET api/app/about-us
+ * @description get all about us keys
+ * @returns JSON
+ * @access public
+ */
+router.get("/result/:pollId", asyncHandler(pollResult));
+
+/**
  * @description add poll
  */
 async function addPoll(req, res, next) {
@@ -23,6 +47,48 @@ async function addPoll(req, res, next) {
     if (response) return createResponse(res, resStatusCode.CREATED, resMsg.CREATED, response);
     else
       return createError(res, resStatusCode.UNABLE_CREATE, { message: resMsg.UNABLE_CREATE });
+  } catch (e) {
+    return createError(res, resStatusCode.BAD_REQUEST, e);
+  }
+}
+
+/**
+ * @description get poll
+ */
+async function getPoll(req, res, next) {
+  try {
+    let response = await pollCtrl.getPoll(req);
+    if (response) return createResponse(res, resStatusCode.SUCCESS_FETCH, resMsg.SUCCESS_FETCH, response);
+    else
+      return createError(res, resStatusCode.UNABLE_FETCH, { message: resMsg.UNABLE_FETCH });
+  } catch (e) {
+    return createError(res, resStatusCode.BAD_REQUEST, e);
+  }
+}
+
+/**
+ * @description submit poll
+ */
+async function submitPoll(req, res, next) {
+  try {
+    let response = await pollCtrl.submitPoll(req);
+    if (response) return createResponse(res, resStatusCode.SUCCESS, resMsg.SUCCESS, response);
+    else
+      return createError(res, resStatusCode.BAD_REQUEST, { message: resMsg.BAD_REQUEST });
+  } catch (e) {
+    return createError(res, resStatusCode.BAD_REQUEST, e);
+  }
+}
+
+/**
+ * @description submit poll
+ */
+async function pollResult(req, res, next) {
+  try {
+    let response = await pollCtrl.pollResult(req);
+    if (response) return createResponse(res, resStatusCode.SUCCESS, resMsg.SUCCESS, response);
+    else
+      return createError(res, resStatusCode.BAD_REQUEST, { message: resMsg.BAD_REQUEST });
   } catch (e) {
     return createError(res, resStatusCode.BAD_REQUEST, e);
   }

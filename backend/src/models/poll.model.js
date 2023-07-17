@@ -24,6 +24,7 @@ const pollSchema = new mongoose.Schema(
   }
 );
 
+pollSchema.index({ pollId: 1 }); // Index for faster lookup using pollId
 pollSchema.index({ 'options.text': 'text' }); // Index for text search on option text
 
 module.exports = mongoose.model("Poll", pollSchema);
