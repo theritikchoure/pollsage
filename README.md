@@ -1,3 +1,12 @@
+<h1 align="center">
+	<br>
+	<br>
+	<img width="100" src="./quiz-react/public/logo.png" alt="PollSage">
+	<br>
+	<br>
+	<br>
+</h1>
+
 # PollSage
 
 PollSage is a web application that allows users to create and participate in polls. It provides a platform for users to gather opinions and make data-driven decisions.
