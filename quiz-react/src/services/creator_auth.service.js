@@ -7,7 +7,7 @@ import jwt_decode from "jwt-decode";
 
 const creatorRegister = async (userData) => {
   try {
-    let res = await api.post("/auth/register", userData);
+    let res = await api.post("/creators/auth/register", userData);
     return res.data;
   } catch (error) {
     throw getAPIResponseError(error);
@@ -16,7 +16,7 @@ const creatorRegister = async (userData) => {
 
 const verifyToken = async (token) => {
   try {
-    let res = await api.post(`/auth/verify/${token}`);
+    let res = await api.post(`/creators/auth/verify/${token}`);
     return res.data;
   } catch (error) {
     throw getAPIResponseError(error);
@@ -25,7 +25,7 @@ const verifyToken = async (token) => {
 
 const creatorLogin = async (userData) => {
   try {
-    let res = await api.post("/auth/login", userData);
+    let res = await api.post("/creators/auth/login", userData);
     console.log(res.data);
     setLoginToken(res.data.data);
     return res.data;
@@ -36,7 +36,7 @@ const creatorLogin = async (userData) => {
 
 const creatorForgetPassword = async (data) => {
   try {
-    let res = await api.post("/auth/forget-password", data);
+    let res = await api.post("/creators/auth/forget-password", data);
     console.log(res.data);
     return res.data;
   } catch (error) {
@@ -46,7 +46,7 @@ const creatorForgetPassword = async (data) => {
 
 const creatorResetPassword = async (data) => {
   try {
-    let res = await api.post("/auth/reset-password", data);
+    let res = await api.post("/creators/auth/reset-password", data);
     console.log(res.data);
     return res.data;
   } catch (error) {

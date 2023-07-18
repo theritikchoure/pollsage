@@ -1,9 +1,9 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
-const authCtrl = require("../../controllers/auth.controller.js");
+const authCtrl = require("../../../controllers/auth.controller.js");
 const router = express.Router();
-const { resMsg, resStatusCode } = require("../../../config/constant.js");
-const { createResponse, createError } = require("../../../utils/helpers.js");
+const { resMsg, resStatusCode } = require("../../../../config/constant.js");
+const { createResponse, createError } = require("../../../../utils/helpers.js");
 module.exports = router;
 
 /**

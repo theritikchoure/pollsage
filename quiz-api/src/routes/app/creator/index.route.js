@@ -1,6 +1,6 @@
 const express = require('express');
-const pollRoutes = require('./poll.route.js');
-const creatorRoutes = require('./app/creator/index.route.js');
+// const pollRoutes = require('./poll.route.js');
+const authRoutes = require('./auth.route.js');
 // const appRoutes = require('./app/index.route');
 // const passport = require("passport");
 // const requireAdmin = require('../middleware/require-admin');
@@ -12,9 +12,10 @@ router.get('/health-check', (req, res) =>
   res.send('OK')
 );  
 
-/** /polls - for polls related routes */
-router.use('/polls', pollRoutes);
+/** GET /auth - auth service */
+router.use('/auth', authRoutes);
 
-router.use('/creators', creatorRoutes);
+/** /polls - for polls related routes */
+// router.use('/polls', pollRoutes);
 
 module.exports = router;
