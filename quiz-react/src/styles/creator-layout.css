@@ -1,0 +1,22 @@
+  /* Additional custom styles */
+  .sidebar {
+      height: 100vh;
+  }
+
+  .sub-menu {
+      display: none;
+  }
+
+  .sidebar-item:hover .sub-menu {
+      display: block;
+  }
+
+  @media (max-width: 767px) {
+      .sub-menu {
+          display: block;
+      }
+
+      .sidebar-item:hover .sub-menu {
+          display: none;
+      }
+  }
