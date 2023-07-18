@@ -55,7 +55,7 @@ After installing Node.js and MongoDB, follow the steps below:
 
 ## Screenshots
 
-![Home Page](https://user-images.githubusercontent.com/54600664/132952421-4b5b8b0a-0b0a-4b0a-8b0a-9b0a0b0a0b0a.png)
+![Home Page](./screenshots/home.png)
 ![Poll Page](https://user-images.githubusercontent.com/54600664/132952422-4b5b8b0a-0b0a-4b0a-8b0a-9b0a0b0a0b0a.png)
 ![Poll Results](https://user-images.githubusercontent.com/54600664/132952423-4b5b8b0a-0b0a-4b0a-8b0a-9b0a0b0a0b0a.png)
 ![Poll Analytics](https://user-images.githubusercontent.com/54600664/132952424-4b5b8b0a-0b0a-4b0a-8b0a-9b0a0b0a0b0a.png)
