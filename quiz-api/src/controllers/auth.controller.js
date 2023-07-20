@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { resMsg, defaultLen } = require("../../config/constant");
 const { handleControllerError } = require("../../utils/helpers");
-const PollCreator = require("../models/poll_creator.model");
+const PollCreator = require("../models/creator.model");
 const uuid = require("uuid");
 const sendMail = require("../../config/mail");
 
@@ -143,7 +143,7 @@ async function login(req) {
     }
 
     // Generate JWT token
-    const token = jwt.sign({ userId: pollCreator._id, name: pollCreator.name }, 'your-secret-key');
+    const token = jwt.sign({ id: pollCreator._id, name: pollCreator.name, role: 'creator' }, 'your-secret-key');
 
     return { token };
   } catch (e) {

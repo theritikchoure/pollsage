@@ -15,6 +15,7 @@ import CreatePoll from "./views/poll/create_poll";
 import ViewPoll from "./views/poll/view_poll";
 import PollResult from "./views/poll/poll_result.js";
 import Loader from "./components/_loader";
+import Chat from "./views/chat.js"
 
 function App() {
 
@@ -63,6 +64,8 @@ function App() {
           <Route exact path="/404" element={<NotFound />} />
           <Route exact path="/poll/:pollId" element={<ViewPoll />} />
           <Route exact path="/results/:pollId" element={<PollResult />} />
+
+          <Route exact path="/chat/:pollId" element={<Chat />} />
         </Routes>
       </Suspense>
     {/* // </Router> */}

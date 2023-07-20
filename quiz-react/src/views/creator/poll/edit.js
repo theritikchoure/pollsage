@@ -5,6 +5,7 @@ import { dismissToast, errorToast, loadingToast, successToast } from "../../../u
 import PageDetails from "../../../components/_page_details";
 import { useNavigate } from "react-router-dom";
 import Form from "./form";
+import { getPoll, updatePoll } from "../../../services/creator/poll.service";
 
 const CreatePoll = () => {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const CreatePoll = () => {
 
   const [booleanValue, setBooleanValue] = useState({
     showDescription: false,
-    showPassword: true,
+    showPassword: false,
   });
 
   const [isFormDirty, setIsFormDirty] = useState(false);
@@ -58,9 +59,47 @@ const CreatePoll = () => {
     };
   }, [isFormDirty]);
 
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async (pId) => {
+    try {
+      // load the poll
+      const id = window.location.pathname.split("/")[3];
+      let res = await getPoll(id);
+      delete res.data.createdAt;
+      delete res.data.updatedAt;
+      setFormData(res.data);
+      if(res.data.description) {
+        setBooleanValue({ ...booleanValue, showDescription: true });
+      }
+
+      if(res.data.password || res.data.start_date || res.data.end_date) {
+        setAdditionalFeatures(true);
+
+        if(res.data.password) {
+        setBooleanValue({ ...booleanValue, showPassword: true });
+        }
+
+        if(res.data.start_date) {
+          setMinPollEndDate(res.data.start_date);
+        }
+      }
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // write on change booleanValue
   const onChangeBooleanValue = (key, value) => {
     if (!key) return;
+
+    if(key === "showPassword") {
+      setFormData({ ...formData, password: null });
+    }
+
     setBooleanValue({ ...booleanValue, [key]: value });
   };
 
@@ -121,6 +160,7 @@ const CreatePoll = () => {
     try {
       e.preventDefault();
       setLoading(true);
+      console.log(formData)
       const { isValid, errors } = createPollValidation(formData);
       console.log(errors);
       if (!isValid) {
@@ -131,17 +171,21 @@ const CreatePoll = () => {
 
       setErrors({});
 
-      loadingToast("Creating poll...");
+      loadingToast("Updating poll...");
+
+      let pollId = formData.pollId;
+      delete formData.pollId;
+      delete formData._id;
 
       // write api call here
-      let res = await createPoll(formData);
+      let res = await updatePoll(pollId, formData);
 
       if (res) {
         setFormData(initialState);
         setRegisterSuccess(true);
         setLoading(false);
         dismissToast();
-        successToast("Poll created successfully.");
+        successToast("Poll updated successfully.");
         navigate("/creator/polls");
       }
 
@@ -469,25 +513,6 @@ const CreatePoll = () => {
                                   type="checkbox"
                                   id="formCheckbox"
                                   className=""
-                                  checked={formData.require_name}
-                                  onChange={(event) =>
-                                    onChangeFormData("require_name", event.target.checked)
-                                  }
-                                />
-                              </div>
-                              <p className="ml-2">Require participants' names</p>
-                            </label>
-                          </div>
-                          <div className="mb-4">
-                            <label
-                              htmlFor="formCheckbox"
-                              className="flex cursor-pointer"
-                            >
-                              <div className="relative pt-0.5">
-                                <input
-                                  type="checkbox"
-                                  id="formCheckbox"
-                                  className=""
                                   checked={booleanValue.showPassword}
                                   onChange={() =>
                                     onChangeBooleanValue(
@@ -523,7 +548,7 @@ const CreatePoll = () => {
                     <div className="mb-4 flex flex-col gap-6 xl:flex-row">
                       <input
                         type="submit"
-                        value={"Create poll"}
+                        value={"Update poll"}
                         className="flex cursor-pointer w-full justify-center rounded bg-gray-900 border border-gray-600 hover:bg-gray-900 p-3 font-medium text-gray"
                       />
                     </div>

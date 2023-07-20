@@ -276,7 +276,7 @@ export const getAPIResponseError = (e) => {
       //     break;
       // }
       if (e.response.data.message) {
-        return e.response.data.message;
+        return {code, message: e.response.data.message};
       }
     }
   }
@@ -510,4 +510,8 @@ export const convertToWebP = (inputFile, newfileName, resolution, callback) => {
 
     callback(output, new File([u8arr], newfileName, { type: mime }));
   }
+}
+
+export const formattedDateFromNow = (timestamp) => {
+  return moment(timestamp).fromNow();
 }

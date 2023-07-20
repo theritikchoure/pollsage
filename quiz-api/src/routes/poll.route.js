@@ -39,6 +39,14 @@ router.post("/submit/:pollId", asyncHandler(submitPoll));
 router.get("/result/:pollId", asyncHandler(pollResult));
 
 /**
+ * @route GET api/app/about-us
+ * @description get all about us keys
+ * @returns JSON
+ * @access public
+ */
+router.get("/check-password/:pollId", asyncHandler(checkPasswordProtection));
+
+/**
  * @description add poll
  */
 async function addPoll(req, res, next) {
@@ -86,6 +94,20 @@ async function submitPoll(req, res, next) {
 async function pollResult(req, res, next) {
   try {
     let response = await pollCtrl.pollResult(req);
+    if (response) return createResponse(res, resStatusCode.SUCCESS, resMsg.SUCCESS, response);
+    else
+      return createError(res, resStatusCode.BAD_REQUEST, { message: resMsg.BAD_REQUEST });
+  } catch (e) {
+    return createError(res, resStatusCode.BAD_REQUEST, e);
+  }
+}
+
+/**
+ * @description check password protection
+ */
+async function checkPasswordProtection(req, res, next) {
+  try {
+    let response = await pollCtrl.checkPasswordProtection(req);
     if (response) return createResponse(res, resStatusCode.SUCCESS, resMsg.SUCCESS, response);
     else
       return createError(res, resStatusCode.BAD_REQUEST, { message: resMsg.BAD_REQUEST });

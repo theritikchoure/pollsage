@@ -18,6 +18,7 @@ PollSage is a web application that allows users to create and participate in pol
 - **Vote on Polls:** Users can participate in polls by selecting their preferred answer option(s). They can choose a single option or multiple options based on the poll's configuration.
 - **View Poll Results:** Users can view the results of a poll, including the number and percentage of votes for each option. The results are displayed in a visually appealing chart format.
 - **Comment Sections:** Participants can provide additional feedback and comments on polls. They can express their thoughts, share insights, or ask questions related to the poll.
+
 - **Draft Saving:** Users can save their polls as drafts and continue editing them later. This feature allows users to work on complex or time-consuming polls without losing progress.
 - **Poll Expiration:** Poll creators can set a start and end date for their polls. This feature ensures that the poll is active and accepting votes only within the specified timeframe.
 - **Poll Visibility:** Poll creators can choose to make their polls public or limit access to specific participants. They have the option to share the poll publicly or restrict it to a select group of individuals.
@@ -46,21 +47,30 @@ This project is open to contributions from anyone. If you would like to contribu
 
 ## Installation
 
-To run the application locally, you must have Node.js and MongoDB installed on your machine. You can download Node.js from [here](https://nodejs.org/en/download/) and MongoDB from [here](https://www.mongodb.com/try/download/community).
+To run the application locally, you must have Docker installed on your machine. You can download Docker from [here](https://www.docker.com/).
 
-After installing Node.js and MongoDB, follow the steps below:
+#### 1. Clone the Repository
 
-1. Clone the repository to your local machine
-2. Navigate to the project directory
-3. Navigate to `quiz-api` directory
-4. Setup `.env` environment variables
-5. Run `npm install` to install dependencies
-6. Run `npm run dev` to start the development server
-7. Open new terminal
-8. Navigate to `quiz-app` directory
-9. Run `npm install` to install dependencies
-10. Run `npm start` to start the application
-11. Open your browser and navigate to `localhost:3000`
+Clone the repository from GitHub to your local machine.
+
+```
+git clone https://github.com/your-username/pollsage.git
+cd pollsage
+```
+
+#### 2. Docker Compose Setup
+
+Make sure you have Docker and Docker Compose installed on your system.
+
+#### 3. Build and Run
+
+Use Docker Compose to build and run the containers:
+
+```
+docker-compose up --build
+```
+
+This command will build the images and start the containers for MongoDB, Redis, Backend, and Frontend.
 
 ## Screenshots
 

@@ -21,8 +21,8 @@ const Sidebar = () => {
   const handleLogout = () => {
     logout();
     successToast("Logged out successfully");
-    navigate('/')
-  }
+    navigate("/");
+  };
 
   return (
     <div className="fixed flex flex-col left-0 w-14 hover:w-64 md:w-64 bg-blue-900 dark:bg-gray-900 h-full text-white transition-all duration-300 border-none z-10 sidebar">
@@ -56,7 +56,9 @@ const Sidebar = () => {
                   ></path>
                 </svg>
               </span>
-              <span className="ml-2 text-sm tracking-wide truncate">Dashboard</span>
+              <span className="ml-2 text-sm tracking-wide truncate">
+                Dashboard
+              </span>
             </Link>
           </li>
           <li>
@@ -65,35 +67,55 @@ const Sidebar = () => {
               className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
             >
               <span className="inline-flex justify-center items-center ml-4">
-              <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <circle cx="12" cy="12" r="10" />
-  <line x1="12" y1="8" x2="12" y2="16" />
-  <line x1="8" y1="12" x2="16" y2="12" />
-</svg>
+                <svg
+                  className="w-5 h-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="16" />
+                  <line x1="8" y1="12" x2="16" y2="12" />
+                </svg>
               </span>
-              <span className="ml-2 text-sm tracking-wide truncate">Create poll</span>
+              <span className="ml-2 text-sm tracking-wide truncate">
+                Create poll
+              </span>
               <span className="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-blue-500 bg-indigo-50 rounded-full">
                 New
               </span>
             </Link>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to={"/creator/polls"}
               className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
             >
               <span className="inline-flex justify-center items-center ml-4">
-              <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <line x1="8" y1="6" x2="21" y2="6"/>
-  <line x1="8" y1="12" x2="21" y2="12"/>
-  <line x1="8" y1="18" x2="21" y2="18"/>
-  <line x1="3" y1="6" x2="3" y2="6"/>
-  <line x1="3" y1="12" x2="3" y2="12"/>
-  <line x1="3" y1="18" x2="3" y2="18"/>
-</svg>
+                <svg
+                  className="w-5 h-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="8" y1="6" x2="21" y2="6" />
+                  <line x1="8" y1="12" x2="21" y2="12" />
+                  <line x1="8" y1="18" x2="21" y2="18" />
+                  <line x1="3" y1="6" x2="3" y2="6" />
+                  <line x1="3" y1="12" x2="3" y2="12" />
+                  <line x1="3" y1="18" x2="3" y2="18" />
+                </svg>
               </span>
               <span className="ml-2 text-sm tracking-wide truncate">Polls</span>
-            </a>
+            </Link>
           </li>
           <li>
             <a
@@ -152,7 +174,9 @@ const Sidebar = () => {
                   ></path>
                 </svg>
               </span>
-              <span className="ml-2 text-sm tracking-wide truncate">Profile</span>
+              <span className="ml-2 text-sm tracking-wide truncate">
+                Profile
+              </span>
             </a>
           </li>
           <li>
@@ -182,7 +206,9 @@ const Sidebar = () => {
                   ></path>
                 </svg>
               </span>
-              <span className="ml-2 text-sm tracking-wide truncate">Settings</span>
+              <span className="ml-2 text-sm tracking-wide truncate">
+                Settings
+              </span>
             </a>
           </li>
           <li>
@@ -198,17 +224,23 @@ const Sidebar = () => {
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <path strokeLinecap="round"
+                  <path
+                    strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
-                   d="M12 2L22 12L12 22" />
-                  <path strokeLinecap="round"
+                    d="M12 2L22 12L12 22"
+                  />
+                  <path
+                    strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
-                  d="M8 12H20" />
+                    d="M8 12H20"
+                  />
                 </svg>
               </span>
-              <span className="ml-2 text-sm tracking-wide truncate">Logout</span>
+              <span className="ml-2 text-sm tracking-wide truncate">
+                Logout
+              </span>
             </button>
           </li>
         </ul>

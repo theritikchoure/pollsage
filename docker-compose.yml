@@ -1,26 +1,31 @@
 version: '3'
 services:
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - 80:80
-    depends_on:
-      - backend
-    networks:
-      - app-network
-
   backend:
     build:
-      context: ./backend
+      context: ./quiz-api
       dockerfile: Dockerfile
     ports:
-      - 3000:3000
+      - 5000:5000
     depends_on:
       - redis
     networks:
       - app-network
+    volumes:
+      - ./quiz-api:/app
+    command: npm run dev
+
+  # frontend:
+  #   build:
+  #     context: ./quiz-react
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 80:80
+  #   depends_on:
+  #     - backend
+  #   networks:
+  #     - app-network
+  #   volumes:
+  #     - ./quiz-react:/app
 
   redis:
     image: redis:latest
@@ -29,16 +34,23 @@ services:
     networks:
       - app-network
 
-  nginx:
-    image: nginx:1.21
+  mongo:
+    image: mongo:latest
     ports:
-      - 8080:80
-    volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-    depends_on:
-      - frontend
+      - 27017:27017
     networks:
       - app-network
+
+  # nginx:
+  #   image: nginx:1.21
+  #   ports:
+  #     - 8080:80
+  #   volumes:
+  #     - ./quiz-react/nginx/default.conf:/etc/nginx/conf.d/default.conf
+  #   depends_on:
+  #     - frontend
+  #   networks:
+  #     - app-network
 
 networks:
   app-network:

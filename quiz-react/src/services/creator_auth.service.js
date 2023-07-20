@@ -54,7 +54,6 @@ const creatorResetPassword = async (data) => {
   }
 };
 
-const updateUser = (userId, userData) => api.put(`/users/${userId}`, userData);
 const deleteUser = (userId) => api.delete(`/users/${userId}`);
 
 const setLoginToken = (data) => {
@@ -83,5 +82,5 @@ export {
   creatorLogin,
   creatorForgetPassword,
   creatorResetPassword,
-  logout
+  logout,
 };

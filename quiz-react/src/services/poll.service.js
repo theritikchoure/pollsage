@@ -1,9 +1,16 @@
 import { getAPIResponseError } from "../helpers/common.js";
 import api from "./api.service.js";
 
-const getPoll = async (pollId) => {
+const getPoll = async (pollId, password = null) => {
   try {
-    let res = await api.get(`/polls/${pollId}`);
+    let url;
+    if (password) {
+      url = `/polls/${pollId}?password=${password}`;
+    } else {
+      url = `/polls/${pollId}`;
+    }
+
+    let res = await api.get(url);
     return res.data;
   } catch (error) {
     throw getAPIResponseError(error);
@@ -37,6 +44,15 @@ const getPollResult = async (pollId, data) => {
   }
 };
 
+const checkPasswordProtection = async (pollId) => {
+  try {
+    let res = await api.get(`/polls/check-password/${pollId}`);
+    return res.data;
+  } catch (error) {
+    throw getAPIResponseError(error);
+  }
+};
+
 export {
-  createPoll, getPoll, submitPoll, getPollResult
+  createPoll, getPoll, submitPoll, getPollResult, checkPasswordProtection
 };

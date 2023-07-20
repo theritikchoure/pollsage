@@ -216,7 +216,7 @@ const Home = () => {
           </h1>
 
           <p className="mx-auto mt-4 max-w-xl sm:text-xl/relaxed">
-          Empower Your Decision-Making with Pollsage
+          Empower Your Decision-Making with PollSage
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-4">

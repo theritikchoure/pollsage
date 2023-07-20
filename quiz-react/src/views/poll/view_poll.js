@@ -1,10 +1,16 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { submitPollValidation } from "../../validations/poll.js";
-import { getPoll, submitPoll } from "../../services/poll.service";
+import {
+  checkPasswordProtection,
+  getPoll,
+  submitPoll,
+} from "../../services/poll.service";
 import { errorToast, successToast } from "../../utils/toaster";
 import ShareModal from "../../components/share_modal.js";
 import Loader from "../../components/_loader.js";
 import PageDetails from "../../components/_page_details.js";
+import { Link } from "react-router-dom";
+import Comment from "../../components/comment.js";
 
 const ViewPoll = () => {
   const initialState = {
@@ -21,6 +27,9 @@ const ViewPoll = () => {
   const [poll, setPoll] = useState(null);
   const [pollUrl, setPollUrl] = useState(null);
   const [showShareModal, setShowShareModal] = useState(false);
+  const [notFound, setNotFound] = useState(false);
+  const [passwordProtected, setPasswordProtected] = useState(false);
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     loadData();
@@ -31,11 +40,34 @@ const ViewPoll = () => {
       // load the poll
       const id = window.location.pathname.split("/")[2];
       setPollId(id);
-      let res = await getPoll(id);
-      setPoll(res.data);
+      let response = await checkPasswordProtection(id);
+      console.log(response);
+      if (response.data && response.data.password_protected) {
+        setPasswordProtected(true);
+      } else {
+        let res = await getPoll(id);
+        setPoll(res.data);
+      }
+
       setPollUrl(window.location.href);
       await loadUserIp();
     } catch (error) {
+      console.log(error);
+      setNotFound(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const loadPoll = async (e) => {
+    try {
+      e.preventDefault();
+      setLoading(true);
+      const res = await getPoll(pollId, password);
+      setPoll(res.data);
+      setPasswordProtected(false);
+    } catch (error) {
+      errorToast(error.message);
     } finally {
       setLoading(false);
     }
@@ -46,7 +78,14 @@ const ViewPoll = () => {
       // load the poll
       let res = await fetch("https://ipv4.jsonip.com/");
       res = await res.json();
-      setFormData({ ...formData, ip: res.ip, country: res.country });
+      let geoLocation = await fetch(`http://ip-api.com/json/${res.ip}`);
+      geoLocation = await geoLocation.json();
+      setFormData({
+        ...formData,
+        ip: res.ip,
+        country: res.country,
+        geo_location: geoLocation,
+      });
     } catch (error) {
     } finally {
       setLoading(false);
@@ -70,7 +109,10 @@ const ViewPoll = () => {
   const onSubmit = async (e) => {
     try {
       e.preventDefault();
-      const { isValid, errors } = submitPollValidation(formData);
+      const { isValid, errors } = submitPollValidation(
+        formData,
+        poll.require_name
+      );
       if (!isValid) {
         setErrors(errors);
         return;
@@ -95,13 +137,15 @@ const ViewPoll = () => {
       <div className="min-h-screen bg-gray-900 p-0 p-12">
         {/* loading... text center horizontally and vertically */}
         {loading && <Loader />}
-        {!loading && (
+        {!loading && poll && (
           <>
             <PageDetails title={poll.question} />
             <div className="mx-auto max-w-md px-6 py-12 bg-gray-800 border-0 shadow-lg rounded-xl">
-              <h1 className="text-2xl font-bold mb-4 text-gray-100">{poll.question}</h1>
+              <h1 className="text-2xl font-bold mb-4 text-gray-100">
+                {poll.question}
+              </h1>
               <form onSubmit={onSubmit}>
-                <fieldset className="relative z-0 w-full p-px mb-5">
+                <fieldset className="relative z-0 w-full p-px mb-2">
                   <div className="block pt-3 pb-2">
                     {poll.options.map((option, index) => (
                       <div className="mb-4" key={index}>
@@ -125,6 +169,29 @@ const ViewPoll = () => {
                     )}
                   </div>
                 </fieldset>
+
+                {poll.require_name && (
+                  <div className="mb-4">
+                    <label className="mb-2.5 block text-black dark:text-white">
+                      Require participant's name
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Enter your name"
+                      className={`w-full rounded border-[1.5px] text-gray-100 bg-transparent py-3 px-5 font-medium 
+                      outline-none transition focus:border-primary active:border-primary disabled:cursor-default 
+                      disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary
+                      ${errors.name ? "border-red-500" : "border-gray-600"}`}
+                      value={formData.name || ""}
+                      onChange={(e) => onChangeFormData("name", e.target.value)}
+                    />
+                    {errors.name && (
+                      <p className="text-red-500 text-sm mt-1 text-left italic">
+                        {errors.name}
+                      </p>
+                    )}
+                  </div>
+                )}
 
                 <input
                   id="button"
@@ -190,6 +257,69 @@ const ViewPoll = () => {
               </svg>
 
               <span>One vote per IP-Address allowed.</span>
+            </div>
+
+            <Comment pollId={pollId} />
+          </>
+        )}
+        {!loading && passwordProtected && (
+          <>
+            <PageDetails title={"Password Protected Poll - PollSage"} />
+            <div className="mx-auto max-w-md px-6 py-12 bg-gray-800 border-0 shadow-lg rounded-xl">
+              <h1 className="text-2xl text-center font-bold mb-4 text-gray-100">
+                Poll is password protected
+              </h1>
+              <div className="mb-4">
+                <label className="mb-2.5 block text-black dark:text-white">
+                  Enter given password
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter given password"
+                  className="w-full rounded text-gray-400 border-[1.5px] border-gray-600 bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              {/* create button  */}
+              <button
+                onClick={loadPoll}
+                className="w-full justify-center text-gray-100 flex bg-gray-900 border border-gray-600 px-5 py-2 rounded items-center hover:bg-gray-900"
+              >
+                <span>Submit</span>
+              </button>
+            </div>
+          </>
+        )}
+        {!loading && notFound && (
+          <>
+            <PageDetails title={"Poll not found - Error 404 - PollSage"} />
+            <div className="mx-auto max-w-md px-6 py-12 bg-gray-800 border-0 shadow-lg rounded-xl">
+              <h1 className="text-2xl text-center font-bold mb-4 text-gray-100">
+                Poll not found
+              </h1>
+              <p className="text-center font-bold text-gray-100 text-9xl my-5">
+                404
+              </p>
+              <p className="text-center text-red-400">
+                The poll you are looking for either deleted or never existed.
+              </p>
+              {/* create button  */}
+              <div className="flex justify-center items-center mt-5 text-gray-100">
+                <Link
+                  to="/"
+                  className="w-full sm:w-40 flex bg-transparent border border-gray-600 px-5 py-2 rounded items-center hover:bg-gray-900"
+                >
+                  <span>Go to home</span>
+                </Link>
+
+                <Link
+                  to="/create-poll"
+                  className="w-full sm:w-40 sm:ml-4 bg-gray-900 border border-gray-600 px-5 py-2 rounded text-white flex items-center hover:bg-gray-800"
+                >
+                  <span>Create a poll</span>
+                </Link>
+              </div>
             </div>
           </>
         )}

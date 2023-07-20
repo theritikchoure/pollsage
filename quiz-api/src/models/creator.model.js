@@ -15,4 +15,4 @@ const customSchema = new mongoose.Schema({
     timestamps: true,
 });
 
-module.exports = mongoose.model("PollCreator", customSchema);
+module.exports = mongoose.model("creator", customSchema);

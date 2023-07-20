@@ -7,6 +7,9 @@ import UsersTable from "../../components/creator/user_table";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Dashboard from "./dashboard";
 import CreatePoll from "./poll/create.js";
+import PollsList from "./poll/list.js";
+import PollResult from "./poll/result.js";
+import EditPoll from "./poll/edit.js";
 
 const CreatorLayout = () => {
   return (
@@ -21,6 +24,9 @@ const CreatorLayout = () => {
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/create-poll" element={<CreatePoll />} />
+            <Route path="/edit-poll/:pollId" element={<EditPoll />} />
+            <Route path="/polls" element={<PollsList />} />
+            <Route path="/poll-result/:pollId" element={<PollResult />} />
             <Route path="*" element={<Navigate to={"/creator/dashboard"} />} />
           </Routes>
         </div>

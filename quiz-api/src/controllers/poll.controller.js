@@ -7,6 +7,7 @@ const {
 } = require("../../utils/helpers");
 const Poll = require("../models/poll.model");
 const PollResponse = require("../models/poll_response.model");
+const { getIO } = require("../../websocket");
 
 // AboutUs Validation Schema
 const pollSchema = Joi.object({
@@ -28,7 +29,8 @@ module.exports = {
   addPoll,
   getPoll,
   submitPoll,
-  pollResult
+  pollResult,
+  checkPasswordProtection,
 };
 
 /**
@@ -59,15 +61,31 @@ async function getPoll(req) {
       throw Error(resMsg.BAD_REQUEST);
     }
 
-    // find poll by pollId
-    const poll = await Poll.findOne({ pollId: req.params.pollId });
+    // find poll by pollId and publish status, exclude password field
+    const poll = await Poll.findOne({ pollId: req.params.pollId, publish_status: 'published' });
 
     // check poll is exist or not
     if (!poll) {
       throw Error(resMsg.NO_RECORD_FOUND);
     }
 
-    return poll;
+    if(poll.password) {
+      // check password from query string
+      if(!req.query.password) {
+        throw Error("Password is required");
+      }
+
+      // check password is correct or not
+      if(poll.password !== req.query.password) {
+        throw Error("Password is incorrect");
+      }
+    }
+
+    // remove password field from poll object
+    const response = poll.toObject();
+    delete response.password;
+
+    return response;
   } catch (e) {
     throw handleControllerError(e);
   }
@@ -75,6 +93,11 @@ async function getPoll(req) {
 
 async function submitPoll(req) {
   try {
+
+    const io = getIO();
+
+    console.log(io);
+
     // check req.body.optionId is exist or not
     if (!req.body.optionId) {
       throw Error("option id is required");
@@ -111,11 +134,17 @@ async function submitPoll(req) {
 
     // save the poll response
     await new PollResponse({
+      name: req.body.name || 'Guest',
       poll: poll._id,
       ipAddress: req.body.ip,
       optionId: optionId,
       country: req.body.country,
+      geo_location: req.body.geo_location,
     }).save();
+
+    const result = await getResult(pollId);
+
+    io.emit(`pollResultUpdated-${req.params.pollId}`, {pollId: req.params.pollId, result});
 
     return poll;
   } catch (e) {
@@ -128,6 +157,14 @@ async function pollResult(req) {
   try {
     const pollId = req.params.pollId;
     
+    return await getResult(pollId);
+  } catch (e) {
+    throw handleControllerError(e);
+  }
+}
+
+async function getResult(pollId) {
+  try {
     // Retrieve the poll from the database
     const poll = await Poll.findOne({ pollId });
 
@@ -136,7 +173,7 @@ async function pollResult(req) {
     }
 
     // Find the poll responses for the poll
-    const pollResponses = await PollResponse.find({ poll: poll._id });
+    const pollResponses = await PollResponse.find({ poll: poll._id }).sort({ createdAt: -1 });;
 
     // Calculate total votes
     const totalVotes = poll.options.reduce((total, option) => total + option.votes, 0);
@@ -149,6 +186,26 @@ async function pollResult(req) {
     };
 
     return pollResults;
+  } catch (e) {
+    throw handleControllerError(e);
+  }
+}
+
+async function checkPasswordProtection(req) {
+  try {
+    // check only poll is password protected or not
+    const poll = await Poll.findOne({ pollId: req.params.pollId, publish_status: 'published' });
+
+    // check poll is exist or not
+    if(!poll) {
+      throw Error(resMsg.NO_RECORD_FOUND);
+    }
+
+    if(poll.password) {
+      return { password_protected: true };
+    }
+
+    return { password_protected: false };
   } catch (e) {
     throw handleControllerError(e);
   }

@@ -6,11 +6,15 @@ import { createPollValidation } from "../../validations/poll.js";
 import { createPoll } from "../../services/poll.service";
 import { errorToast, successToast } from "../../utils/toaster";
 import PageDetails from "../../components/_page_details";
+import { useNavigate } from "react-router-dom";
 
 const CreatePoll = () => {
+
+  const navigate = useNavigate();
+
     const initialState = {
         question: "",
-        allowMultipleSelection: false,
+        allow_multiple_selection: false,
         options: [{ text: "" }, { text: "" }, { text: "" }, { text: "" }],
       };
 
@@ -48,11 +52,12 @@ const CreatePoll = () => {
 
       // write api call here
       let res = await createPoll(formData);
-
+      console.log(res)
       if (res) {
         // setFormData(initialState);
         setRegisterSuccess(true);
         successToast("Poll created successfully."); 
+        navigate(`/poll/${res.data.pollId}`)
         // window.location.href = links.creatorDashboard;
       }
     } catch (error) {
@@ -110,10 +115,10 @@ const CreatePoll = () => {
                           type="select"
                           className="px-4 bg-gray-700  py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-600 rounded-md focus:outline-none text-gray-100"
                           placeholder="Optional"
-                          value={formData.allowMultipleSelection}
+                          value={formData.allow_multiple_selection}
                           onChange={(e) =>
                             onChangeFormData(
-                              "allowMultipleSelection",
+                              "allow_multiple_selection",
                               e.target.value
                             )
                           }
