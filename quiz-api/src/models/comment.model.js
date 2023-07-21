@@ -24,6 +24,22 @@ const customSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    ip : {
+      type: String,
+      // required: true,
+    },
+    is_active: {
+      type: Boolean,
+      default: true,
+    },
+    geo_location: {
+      type: Object,
+      default: {},
+    },
+    sentiment : {
+      type: Object,
+      default: {},
+    },
   },
   {
     versionKey: false,
@@ -31,4 +47,4 @@ const customSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("comments", customSchema);
+module.exports = mongoose.model("Comment", customSchema);

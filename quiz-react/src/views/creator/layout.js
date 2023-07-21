@@ -10,6 +10,7 @@ import CreatePoll from "./poll/create.js";
 import PollsList from "./poll/list.js";
 import PollResult from "./poll/result.js";
 import EditPoll from "./poll/edit.js";
+import CommentByPoll from "./comments/list-by-poll.js";
 
 const CreatorLayout = () => {
   return (
@@ -27,6 +28,7 @@ const CreatorLayout = () => {
             <Route path="/edit-poll/:pollId" element={<EditPoll />} />
             <Route path="/polls" element={<PollsList />} />
             <Route path="/poll-result/:pollId" element={<PollResult />} />
+            <Route path="/poll-comments/:pollId" element={<CommentByPoll />} />
             <Route path="*" element={<Navigate to={"/creator/dashboard"} />} />
           </Routes>
         </div>

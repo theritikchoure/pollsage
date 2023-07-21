@@ -56,6 +56,10 @@ const pollSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    allow_comments: {
+      type: Boolean,
+      default: false,
+    },
     password: {
       type: String,
       required: false,

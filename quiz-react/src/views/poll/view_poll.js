@@ -259,7 +259,7 @@ const ViewPoll = () => {
               <span>One vote per IP-Address allowed.</span>
             </div>
 
-            <Comment pollId={pollId} />
+            {poll.allow_comments && <Comment pollId={pollId} />}
           </>
         )}
         {!loading && passwordProtected && (

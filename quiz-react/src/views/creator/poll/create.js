@@ -1,7 +1,12 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { createPollValidation } from "../../../validations/poll";
 import { createPoll } from "../../../services/creator/poll.service";
-import { dismissToast, errorToast, loadingToast, successToast } from "../../../utils/toaster";
+import {
+  dismissToast,
+  errorToast,
+  loadingToast,
+  successToast,
+} from "../../../utils/toaster";
 import PageDetails from "../../../components/_page_details";
 import { useNavigate } from "react-router-dom";
 import Form from "./form";
@@ -165,8 +170,23 @@ const CreatePoll = () => {
                     Create Poll
                   </h3>
                 </div>
-                {/* <Form onSubmit={onSubmit} onChangeFormData={onChangeFormData} formData={formData} errors={errors} /> */}
-                <form onSubmit={onSubmit}>
+                <Form
+                  formData={formData}
+                  errors={errors}
+                  onChangeFormData={onChangeFormData}
+                  onSubmit={onSubmit}
+                  booleanValue={booleanValue}
+                  onChangeBooleanValue={onChangeBooleanValue}
+                  additionalFeatures={additionalFeatures}
+                  setAdditionalFeatures={setAdditionalFeatures}
+                  handleOptionChange={handleOptionChange}
+                  addOption={addOption}
+                  addOtherOption={addOtherOption}
+                  removeOption={removeOption}
+                  minPollEndDate={minPollEndDate}
+                  setMinPollEndDate={setMinPollEndDate}
+                />
+                {/* <form onSubmit={onSubmit}>
                   <div className="p-6">
                     <div className="mb-4 flex flex-col gap-6 xl:flex-row">
                       <div className="w-full xl:w-1/2">
@@ -528,7 +548,7 @@ const CreatePoll = () => {
                       />
                     </div>
                   </div>
-                </form>
+                </form> */}
               </div>
             </div>
             <div className="flex flex-col gap-9">

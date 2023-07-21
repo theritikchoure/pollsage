@@ -1,7 +1,12 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { createPollValidation } from "../../../validations/poll";
 import { createPoll } from "../../../services/creator/poll.service";
-import { dismissToast, errorToast, loadingToast, successToast } from "../../../utils/toaster";
+import {
+  dismissToast,
+  errorToast,
+  loadingToast,
+  successToast,
+} from "../../../utils/toaster";
 import PageDetails from "../../../components/_page_details";
 import { useNavigate } from "react-router-dom";
 import Form from "./form";
@@ -71,18 +76,18 @@ const CreatePoll = () => {
       delete res.data.createdAt;
       delete res.data.updatedAt;
       setFormData(res.data);
-      if(res.data.description) {
+      if (res.data.description) {
         setBooleanValue({ ...booleanValue, showDescription: true });
       }
 
-      if(res.data.password || res.data.start_date || res.data.end_date) {
+      if (res.data.password || res.data.start_date || res.data.end_date) {
         setAdditionalFeatures(true);
 
-        if(res.data.password) {
-        setBooleanValue({ ...booleanValue, showPassword: true });
+        if (res.data.password) {
+          setBooleanValue({ ...booleanValue, showPassword: true });
         }
 
-        if(res.data.start_date) {
+        if (res.data.start_date) {
           setMinPollEndDate(res.data.start_date);
         }
       }
@@ -96,7 +101,7 @@ const CreatePoll = () => {
   const onChangeBooleanValue = (key, value) => {
     if (!key) return;
 
-    if(key === "showPassword") {
+    if (key === "showPassword") {
       setFormData({ ...formData, password: null });
     }
 
@@ -160,7 +165,7 @@ const CreatePoll = () => {
     try {
       e.preventDefault();
       setLoading(true);
-      console.log(formData)
+      console.log(formData);
       const { isValid, errors } = createPollValidation(formData);
       console.log(errors);
       if (!isValid) {
@@ -209,8 +214,23 @@ const CreatePoll = () => {
                     Create Poll
                   </h3>
                 </div>
-                {/* <Form onSubmit={onSubmit} onChangeFormData={onChangeFormData} formData={formData} errors={errors} /> */}
-                <form onSubmit={onSubmit}>
+                <Form
+                  formData={formData}
+                  errors={errors}
+                  onChangeFormData={onChangeFormData}
+                  onSubmit={onSubmit}
+                  booleanValue={booleanValue}
+                  onChangeBooleanValue={onChangeBooleanValue}
+                  additionalFeatures={additionalFeatures}
+                  setAdditionalFeatures={setAdditionalFeatures}
+                  handleOptionChange={handleOptionChange}
+                  addOption={addOption}
+                  addOtherOption={addOtherOption}
+                  removeOption={removeOption}
+                  minPollEndDate={minPollEndDate}
+                  setMinPollEndDate={setMinPollEndDate}
+                />
+                {/* <form onSubmit={onSubmit}>
                   <div className="p-6">
                     <div className="mb-4 flex flex-col gap-6 xl:flex-row">
                       <div className="w-full xl:w-1/2">
@@ -553,7 +573,7 @@ const CreatePoll = () => {
                       />
                     </div>
                   </div>
-                </form>
+                </form> */}
               </div>
             </div>
             <div className="flex flex-col gap-9">

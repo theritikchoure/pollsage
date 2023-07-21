@@ -1,60 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 
-const Form = (props) => {
-    
-    const [errors, setErrors] = useState(props.errors);
-    const [formData, setFormData] = useState(props.formData);
-    const [booleanValue, setBooleanValue] = useState({
-        showDescription: props.formData.description ? true : false,
-        showPassword: props.formData.password ? true : false,
-    });
-
-    const [additionalFeatures, setAdditionalFeatures] = useState(false);
-    const [minPollEndDate, setMinPollEndDate] = useState(
-        new Date().toISOString().slice(0, 16)
-    );
-
-    const onChangeFormData = (key, value) => {
-        setFormData({ ...formData, [key]: value });
-    }
-
-    const onChangeBooleanValue = (key, value) => {
-        setBooleanValue({ ...booleanValue, [key]: value });
-    }
-
-    const addOption = () => {
-        const newOption = {
-            text: "",
-        };
-        setFormData({ ...formData, options: [...formData.options, newOption] });
-    };
-
-    const addOtherOption = () => {
-        const newOption = {
-            text: "Other",
-        };
-        setFormData({ ...formData, options: [...formData.options, newOption] });
-    };
-
-    const removeOption = (index) => {
-        const newOptions = [...formData.options];
-        newOptions.splice(index, 1);
-        setFormData({ ...formData, options: newOptions });
-    };
-
-    const handleOptionChange = (index, value) => {
-        const newOptions = [...formData.options];
-        newOptions[index].text = value;
-        setFormData({ ...formData, options: newOptions });
-    };
-
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    console.log("first")
-    console.log(props)
-    props.onSubmit(e);
-  };
+const PollForm = ({
+  formData,
+  errors,
+  onChangeFormData,
+  onSubmit,
+  booleanValue,
+  onChangeBooleanValue,
+  additionalFeatures,
+  setAdditionalFeatures,
+  handleOptionChange,
+  addOption,
+  addOtherOption,
+  removeOption,
+  minPollEndDate,
+  setMinPollEndDate,
+}) => {
   return (
     <form onSubmit={onSubmit}>
       <div className="p-6">
@@ -334,6 +295,38 @@ const Form = (props) => {
                 </div>
               </div>
               <div className="mb-4">
+                <label htmlFor="allow_comments" className="flex cursor-pointer">
+                  <div className="relative pt-0.5">
+                    <input
+                      type="checkbox"
+                      id="allow_comments"
+                      className=""
+                      checked={formData.allow_comments}
+                      onChange={(event) =>
+                        onChangeFormData("allow_comments", event.target.checked)
+                      }
+                    />
+                  </div>
+                  <p className="ml-2">Allow comments</p>
+                </label>
+              </div>
+              <div className="mb-4">
+                <label htmlFor="require_name" className="flex cursor-pointer">
+                  <div className="relative pt-0.5">
+                    <input
+                      type="checkbox"
+                      id="require_name"
+                      className=""
+                      checked={formData.require_name}
+                      onChange={(event) =>
+                        onChangeFormData("require_name", event.target.checked)
+                      }
+                    />
+                  </div>
+                  <p className="ml-2">Require participants' names</p>
+                </label>
+              </div>
+              <div className="mb-4">
                 <label htmlFor="formCheckbox" className="flex cursor-pointer">
                   <div className="relative pt-0.5">
                     <input
@@ -384,4 +377,4 @@ const Form = (props) => {
   );
 };
 
-export default Form;
+export default PollForm;

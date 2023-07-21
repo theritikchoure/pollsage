@@ -42,7 +42,7 @@ const PollList = () => {
 
   return (
     <>
-      <PageDetails title="Create Poll - PollSage" description="Create Poll" />
+      <PageDetails title="Poll list - PollSage" description="Create Poll" />
       <div className="mt-4 mx-4">
         <h1 className="text-xl my-4">Poll list</h1>
         <div className="w-full overflow-hidden rounded-sm shadow-xs">
@@ -55,6 +55,7 @@ const PollList = () => {
                   <th className="px-4 py-3">Status</th>
                   <th className="px-4 py-3">View poll</th>
                   <th className="px-4 py-3">View results</th>
+                  <th className="px-4 py-3">View comments</th>
                   <th className="px-4 py-3">Action</th>
                 </tr>
               </thead>
@@ -108,6 +109,24 @@ const PollList = () => {
                           ></path>{" "}
                         </svg>
                       </Link>
+                    </td>
+                    <td className="px-4 py-3 text-xs">
+                      {poll.allow_comments ? (
+                        <Link
+                          to={`/creator/poll-comments/${poll.pollId}`}
+                          className={`px-2 py-1 font-semibold leading-tight rounded-full cursor-pointer bg-green-700 text-green-100`}
+                        >
+                          {" "}
+                          View comment{" "}
+                        </Link>
+                      ) : (
+                        <span
+                          className={`px-2 py-1 font-semibold leading-tight rounded-full cursor-pointer bg-red-600 text-gray-100`}
+                        >
+                          {" "}
+                          Not allowed{" "}
+                        </span>
+                      )}
                     </td>
                     <td className="px-4 py-3 text-sm flex">
                       {/* Edit svg */}
