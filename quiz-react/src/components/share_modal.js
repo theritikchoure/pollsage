@@ -20,8 +20,8 @@ const ShareModal = ({ poll, pollUrl, onClose }) => {
           className="fixed left-0 top-0 z-[1055] h-full w-full overflow-y-auto overflow-x-hidden outline-none"
           id="exampleModal"
         >
-          <div className="bg-white pointer-events-none relative w-auto translate-y-[-50px] transition-all duration-300 ease-in-out mx-auto w-10/12 mt-32 min-[576px]:max-w-[500px]">
-            <div className="bg-white min-[576px]:shadow-[0_0.5rem_1rem_rgba(#000, 0.15)] pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-white-600">
+          <div className="bg-gray-800 border pointer-events-none relative w-auto translate-y-[-50px] transition-all duration-300 ease-in-out mx-auto w-10/12 mt-32 min-[576px]:max-w-[500px]">
+            <div className="bg-gray-800 min-[576px]:shadow-[0_0.5rem_1rem_rgba(#000, 0.15)] pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-clip-padding text-current shadow-lg outline-none">
               <div className="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-gray-300 border-opacity-100 p-4 dark:border-opacity-50">
                 {/* <!--Modal title--> */}
                 <svg

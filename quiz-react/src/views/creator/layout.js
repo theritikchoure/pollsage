@@ -11,6 +11,8 @@ import PollsList from "./poll/list.js";
 import PollResult from "./poll/result.js";
 import EditPoll from "./poll/edit.js";
 import CommentByPoll from "./comments/list-by-poll.js";
+import CreateMailTemplate from "./emails/templates/create";
+
 
 const CreatorLayout = () => {
   return (
@@ -29,6 +31,7 @@ const CreatorLayout = () => {
             <Route path="/polls" element={<PollsList />} />
             <Route path="/poll-result/:pollId" element={<PollResult />} />
             <Route path="/poll-comments/:pollId" element={<CommentByPoll />} />
+            <Route path="/emails/template/create" element={<CreateMailTemplate />} />
             <Route path="*" element={<Navigate to={"/creator/dashboard"} />} />
           </Routes>
         </div>

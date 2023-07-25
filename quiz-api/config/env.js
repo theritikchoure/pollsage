@@ -8,6 +8,9 @@ module.exports = {
     SMTP_MAIL_PASSWORD: process.env.SMTP_MAIL_PASSWORD,
     SMTP_MAIL_SERVICE: process.env.SMTP_MAIL_SERVICE,
     JWT_SECRET: process.env.JWT_SECRET,
+    VAPID_PUBLIC_KEY: process.env.VAPID_PUBLIC_KEY,
+    VAPID_PRIVATE_KEY: process.env.VAPID_PRIVATE_KEY,
+    VAPID_MAIL_ID: process.env.VAPID_MAIL_ID,
     // Add other environment variables as needed
 };
   

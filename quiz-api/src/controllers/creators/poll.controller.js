@@ -89,8 +89,30 @@ async function getAllPolls(req) {
       },
     ]);
 
+    let currentPage = req.query.page || 1;
+    let perPage = req.query.limit || 10;
+
     if (polls.length > 0) {
-      return polls[0].createdPolls;
+      const createdPolls = polls[0].createdPolls;
+
+      // Calculate pagination details
+      const totalPolls = createdPolls.length;
+      const skipCount = (currentPage - 1) * perPage;
+      const totalPages = Math.ceil(totalPolls / perPage);
+      const paginatedPolls = createdPolls.slice(skipCount, skipCount + perPage);
+
+      const pagination = {
+        itemCount: totalPolls,
+        docs: paginatedPolls,
+        perPage: perPage,
+        currentPage: currentPage,
+        next: Number(currentPage) < totalPages ? Number(currentPage) + 1 : null,
+        prev: currentPage > 1 ? currentPage - 1 : null,
+        pageCount: totalPages,
+        slNo: skipCount + 1,
+      };
+
+      return pagination;
     }
 
     return null;

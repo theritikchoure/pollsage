@@ -119,6 +119,10 @@ const CreatePoll = () => {
       return;
     }
 
+    if(key === 'password') {
+      value = !value ? null : value;
+    }
+
     setFormData({ ...formData, [key]: value });
     setIsFormDirty(true);
   };
@@ -197,16 +201,16 @@ const CreatePoll = () => {
       return;
     } catch (error) {
       dismissToast();
-      errorToast(error);
+      errorToast(error.message ? error.message : error);
       setLoading(false);
     }
   };
   return (
     <>
-      <PageDetails title="Create Poll - PollSage" description="Create Poll" />
+      <PageDetails title="Update Poll - PollSage" description="Create Poll" />
       <div className="mt-4 mx-4">
         <div className="w-full overflow-hidden rounded-lg shadow-xs">
-          <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
+          <div className="">
             <div className="flex flex-col gap-9">
               <div className="rounded-sm border border-gray-600 bg-gray-800 shadow-default dark:border-strokedark dark:bg-boxdark">
                 <div className="border-b border-stroke py-4 px-6 dark:border-strokedark">
@@ -229,6 +233,7 @@ const CreatePoll = () => {
                   removeOption={removeOption}
                   minPollEndDate={minPollEndDate}
                   setMinPollEndDate={setMinPollEndDate}
+                  submitButtonText={'Update poll'}
                 />
                 {/* <form onSubmit={onSubmit}>
                   <div className="p-6">
@@ -574,93 +579,6 @@ const CreatePoll = () => {
                     </div>
                   </div>
                 </form> */}
-              </div>
-            </div>
-            <div className="flex flex-col gap-9">
-              <div className="rounded-sm border border-gray-600 bg-gray-800 shadow-default dark:border-strokedark dark:bg-boxdark">
-                <div className="border-b border-stroke py-4 px-6 dark:border-strokedark">
-                  <h3 className="font-medium text-gray-100 dark:text-gray-100">
-                    Poll preview
-                  </h3>
-                </div>
-                <div className="mx-auto max-w-md px-6 py-12 bg-gray-800 border-0 shadow-lg rounded-xl">
-                  <h1 className="text-2xl font-bold mb-4 text-gray-100">
-                    {formData.question || "What is your question?"}
-                  </h1>
-                  <form onSubmit={undefined}>
-                    <fieldset className="relative z-0 w-full p-px mb-5">
-                      <div className="block pt-3 pb-2">
-                        {formData.options.map((option, index) => (
-                          <div className="mb-4" key={index}>
-                            <label className="text-gray-100">
-                              <input
-                                type="radio"
-                                name="radio"
-                                value={option._id}
-                                className="mr-2 text-gray-100 border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
-                                // checked={formData.optionId === option._id}
-                                // onChange={handleOptionChange}
-                              />
-                              {option.text || `Option ${index + 1}`}
-                            </label>
-                          </div>
-                        ))}
-                        {errors.optionId && (
-                          <p className="text-red-500 text-sm mt-1 text-left italic">
-                            {errors.optionId}
-                          </p>
-                        )}
-                      </div>
-                    </fieldset>
-
-                    <input
-                      id="button"
-                      type="submit"
-                      value={"Vote"}
-                      className="w-full px-6 py-3 mt-3 text-lg text-white cursor-pointer transition-all duration-150 ease-linear rounded-lg shadow outline-none bg-pink-500 hover:bg-pink-600 hover:shadow-lg focus:outline-none"
-                    />
-
-                    <div className="block mt-5">
-                      <div className="sm:flex items-center justify-between">
-                        <div className="flex items-center space-x-4">
-                          <a
-                            // href={`/results/${pollId}`}
-                            className="w-full sm:w-40 flex bg-gray-300 px-5 py-2 rounded items-center text-black"
-                          >
-                            <svg
-                              className="h-5 w-5 -ml-1 mr-2 "
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                              stroke=""
-                            >
-                              <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
-                            </svg>
-
-                            <span>Show results</span>
-                          </a>
-                        </div>
-                        <button
-                          // onClick={() => setShowShareModal(true)}
-                          type="button"
-                          className="w-full my-2 sm:w-40 sm:ml-4 bg-purple-500 px-5 py-2 rounded text-white flex items-center"
-                        >
-                          <svg
-                            className="h-5 w-5 -ml-1 mr-2 "
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                            stroke=""
-                          >
-                            <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"></path>
-                          </svg>
-
-                          <span>Share</span>
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
               </div>
             </div>
           </div>

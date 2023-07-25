@@ -66,6 +66,8 @@ function App() {
           <Route exact path="/results/:pollId" element={<PollResult />} />
 
           <Route exact path="/chat/:pollId" element={<Chat />} />
+
+          {/* <Route path="*" element={<Navigate to={'/404'} />} /> */}
         </Routes>
       </Suspense>
     {/* // </Router> */}

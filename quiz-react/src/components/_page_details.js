@@ -76,7 +76,7 @@ const PageDetails = (props) => {
       // cookie = cookie.split('=')[1];
       // cookie = JSON.parse(cookie);
       // console.log(cookie);
-      console.log(getCookie("user_infoh"));
+      console.log(getCookie("user_info"));
     } catch (error) {
     } finally {
     }

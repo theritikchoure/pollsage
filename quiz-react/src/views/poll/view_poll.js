@@ -11,12 +11,16 @@ import Loader from "../../components/_loader.js";
 import PageDetails from "../../components/_page_details.js";
 import { Link } from "react-router-dom";
 import Comment from "../../components/comment.js";
+import { formattedDateFromNow } from "../../helpers/common.js";
+import CountdownTimer from "../../components/countdown..js";
+import moment from "moment";
 
 const ViewPoll = () => {
   const initialState = {
     optionId: "",
     ip: "",
     country: "",
+    optionIds: [],
   };
 
   const [formData, setFormData] = useState(initialState);
@@ -124,13 +128,65 @@ const ViewPoll = () => {
         successToast("Poll submit successfully.");
       }
     } catch (error) {
-      errorToast(error);
+      errorToast(error.message);
     }
   };
 
   const handleOptionChange = (event) => {
     onChangeFormData("optionId", event.target.value);
   };
+
+  const handleMultiSelectOptionChange = (e) => {
+    const optionId = e.target.value;
+    const isChecked = e.target.checked;
+
+    setFormData((prevFormData) => {
+      if (isChecked) {
+        return {
+          ...prevFormData,
+          optionIds: [...prevFormData.optionIds, optionId],
+        };
+      } else {
+        return {
+          ...prevFormData,
+          optionIds: prevFormData.optionIds.filter((id) => id !== optionId),
+        };
+      }
+    });
+  };
+
+  if (poll && poll.poll_start && moment(poll.poll_start).isAfter(moment())) {
+    // If the poll_start date is in the future, display a message with the start date and time
+    return (
+      <div className="min-h-screen bg-gray-900 p-0 p-12">
+        <div className="mx-auto max-w-md px-6 py-12 bg-gray-800 border-0 shadow-lg rounded-xl">
+          <div className="mt-4 text-center text-gray-100">
+            <h2 className="text-xl font-bold mb-2">Poll starts in:</h2>
+            <CountdownTimer pollStart={poll.poll_start} />
+            <p className="text-gray-400">
+              This poll will start on{" "}
+              {moment(poll.poll_start).format("MMMM Do, YYYY [at] h:mm A")}
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
+  if (poll && poll.poll_expired) {
+    // If the poll_start date is in the future, display a message with the start date and time
+    return (
+      <div className="min-h-screen bg-gray-900 p-0 p-12">
+        <div className="mx-auto max-w-md px-6 py-12 bg-gray-800 border-0 shadow-lg rounded-xl">
+          <div className="mt-4 text-center text-gray-100">
+            <p className="text-gray-400">
+              This poll has already expired. 
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <Fragment>
@@ -139,24 +195,61 @@ const ViewPoll = () => {
         {loading && <Loader />}
         {!loading && poll && (
           <>
+            {/* Display your custom logo */}
+            {poll.logo && (
+              <div className="flex justify-center mb-4">
+                <img src={poll.logo} alt="Custom Logo" className="h-16" />
+              </div>
+            )}
             <PageDetails title={poll.question} />
             <div className="mx-auto max-w-md px-6 py-12 bg-gray-800 border-0 shadow-lg rounded-xl">
               <h1 className="text-2xl font-bold mb-4 text-gray-100">
                 {poll.question}
               </h1>
+              <p className="text-gray-400 mb-4">
+                Poll created {formattedDateFromNow(poll.createdAt)}
+              </p>
+
               <form onSubmit={onSubmit}>
-                <fieldset className="relative z-0 w-full p-px mb-2">
-                  <div className="block pt-3 pb-2">
+                {!poll.allow_multiple_selection && (
+                  <fieldset className="relative z-0 w-full p-px mb-2">
+                    <div className="block pt-3 pb-2">
+                      {poll.options.map((option, index) => (
+                        <div className="mb-4" key={index}>
+                          <label className="text-gray-100">
+                            <input
+                              type="radio"
+                              name="radio"
+                              value={option._id}
+                              className="mr-2 text-gray-100 border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
+                              checked={formData.optionId === option._id}
+                              onChange={handleOptionChange}
+                            />
+                            {option.text}
+                          </label>
+                        </div>
+                      ))}
+                      {errors.optionId && (
+                        <p className="text-red-500 text-sm mt-1 text-left italic">
+                          {errors.optionId}
+                        </p>
+                      )}
+                    </div>
+                  </fieldset>
+                )}
+
+                {poll.allow_multiple_selection && (
+                  <fieldset className="relative z-0 w-full p-px mb-2">
                     {poll.options.map((option, index) => (
                       <div className="mb-4" key={index}>
                         <label className="text-gray-100">
                           <input
-                            type="radio"
-                            name="radio"
+                            type="checkbox"
+                            name="checkbox"
                             value={option._id}
                             className="mr-2 text-gray-100 border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
-                            checked={formData.optionId === option._id}
-                            onChange={handleOptionChange}
+                            checked={formData.optionIds.includes(option._id)}
+                            onChange={handleMultiSelectOptionChange}
                           />
                           {option.text}
                         </label>
@@ -167,8 +260,8 @@ const ViewPoll = () => {
                         {errors.optionId}
                       </p>
                     )}
-                  </div>
-                </fieldset>
+                  </fieldset>
+                )}
 
                 {poll.require_name && (
                   <div className="mb-4">
@@ -203,8 +296,8 @@ const ViewPoll = () => {
                 <div className="block mt-5">
                   <div className="sm:flex items-center justify-between">
                     <div className="flex items-center space-x-4">
-                      <a
-                        href={`/results/${pollId}`}
+                      <Link
+                        to={`/results/${pollId}`}
                         className="w-full sm:w-40 flex bg-gray-300 px-5 py-2 rounded items-center"
                       >
                         <svg
@@ -218,7 +311,7 @@ const ViewPoll = () => {
                         </svg>
 
                         <span>Show results</span>
-                      </a>
+                      </Link>
                     </div>
                     <button
                       onClick={() => setShowShareModal(true)}

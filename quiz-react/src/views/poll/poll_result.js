@@ -5,8 +5,9 @@ import { errorToast, successToast } from "../../utils/toaster";
 import ShareModal from "../../components/share_modal.js";
 import Loader from "../../components/_loader.js";
 import PageDetails from "../../components/_page_details.js";
+import { Link } from "react-router-dom";
 
-const ViewPoll = () => {
+const PollResult = () => {
   const initialState = {
     optionId: "",
     ip: "",
@@ -117,12 +118,12 @@ const ViewPoll = () => {
                         </h3>
                       </div>
                       <div className="relative w-full max-w-full flex-grow flex-1 text-right">
-                        <a href={`/poll/${pollId}`}
+                        <Link to={`/poll/${pollId}`}
                           className="bg-blue-500 dark:bg-green-100 text-white cursor-pointer dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                           type="button"
                         >
                           Back to Polls
-                        </a>
+                        </Link>
                       </div>
                     </div>
                     <div className="block w-full overflow-x-auto">
@@ -455,4 +456,4 @@ const ViewPoll = () => {
   );
 };
 
-export default ViewPoll;
+export default PollResult;

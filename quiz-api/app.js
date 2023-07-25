@@ -12,6 +12,7 @@ const logger = require("./config/logger.js");
 const session = require("express-session");
 const cors = require("cors");
 const passport = require('./config/passport.js');
+const webpush = require('web-push');
 
 // Create the Express app
 const app = express();
@@ -56,5 +57,7 @@ app.use("/api/v1", routes);
 
 // Error handling middleware
 app.use(errorHandler);
+
+webpush.setVapidDetails(`mailto:${env.VAPID_MAIL_ID}`, env.VAPID_PUBLIC_KEY, env.VAPID_PRIVATE_KEY);
 
 module.exports = app;

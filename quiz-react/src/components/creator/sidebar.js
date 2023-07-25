@@ -119,7 +119,7 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              to={'/creator/comments'}
+              to={"/creator/comments"}
               className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
             >
               <span className="inline-flex justify-center items-center ml-4">
@@ -169,6 +169,56 @@ const Sidebar = () => {
                 1.2k
               </span>
             </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+            >
+              <span className="inline-flex justify-center items-center ml-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  class="w-5 h-5"
+                  stroke="currentColor"
+                  viewBox="0 0 16 16"
+                >
+                  {" "}
+                  <path
+                    d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"
+                    fill="white"
+                  ></path>{" "}
+                </svg>
+              </span>
+              <span className="ml-2 text-sm tracking-wide truncate">
+                Email system
+              </span>
+              <span className="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">
+                1.2k
+              </span>
+            </a>
+
+            {/* create submenu and consider the overall style */}
+            <ul className="flex flex-col py-2 space-y-1">
+              <li className="">
+                <a
+                  href="#"
+                  className="relative flex flex-row items-center px-12 h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+                >
+                  {" "}
+                  Email templates
+                </a>
+              </li>
+              <li className="">
+                <Link
+                  to={"/creator/emails/template/create"}
+                  className="relative flex flex-row items-center px-12 h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+                >
+                  {" "}
+                  Create templates
+                </Link>
+              </li>
+            </ul>
           </li>
           <li className="px-5 hidden md:block">
             <div className="flex flex-row items-center mt-5 h-8">

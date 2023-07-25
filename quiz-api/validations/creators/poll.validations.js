@@ -20,6 +20,9 @@ const createPollValidation = Joi.object({
   share_btn: Joi.boolean().default(true),
   require_name: Joi.boolean().default(false),
   allow_comments: Joi.boolean().default(false),
+  thank_you_message: Joi.string().allow(null).default(null),
+  send_mail: Joi.boolean().default(false),
+  logo: Joi.string().allow(null).default(null),
 });
 
 const updatePollValidation = Joi.object({
@@ -44,6 +47,9 @@ const updatePollValidation = Joi.object({
   share_btn: Joi.boolean().default(true),
   require_name: Joi.boolean().default(false),
   allow_comments: Joi.boolean().default(false),
+  thank_you_message: Joi.string().allow(null).default(null),
+  send_mail: Joi.boolean().default(false),
+  logo: Joi.string().allow(null).default(null),
 });
 
 module.exports = { createPollValidation, updatePollValidation };

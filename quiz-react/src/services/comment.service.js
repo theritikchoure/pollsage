@@ -12,9 +12,9 @@ const createComment = async (id, data) => {
   }
 };
 
-const getComments = async (id) => {
+const getComments = async (id, limit, page) => {
     try {
-        let res = await api.get(`${url}/${id}`);
+        let res = await api.get(`${url}/${id}?page=${page}&limit=${limit}`);
         return res.data;
     } catch (error) {
         throw getAPIResponseError(error);

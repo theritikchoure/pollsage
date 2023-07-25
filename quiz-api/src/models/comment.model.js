@@ -20,11 +20,13 @@ const customSchema = new mongoose.Schema(
         ref: "Comment",
       },
     ],
-    like_count: {
-      type: Number,
-      default: 0,
-    },
-    ip : {
+    likes: [
+      {
+        type: String,
+        required: false,
+      },
+    ],
+    ip: {
       type: String,
       // required: true,
     },
@@ -36,7 +38,7 @@ const customSchema = new mongoose.Schema(
       type: Object,
       default: {},
     },
-    sentiment : {
+    sentiment: {
       type: Object,
       default: {},
     },
