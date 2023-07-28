@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { emailTemplateValidation } from "../../../../validations/email_template.js";
-import { addEmailTemplate } from "../../../../services/creator/email_template.service.js";
+import { getEmailTemplateById, updateEmailTemplateById } from "../../../../services/creator/email_template.service.js";
 import {
   dismissToast,
   errorToast,
@@ -28,6 +28,10 @@ const CreateMailTemplate = () => {
 
   const [errors, setErrors] = useState({});
   const [isFormDirty, setIsFormDirty] = useState(false);
+
+  useEffect(() => {
+    loadData()
+  }, []);
 
   useEffect(() => {
     const handleBeforeUnload = (e) => {
@@ -65,6 +69,22 @@ const CreateMailTemplate = () => {
     iframeDocument.close();
   }, [formData]);
 
+  const loadData = async () => {
+    try {
+      setLoading(true);
+      const id = window.location.pathname.split("/")[5];
+      console.log(id);
+      let res = await getEmailTemplateById(id);
+      delete res.data.createdAt;
+      delete res.data.updatedAt;
+      setFormData(res.data);
+      setLoading(false);
+    } catch (error) {
+      errorToast(error.message);
+      setLoading(false);
+    }
+  };
+
   // write on change function
   const onChangeFormData = (key, value, index = null) => {
     if (!key) return;
@@ -93,7 +113,7 @@ const CreateMailTemplate = () => {
       loadingToast("Creating template...");
 
       // write api call here
-      let res = await addEmailTemplate(formData);
+      let res = await updateEmailTemplateById(formData);
 
       if (res) {
         setFormData(initialState);
@@ -123,7 +143,7 @@ const CreateMailTemplate = () => {
               <div className="w-full xl:w-1/2 rounded-sm border border-gray-600 bg-gray-800 shadow-default dark:border-strokedark dark:bg-boxdark">
                 <div className="border-b border-stroke py-4 px-6 dark:border-strokedark">
                   <h3 className="font-medium text-black dark:text-white">
-                    Create mail template
+                    Edit mail template
                   </h3>
                 </div>
                 <Form
@@ -133,7 +153,7 @@ const CreateMailTemplate = () => {
                   onSubmit={onSubmit}
                   mailContent={mailContent}
                   setMailContent={setMailContent}
-                  submitButtonText={"Create template"}
+                  submitButtonText={"Update template"}
                 />
               </div>
               <div className="w-full xl:w-1/2 rounded-sm border border-gray-600 bg-gray-800 shadow-default dark:border-strokedark dark:bg-boxdark">

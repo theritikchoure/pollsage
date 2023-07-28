@@ -76,14 +76,14 @@ const Comment = ({ pollId }) => {
 
   return (
     <section className="max-w-md mx-auto mt-5">
-      <div className="bg-gray-800 custom-box border border-gray-600 sm:border-x sm:rounded-md overflow-hidden">
+      <div className="bg-gray-800 custom-box border border-gray-600 sm:border-x sm:rounded-md overflow-hidden" id="comment-box" >
         <div className="px-4 py-5 sm:px-6">
           <h2
-            id="comments-title"
+            id="comment-heading"
             className="text-lg text-gray-900 dark:text-gray-200 custom-title font-medium flex items-center"
           >
             <svg
-              className="h-5 w-5 -ml-1 mr-2 text-gray-400 custom-text"
+              className="h-5 w-5 -ml-1 mr-2 text-gray-400 custom-text comment-svg-color"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
               viewBox="0 0 20 20"
@@ -129,6 +129,7 @@ const Comment = ({ pollId }) => {
           </div>
         )}
 
+        {/* Comment form */}
         <div className="px-4 py-6 sm:px-6 border-t border-gray-600">
           <div className="flex space-x-3">
             <div className="flex-shrink-0">
@@ -160,6 +161,7 @@ const Comment = ({ pollId }) => {
                     className={`w-full text-gray-200 rounded border-[1.5px]  bg-transparent py-3 px-5 
                     outline-none transition focus:border-primary active:border-primary disabled:cursor-default 
                     disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary
+                    input-field
                     ${
                       errors.display_name ? "border-red-500" : "border-gray-600"
                     }`}
@@ -186,6 +188,7 @@ const Comment = ({ pollId }) => {
                     className={`w-full text-gray-200 rounded border-[1.5px] bg-transparent py-3 px-5 
                     outline-none transition focus:border-primary active:border-primary disabled:cursor-default 
                     disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary
+                    input-field
                     ${errors.comment ? "border-red-500" : "border-gray-600"}`}
                     placeholder="Add a comment"
                     onChange={(e) =>
@@ -203,6 +206,7 @@ const Comment = ({ pollId }) => {
                   <input
                     type="submit"
                     value="Post comment"
+                    id="post-comment-button"
                     className="bg-gray-900 cursor-pointer border border-gray-600 px-5 py-2 rounded text-white flex items-center hover:bg-gray-800"
                   />
                 </div>
@@ -236,7 +240,7 @@ const Comment = ({ pollId }) => {
                   <div className="flex-grow">
                     <div className="text-sm">
                       <span className="flex items-center space-x-2">
-                        <span className="text-gray-200">
+                        <span className="text-gray-200 comment-name">
                           {comment.display_name}
                         </span>
 
@@ -246,7 +250,7 @@ const Comment = ({ pollId }) => {
                       </span>
                     </div>
                     <div>
-                      <div className="mt-1 text-sm text-gray-700 dark:text-gray-300 custom-text">
+                      <div className="mt-1 text-sm text-gray-700 dark:text-gray-300 custom-text comment-text">
                         <p>{comment.comment}</p>
                       </div>
                       <div className="mt-2 text-sm space-x-2">

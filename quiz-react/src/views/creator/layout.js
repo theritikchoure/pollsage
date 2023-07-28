@@ -12,7 +12,10 @@ import PollResult from "./poll/result.js";
 import EditPoll from "./poll/edit.js";
 import CommentByPoll from "./comments/list-by-poll.js";
 import CreateMailTemplate from "./emails/templates/create";
-
+import EditMailTemplate from "./emails/templates/edit";
+import MailTemplates from "./emails/templates/list";
+import CreateTheme from "./themes/create";
+import Activity from "./activity";
 
 const CreatorLayout = () => {
   return (
@@ -32,6 +35,10 @@ const CreatorLayout = () => {
             <Route path="/poll-result/:pollId" element={<PollResult />} />
             <Route path="/poll-comments/:pollId" element={<CommentByPoll />} />
             <Route path="/emails/template/create" element={<CreateMailTemplate />} />
+            <Route path="/emails/template/list" element={<MailTemplates />} />
+            <Route path="/emails/template/edit/:id" element={<EditMailTemplate />} />
+            <Route path="/themes/create" element={<CreateTheme />} />
+            <Route path="/activity" element={<Activity />} />
             <Route path="*" element={<Navigate to={"/creator/dashboard"} />} />
           </Routes>
         </div>

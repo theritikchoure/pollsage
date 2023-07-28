@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { getCookie } from "../helpers/cookie";
+import { generateUUID } from "../helpers/common";
 
 const PageDetails = (props) => {
   useEffect(() => {
@@ -50,6 +51,7 @@ const PageDetails = (props) => {
       }
 
       let user_info = {
+        user_id: getCookie('user_id') ? getCookie('user_id') : generateUUID(),
         ip: res.ip,
         country: res.country,
         geo_location: {
@@ -71,11 +73,11 @@ const PageDetails = (props) => {
       date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
       document.cookie = `user_info=${JSON.stringify(user_info)}; expires=${date.toUTCString()}; path=/`;
 
-      // get browser cookie
-      // let cookie = document.cookie.split(';').find(row => row.startsWith('user_info'));
-      // cookie = cookie.split('=')[1];
-      // cookie = JSON.parse(cookie);
-      // console.log(cookie);
+      // set browser cookie for 365 days
+      let cookieDate = new Date();
+      cookieDate.setTime(cookieDate.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = `user_id=${user_info.user_id}; expires=${cookieDate.toUTCString()}; path=/`;
+
       console.log(getCookie("user_info"));
     } catch (error) {
     } finally {

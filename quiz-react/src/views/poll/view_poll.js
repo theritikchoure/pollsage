@@ -11,9 +11,11 @@ import Loader from "../../components/_loader.js";
 import PageDetails from "../../components/_page_details.js";
 import { Link } from "react-router-dom";
 import Comment from "../../components/comment.js";
-import { formattedDateFromNow } from "../../helpers/common.js";
+import { formattedDateFromNow, shuffleArray } from "../../helpers/common.js";
 import CountdownTimer from "../../components/countdown..js";
 import moment from "moment";
+// import './dark-style.css'
+// import './light-style.css';
 
 const ViewPoll = () => {
   const initialState = {
@@ -50,6 +52,9 @@ const ViewPoll = () => {
         setPasswordProtected(true);
       } else {
         let res = await getPoll(id);
+        console.log(res.data);
+        res.data.options = shuffleArray(res.data.options);
+        console.log(res.data.options)
         setPoll(res.data);
       }
 
@@ -188,22 +193,30 @@ const ViewPoll = () => {
     );
   }
 
+  const ManageTheme = ({pollContainer}) => {
+    if(pollContainer) {
+      document.body.style.backgroundColor = pollContainer;
+      document.getElementById("poll-container").style.backgroundColor = pollContainer;
+    }
+  }
+
   return (
     <Fragment>
-      <div className="min-h-screen bg-gray-900 p-0 p-12">
+      <div className="min-h-screen bg-gray-900 p-0 p-12" id="poll-container">
         {/* loading... text center horizontally and vertically */}
         {loading && <Loader />}
         {!loading && poll && (
           <>
+            <PageDetails title={poll.question} />
+            {/* <ManageTheme pollContainer={'#015c6e'} /> */}
             {/* Display your custom logo */}
             {poll.logo && (
               <div className="flex justify-center mb-4">
                 <img src={poll.logo} alt="Custom Logo" className="h-16" />
               </div>
             )}
-            <PageDetails title={poll.question} />
-            <div className="mx-auto max-w-md px-6 py-12 bg-gray-800 border-0 shadow-lg rounded-xl">
-              <h1 className="text-2xl font-bold mb-4 text-gray-100">
+            <div className="mx-auto max-w-md px-6 py-12 bg-gray-800 border-0 shadow-lg rounded-xl" id="poll-box" >
+              <h1 className="text-2xl font-bold mb-4 text-gray-100" id="poll-question" >
                 {poll.question}
               </h1>
               <p className="text-gray-400 mb-4">
@@ -212,11 +225,11 @@ const ViewPoll = () => {
 
               <form onSubmit={onSubmit}>
                 {!poll.allow_multiple_selection && (
-                  <fieldset className="relative z-0 w-full p-px mb-2">
+                  <fieldset className="relative z-0 w-full p-px mb-2" id="poll-options" >
                     <div className="block pt-3 pb-2">
                       {poll.options.map((option, index) => (
                         <div className="mb-4" key={index}>
-                          <label className="text-gray-100">
+                          <label className="text-gray-100 cursor-pointer">
                             <input
                               type="radio"
                               name="radio"
@@ -274,6 +287,7 @@ const ViewPoll = () => {
                       className={`w-full rounded border-[1.5px] text-gray-100 bg-transparent py-3 px-5 font-medium 
                       outline-none transition focus:border-primary active:border-primary disabled:cursor-default 
                       disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary
+                      input-field
                       ${errors.name ? "border-red-500" : "border-gray-600"}`}
                       value={formData.name || ""}
                       onChange={(e) => onChangeFormData("name", e.target.value)}
@@ -287,7 +301,7 @@ const ViewPoll = () => {
                 )}
 
                 <input
-                  id="button"
+                  id="vote-button"
                   type="submit"
                   value={"Vote"}
                   className="w-full px-6 py-3 mt-3 text-lg text-white cursor-pointer transition-all duration-150 ease-linear rounded-lg shadow outline-none bg-pink-500 hover:bg-pink-600 hover:shadow-lg focus:outline-none"

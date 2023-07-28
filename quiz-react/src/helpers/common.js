@@ -1,7 +1,7 @@
-import moment from 'moment';
-import _ from 'lodash';
-import { DATE_FORMAT } from '../global/constants.js';
-import { dismissToast, infoToast, warningToast } from '../utils/toaster';
+import moment from "moment";
+import _ from "lodash";
+import { DATE_FORMAT } from "../global/constants.js";
+import { dismissToast, infoToast, warningToast } from "../utils/toaster";
 
 /**
  * @desc Check if given value is string
@@ -28,7 +28,6 @@ export function isNumber(value) {
  * @param {*} value // Accepts string
  */
 export function isEmail(value) {
-
   var myRegEx =
     // eslint-disable-next-line max-len
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -41,7 +40,6 @@ export function isEmail(value) {
  * @param {*} value // Accepts string
  */
 export function isValidEmail(value) {
-
   var myRegEx =
     // eslint-disable-next-line max-len
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -57,8 +55,8 @@ export function isEmpty(value) {
   if (
     value === undefined ||
     value === null ||
-    (typeof value === 'object' && Object.keys(value).length === 0) ||
-    (typeof value === 'string' && value.trim().length === 0)
+    (typeof value === "object" && Object.keys(value).length === 0) ||
+    (typeof value === "string" && value.trim().length === 0)
   ) {
     return true;
   } else {
@@ -79,7 +77,8 @@ export function isValidDate(d) {
  */
 export function isValidDateFormat(d) {
   // let myRegEx = /^[0-9]{4}-(((0[13578]|(10|12))-(0[1-9]|[1-2][0-9]|3[0-1]))|(02-(0[1-9]|[1-2][0-9]))|((0[469]|11)-(0[1-9]|[1-2][0-9]|30)))$/;
-  let myRegEx = /\d{4}-[01]{1}\d{1}-[0-3]{1}\d{1}T[0-2]{1}\d{1}:[0-6]{1}\d{1}/gm;
+  let myRegEx =
+    /\d{4}-[01]{1}\d{1}-[0-3]{1}\d{1}T[0-2]{1}\d{1}:[0-6]{1}\d{1}/gm;
   let isValid = myRegEx.test(d);
   return isValid ? true : false;
 }
@@ -94,7 +93,8 @@ export function isValidDateFormat(d) {
  * It doesn’t contain any white space.
  */
 export function isValidPassword(password = null) {
-  let myRegEx = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8, 20}$/;
+  let myRegEx =
+    /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8, 20}$/;
   let isValid = myRegEx.test(password);
   return isValid ? true : false;
 }
@@ -106,7 +106,20 @@ export const getUniqueId = () => {
   function S4() {
     return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
   }
-  return (S4() + S4() + '-' + S4() + '-4' + S4().substr(0, 3) + '-' + S4() + '-' + S4() + S4() + S4()).toLowerCase();
+  return (
+    S4() +
+    S4() +
+    "-" +
+    S4() +
+    "-4" +
+    S4().substr(0, 3) +
+    "-" +
+    S4() +
+    "-" +
+    S4() +
+    S4() +
+    S4()
+  ).toLowerCase();
 };
 
 /**
@@ -114,7 +127,7 @@ export const getUniqueId = () => {
  * it return false only if its a production build
  */
 export const isDev = () => {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === "development") {
     return true;
   }
   return false;
@@ -143,16 +156,16 @@ export const getUrlParam = (query, name) => {
  * @param {*} replaceChar
  */
 export const UserFriendlyString = (value, replaceChar) => {
-  if (!value) return '';
+  if (!value) return "";
   value = value.trim();
 
-  if (!replaceChar) replaceChar = '_';
+  if (!replaceChar) replaceChar = "_";
   return value === undefined
-    ? ''
+    ? ""
     : value
-      .replace(/[^a-z0-9_]+/gi, replaceChar)
-      .replace(/^-|-$/g, '')
-      .toLowerCase();
+        .replace(/[^a-z0-9_]+/gi, replaceChar)
+        .replace(/^-|-$/g, "")
+        .toLowerCase();
 };
 
 /**
@@ -167,18 +180,17 @@ export const isBoolean = (value) => {
   }
 };
 
-
 export const stringToBoolean = (value) => {
   if (!value) return false;
 
   switch (value.toString().toLowerCase().trim()) {
-    case 'true':
-    case 'yes':
-    case '1':
+    case "true":
+    case "yes":
+    case "1":
       return true;
-    case 'false':
-    case 'no':
-    case '0':
+    case "false":
+    case "no":
+    case "0":
     case null:
       return false;
     default:
@@ -187,15 +199,15 @@ export const stringToBoolean = (value) => {
 };
 
 export const appEnvironments = () => {
-  if (isProduction()) return 'inDevlopment';
+  if (isProduction()) return "inDevlopment";
   return null;
 };
 
 export const isProduction = () => {
   try {
     var url = window.location.href;
-    if (url && url.includes('docfliq.app')) return false;
-  } catch (ex) { }
+    if (url && url.includes("docfliq.app")) return false;
+  } catch (ex) {}
 
   if (!isDev()) return true;
   return false;
@@ -205,7 +217,7 @@ export function mathRound(number, digit = 2) {
   try {
     if (Number(number) < 1) digit = 3;
     if (number) return Number(number).toFixed(digit);
-  } catch (e) { }
+  } catch (e) {}
   return Number(0).toFixed(2);
 }
 
@@ -213,7 +225,7 @@ export function mathRound(number, digit = 2) {
  * @desc load java script async from code
  */
 export const loadJavaScript = (url) => {
-  const script = document.createElement('script');
+  const script = document.createElement("script");
   script.src = url;
   script.async = true;
   document.body.appendChild(script);
@@ -227,7 +239,7 @@ export const getFormattedDate = (date) => {
   var month = date.getMonth() + 1;
   var day = date.getDate();
   var year = date.getFullYear();
-  return day + '/' + month + '/' + year;
+  return day + "/" + month + "/" + year;
 };
 
 export const getFormattedTime = (date) => {
@@ -235,7 +247,8 @@ export const getFormattedTime = (date) => {
   else date = new Date(date);
   var hour = date.getHours();
   var minutes = date.getMinutes();
-  const time = String(hour).padStart(2, '0') + ':' + String(minutes).padStart(2, '0');
+  const time =
+    String(hour).padStart(2, "0") + ":" + String(minutes).padStart(2, "0");
   return String(time);
 };
 
@@ -246,15 +259,15 @@ export const getNameById = (array, id) => {
 };
 
 export const removeWhiteSpaceRegex = (str) => {
-  return str.replace(/ +/g, '');
+  return str.replace(/ +/g, "");
 };
 
 export const replaceWhiteSpaceWithDash = (str) => {
-  return str.replace(/\s+/g, '-');
+  return str.replace(/\s+/g, "-");
 };
 
 export const replaceWhiteSpaceWithUnderscore = (str) => {
-  return str.replace(/\s+/g, '_');
+  return str.replace(/\s+/g, "_");
 };
 
 export const getAPIResponseError = (e) => {
@@ -276,7 +289,7 @@ export const getAPIResponseError = (e) => {
       //     break;
       // }
       if (e.response.data.message) {
-        return {code, message: e.response.data.message};
+        return { code, message: e.response.data.message };
       }
     }
   }
@@ -285,8 +298,8 @@ export const getAPIResponseError = (e) => {
 
 export const formatCurrency = (num) => {
   try {
-    if (num) return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-  } catch (e) { }
+    if (num) return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  } catch (e) {}
   return num;
 };
 
@@ -302,63 +315,93 @@ export const currencyWithDecimal = (num) => {
     } else {
       returnValue = Number(0).toFixed(digit);
     }
-  } catch (e) { }
+  } catch (e) {}
   return returnValue;
 };
 
 export const numToWords = (num) => {
   let a = [
-    '',
-    'one ',
-    'two ',
-    'three ',
-    'four ',
-    'five ',
-    'six ',
-    'seven ',
-    'eight ',
-    'nine ',
-    'ten ',
-    'eleven ',
-    'twelve ',
-    'thirteen ',
-    'fourteen ',
-    'fifteen ',
-    'sixteen ',
-    'seventeen ',
-    'eighteen ',
-    'nineteen ',
+    "",
+    "one ",
+    "two ",
+    "three ",
+    "four ",
+    "five ",
+    "six ",
+    "seven ",
+    "eight ",
+    "nine ",
+    "ten ",
+    "eleven ",
+    "twelve ",
+    "thirteen ",
+    "fourteen ",
+    "fifteen ",
+    "sixteen ",
+    "seventeen ",
+    "eighteen ",
+    "nineteen ",
   ];
-  let b = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+  let b = [
+    "",
+    "",
+    "twenty",
+    "thirty",
+    "forty",
+    "fifty",
+    "sixty",
+    "seventy",
+    "eighty",
+    "ninety",
+  ];
 
-  if ((num = num.toString()).length > 9) return 'overflow';
-  let n = num.split('');
-  n = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
-  if (!n) return '';
-  var str = '';
-  str += n[1] !== '00' ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'crore ' : '';
-  str += n[2] !== '00' ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
-  str += n[3] !== '00' ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
-  str += n[4] !== '00' ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
-  str += n[5] !== '00' ? (str !== '' ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + '' : '';
+  if ((num = num.toString()).length > 9) return "overflow";
+  let n = num.split("");
+  n = ("000000000" + num)
+    .substr(-9)
+    .match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+  if (!n) return "";
+  var str = "";
+  str +=
+    n[1] !== "00"
+      ? (a[Number(n[1])] || b[n[1][0]] + " " + a[n[1][1]]) + "crore "
+      : "";
+  str +=
+    n[2] !== "00"
+      ? (a[Number(n[2])] || b[n[2][0]] + " " + a[n[2][1]]) + "lakh "
+      : "";
+  str +=
+    n[3] !== "00"
+      ? (a[Number(n[3])] || b[n[3][0]] + " " + a[n[3][1]]) + "thousand "
+      : "";
+  str +=
+    n[4] !== "00"
+      ? (a[Number(n[4])] || b[n[4][0]] + " " + a[n[4][1]]) + "hundred "
+      : "";
+  str +=
+    n[5] !== "00"
+      ? (str !== "" ? "and " : "") +
+        (a[Number(n[5])] || b[n[5][0]] + " " + a[n[5][1]]) +
+        ""
+      : "";
   return str;
 };
 
 export const currencyInWords = (value) => {
-  if (isEmpty(value)) return '';
+  if (isEmpty(value)) return "";
   var number = parseFloat(value);
-  if (number === undefined) return '';
-  let num = value.toString().split('.');
+  if (number === undefined) return "";
+  let num = value.toString().split(".");
 
   var Rs = numToWords(num[0]).toUpperCase();
-  if (num.length === 1) return Rs + ' RUPEES ONLY';
+  if (num.length === 1) return Rs + " RUPEES ONLY";
 
   //Get two digit decimal
-  var num2 = (num[1] + '0').substring(0, 2);
-  if (num2[0] === '0') num2 = num2[1];
+  var num2 = (num[1] + "0").substring(0, 2);
+  if (num2[0] === "0") num2 = num2[1];
 
   var Paisa = numToWords(num2).toUpperCase();
-  return Rs + ' RUPEES AND ' + Paisa + ' PAISA ONLY';
+  return Rs + " RUPEES AND " + Paisa + " PAISA ONLY";
 };
 
 export const getDateDifference = (startDate, endDate) => {
@@ -368,34 +411,34 @@ export const getDateDifference = (startDate, endDate) => {
     const diffTime = Math.abs(date2 - date1);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     if (diffDays >= 0) return diffDays;
-  } catch (e) { }
+  } catch (e) {}
 };
 
 export const isPastDate = (date) => {
   if (!date) {
-    return '';
+    return "";
   }
-  let diff = moment().diff(date, 'days');
+  let diff = moment().diff(date, "days");
   return diff > 0;
 };
 
 export const displayRelativeDate = (date) => {
   if (!date) {
-    return '';
+    return "";
   }
-  let diff = moment().diff(date, 'days');
+  let diff = moment().diff(date, "days");
   if (diff === 0) {
-    return 'Today';
+    return "Today";
   } else if (diff === -1) {
-    return 'Tomorrow';
+    return "Tomorrow";
   } else {
     return moment(date).fromNow();
   }
 };
 
 export const getFormattedAddress = (item) => {
-  if (!item) return '';
-  let formattedAdd = '';
+  if (!item) return "";
+  let formattedAdd = "";
   let address = [];
   if (!isEmpty(item.address_line1) || !isEmpty(item.addressLine1)) {
     address.push(item.address_line1 || item.addressLine1);
@@ -409,7 +452,7 @@ export const getFormattedAddress = (item) => {
   if (!isEmpty(item.pincode)) {
     address.push(item.pincode);
   }
-  formattedAdd = address.join(', ');
+  formattedAdd = address.join(", ");
   return formattedAdd;
 };
 
@@ -417,7 +460,11 @@ export const getDateString = (date) => {
   //return yyyyMMdd
   if (date) {
     date = new Date(date);
-    return date.getFullYear() + ('0' + (date.getMonth() + 1)).slice(-2) + ('0' + date.getDate()).slice(-2);
+    return (
+      date.getFullYear() +
+      ("0" + (date.getMonth() + 1)).slice(-2) +
+      ("0" + date.getDate()).slice(-2)
+    );
   }
   return;
 };
@@ -437,7 +484,9 @@ export const getDateFromFormattedDate = (date) => {
 
 export const getUTCDate = (date) => {
   if (date) date = new Date(date);
-  return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  return new Date(
+    Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
+  );
 };
 
 export const getDate = (date) => {
@@ -465,53 +514,82 @@ export const durationInAsSeconds = (start, end) => {
 };
 
 export const convertToWebP = (inputFile, newfileName, resolution, callback) => {
-
   //getting File Actual Path
   inputFile = URL.createObjectURL(inputFile);
   // console.log(inputFile);
 
-  var cnv = document.createElement('canvas');
-  var ctx = cnv.getContext('2d');
+  var cnv = document.createElement("canvas");
+  var ctx = cnv.getContext("2d");
   var img = new Image();
   img.src = inputFile;
   img.onload = function () {
     cnv.width = img.width;
     cnv.height = img.height;
     ctx.drawImage(img, 0, 0);
-    var data = '';
+    var data = "";
     switch (resolution) {
-      case 'high':
-        data = cnv.toDataURL('image/webp');
+      case "high":
+        data = cnv.toDataURL("image/webp");
         break;
 
-        case 'medium':
-        data =  cnv.toDataURL('image/webp',0.70); 
+      case "medium":
+        data = cnv.toDataURL("image/webp", 0.7);
         break;
 
-        case 'low':
-        data = cnv.toDataURL('image/webp', 0.40);
+      case "low":
+        data = cnv.toDataURL("image/webp", 0.4);
         break;
 
       default:
-        data = cnv.toDataURL('image/webp');
+        data = cnv.toDataURL("image/webp");
         break;
     }
     // var data = cnv.toDataURL('image/webp',0.50); //second param is quality percentage.
-    var output = data.replace(/^data:image\/(png|jpg);base64,/, '');
+    var output = data.replace(/^data:image\/(png|jpg);base64,/, "");
     // console.log(output);
 
-
     //base64 to original file
-    var arr = output.split(','), mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    var arr = output.split(","),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
     while (n--) {
       u8arr[n] = bstr.charCodeAt(n);
     }
 
     callback(output, new File([u8arr], newfileName, { type: mime }));
-  }
-}
+  };
+};
 
 export const formattedDateFromNow = (timestamp) => {
   return moment(timestamp).fromNow();
-}
+};
+
+export const shuffleArray = (array) => {
+  return array.sort(() => Math.random() - 0.5);
+};
+
+export const generateUUID = () => {
+  const hexDigits = "0123456789abcdef";
+  let uuid = "";
+
+  for (let i = 0; i < 32; i++) {
+    const randomIndex = Math.floor(Math.random() * 16);
+    uuid += hexDigits[randomIndex];
+  }
+
+  // Insert hyphens at specific positions to form a UUID-like string
+  uuid =
+    uuid.substring(0, 8) +
+    "-" +
+    uuid.substring(8, 4) +
+    "-" +
+    uuid.substring(12, 4) +
+    "-" +
+    uuid.substring(16, 4) +
+    "-" +
+    uuid.substring(20);
+
+  return uuid;
+};

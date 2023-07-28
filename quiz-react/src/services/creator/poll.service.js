@@ -35,6 +35,7 @@ const updatePoll = async (pollId, payload) => {
 
 const createPoll = async (data) => {
   try {
+    delete data.theme;
     let res = await api.post(`${url}/polls`, data);
     return res.data;
   } catch (error) {

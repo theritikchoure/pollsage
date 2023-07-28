@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { createPollValidation } from "../../../validations/poll";
 import { createPoll } from "../../../services/creator/poll.service";
+import { getAllThemesForForm } from "../../../services/creator/theme.service";
 import {
   dismissToast,
   errorToast,
@@ -10,6 +11,7 @@ import {
 import PageDetails from "../../../components/_page_details";
 import { useNavigate } from "react-router-dom";
 import Form from "./form";
+import StepProgressBar from "../../../components/stepper";
 
 const CreatePoll = () => {
   const navigate = useNavigate();
@@ -23,6 +25,7 @@ const CreatePoll = () => {
     end_date: null,
     result_visibility: "public",
     password: null,
+    theme: 'dark'
   };
   const [formData, setFormData] = useState(initialState);
   const [loading, setLoading] = useState(false);
@@ -42,6 +45,24 @@ const CreatePoll = () => {
 
   const [isFormDirty, setIsFormDirty] = useState(false);
 
+  const [step, setStep] = useState(1);
+
+  // load themes from api
+  const [themes, setThemes] = useState([]);
+  useEffect(() => {
+    const fetchThemes = async () => {
+      try {
+        let res = await getAllThemesForForm();
+        let themes = separateThemesByDarkness(res.data); // separate themes by darkness
+        console.log(themes)
+        setThemes(themes);
+      } catch (error) {
+        errorToast(error.message);
+      }
+    };
+    fetchThemes();
+  }, []);
+
   useEffect(() => {
     const handleBeforeUnload = (e) => {
       if (isFormDirty) {
@@ -56,6 +77,24 @@ const CreatePoll = () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, [isFormDirty]);
+
+  const separateThemesByDarkness = (themes) => {
+    const dark_themes = [];
+    const light_themes = [];
+
+    themes.forEach((theme) => {
+      if (theme.is_dark_theme) {
+        dark_themes.push(theme);
+      } else {
+        light_themes.push(theme);
+      }
+    });
+
+    return {
+      dark_themes,
+      light_themes,
+    };
+  };
 
   // write on change booleanValue
   const onChangeBooleanValue = (key, value) => {
@@ -74,7 +113,7 @@ const CreatePoll = () => {
       return;
     }
 
-    if(key === 'password') {
+    if (key === "password") {
       value = !value ? null : value;
     }
 
@@ -155,6 +194,22 @@ const CreatePoll = () => {
       setLoading(false);
     }
   };
+
+  const handleStepChange = (e, step) => {
+    e.preventDefault();
+    // check if any validation errors
+    if (step === 2) {
+      const { isValid, errors } = createPollValidation(formData);
+      console.log(errors);
+      if (!isValid) {
+        setErrors(errors);
+        return;
+      } else {
+        setErrors({});
+      }
+    }
+    setStep(step);
+  };
   return (
     <>
       <PageDetails title="Create Poll - PollSage" description="Create Poll" />
@@ -168,6 +223,12 @@ const CreatePoll = () => {
                     Create Poll
                   </h3>
                 </div>
+                <StepProgressBar
+                  numSteps={3}
+                  onClick={(step) => {
+                    setStep(step);
+                  }}
+                />
                 <Form
                   formData={formData}
                   errors={errors}
@@ -181,7 +242,12 @@ const CreatePoll = () => {
                   removeOption={removeOption}
                   minPollEndDate={minPollEndDate}
                   setMinPollEndDate={setMinPollEndDate}
-                  submitButtonText={'Create poll'}
+                  submitButtonText={"Create poll"}
+                  step={step}
+                  setStep={setStep}
+                  totalSteps={3}
+                  handleStepChange={handleStepChange}
+                  themes={themes}
                 />
                 {/* <form onSubmit={onSubmit}>
                   <div className="p-6">

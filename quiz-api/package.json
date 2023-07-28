@@ -21,6 +21,7 @@
     "express-session": "^1.17.3",
     "helmet": "^7.0.0",
     "hpp": "^0.2.3",
+    "html-pdf": "^3.0.1",
     "joi": "^17.9.2",
     "jsonwebtoken": "^9.0.1",
     "jwt-decode": "^3.1.2",

@@ -1,106 +1,212 @@
 import React from "react";
 import PageDetails from "../../../components/_page_details";
+import StatisticsCards from "../../../components/creator/statistics_cards";
+import RecentActivity from "../../../components/creator/recent_activities";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import 'leaflet/dist/leaflet.css';
+import 'react-leaflet-markercluster/dist/styles.min.css'; // (optional) If you are using marker clusters
+
+const geographicData = {
+  totalResponses: 10,
+  countries: {
+    IN: 9,
+    NL: 1,
+  },
+  geoLocations: [
+    {
+      status: "success",
+      country: "India",
+      countryCode: "IN",
+      region: "MP",
+      regionName: "Madhya Pradesh",
+      city: "Bhopal",
+      zip: "464993",
+      lat: 23.2487,
+      lon: 77.4066,
+      timezone: "Asia/Kolkata",
+      isp: "BSNL Internet",
+      org: "",
+      as: "AS9829 National Internet Backbone",
+      query: "59.95.131.22",
+    },
+    {
+      status: "success",
+      country: "India",
+      countryCode: "IN",
+      region: "MP",
+      regionName: "Madhya Pradesh",
+      city: "Bhopal",
+      zip: "464993",
+      lat: 23.2487,
+      lon: 77.4066,
+      timezone: "Asia/Kolkata",
+      isp: "BSNL Internet",
+      org: "",
+      as: "AS9829 National Internet Backbone",
+      query: "59.95.131.22",
+    },
+    {
+      status: "success",
+      country: "India",
+      countryCode: "IN",
+      region: "MP",
+      regionName: "Madhya Pradesh",
+      city: "Bhopal",
+      zip: "464993",
+      lat: 23.2487,
+      lon: 77.4066,
+      timezone: "Asia/Kolkata",
+      isp: "BSNL Internet",
+      org: "",
+      as: "AS9829 National Internet Backbone",
+      query: "59.95.131.22",
+    },
+    {
+      status: "success",
+      country: "India",
+      countryCode: "IN",
+      region: "MP",
+      regionName: "Madhya Pradesh",
+      city: "Bhopal",
+      zip: "464993",
+      lat: 23.2487,
+      lon: 77.4066,
+      timezone: "Asia/Kolkata",
+      isp: "BSNL Internet",
+      org: "",
+      as: "AS9829 National Internet Backbone",
+      query: "59.95.131.22",
+    },
+    {
+      status: "success",
+      country: "India",
+      countryCode: "IN",
+      region: "MP",
+      regionName: "Madhya Pradesh",
+      city: "Bhopal",
+      zip: "464993",
+      lat: 23.2487,
+      lon: 77.4066,
+      timezone: "Asia/Kolkata",
+      isp: "BSNL Internet",
+      org: "",
+      as: "AS9829 National Internet Backbone",
+      query: "59.95.131.22",
+    },
+    {
+      status: "success",
+      country: "Netherlands",
+      countryCode: "NL",
+      region: "NH",
+      regionName: "North Holland",
+      city: "Amsterdam",
+      zip: "1012",
+      lat: 52.3759,
+      lon: 4.8975,
+      timezone: "Europe/Amsterdam",
+      isp: "Online S.A.S.",
+      org: "Scaleway",
+      as: "AS12876 SCALEWAY S.A.S.",
+      query: "2001:bc8:5080:7a0b::1",
+    },
+    {
+      status: "success",
+      country: "India",
+      countryCode: "IN",
+      region: "MP",
+      regionName: "Madhya Pradesh",
+      city: "Bhopal",
+      zip: "462030",
+      lat: 23.2487,
+      lon: 77.4066,
+      timezone: "Asia/Kolkata",
+      isp: "BSNL Internet",
+      org: "",
+      as: "AS9829 National Internet Backbone",
+      query: "117.217.43.252",
+    },
+    {
+      status: "success",
+      country: "India",
+      countryCode: "IN",
+      region: "MP",
+      regionName: "Madhya Pradesh",
+      city: "Bhopal",
+      zip: "462030",
+      lat: 23.2487,
+      lon: 77.4066,
+      timezone: "Asia/Kolkata",
+      isp: "BSNL Internet",
+      org: "",
+      as: "AS9829 National Internet Backbone",
+      query: "117.217.43.252",
+    },
+    {
+      status: "success",
+      country: "India",
+      countryCode: "IN",
+      region: "MP",
+      regionName: "Madhya Pradesh",
+      city: "Harda",
+      zip: "461331",
+      lat: 22.3449,
+      lon: 77.093,
+      timezone: "Asia/Kolkata",
+      isp: "Bharti Airtel Limited",
+      org: "Bharti Airtel Limited",
+      as: "AS45609 Bharti Airtel Ltd. AS for GPRS Service",
+      query: "2401:4900:56a9:7102:4481:611d:64c1:6d0e",
+    },
+    {
+      status: "success",
+      country: "India",
+      countryCode: "IN",
+      region: "MP",
+      regionName: "Madhya Pradesh",
+      city: "Bhopal",
+      zip: "464993",
+      lat: 23.2487,
+      lon: 77.4066,
+      timezone: "Asia/Kolkata",
+      isp: "BSNL Internet",
+      org: "",
+      as: "AS9829 National Internet Backbone",
+      query: "117.217.33.188",
+    },
+  ],
+};
 
 const Dashboard = () => {
   return (
     <>
-      <PageDetails title={'Creator Dashboard - PollSage'} />
+      <PageDetails title={"Creator Dashboard - PollSage"} />
       {/* <!-- Statistics Cards --> */}
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
-        <div class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
-          <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
-            <svg
-              width="30"
-              height="30"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              class="stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-              ></path>
-            </svg>
-          </div>
-          <div class="text-right">
-            <p class="text-2xl">1,257</p>
-            <p>Visitors</p>
-          </div>
-        </div>
-        <div class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
-          <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
-            <svg
-              width="30"
-              height="30"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              class="stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-              ></path>
-            </svg>
-          </div>
-          <div class="text-right">
-            <p class="text-2xl">557</p>
-            <p>Orders</p>
-          </div>
-        </div>
-        <div class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
-          <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
-            <svg
-              width="30"
-              height="30"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              class="stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-              ></path>
-            </svg>
-          </div>
-          <div class="text-right">
-            <p class="text-2xl">$11,257</p>
-            <p>Sales</p>
-          </div>
-        </div>
-        <div class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
-          <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
-            <svg
-              width="30"
-              height="30"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              class="stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path>
-            </svg>
-          </div>
-          <div class="text-right">
-            <p class="text-2xl">$75,257</p>
-            <p>Balances</p>
-          </div>
-        </div>
-      </div>
+      <StatisticsCards />
       {/* <!-- ./Statistics Cards --> */}
+
+      {/* <!-- Recent Activities --> */}
+      <RecentActivity />
+      {/* <!-- ./Recent Activities --> */}
+
+      <div className="mt-4 mx-4">
+      <MapContainer
+        center={[0, 0]} // Set the initial center of the map (latitude, longitude)
+        zoom={2} // Set the initial zoom level of the map (0 to 18)
+        style={{ height: "400px", width: "100%" }}
+      >
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" // URL of the tile layer (OpenStreetMap)
+        />
+        {geographicData.geoLocations.map((location, index) => (
+          <Marker
+            key={index}
+            position={[location.lat, location.lon]} // Latitude and Longitude of the marker
+          >
+            <Popup>{location.city}</Popup>{" "}
+          </Marker>
+        ))}
+      </MapContainer>
+      </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 p-4 gap-4">
         {/* <!-- Social Traffic --> */}
