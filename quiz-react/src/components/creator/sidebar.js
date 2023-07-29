@@ -30,13 +30,13 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="fixed flex flex-col left-0 w-14 hover:w-64 md:w-64 bg-blue-900 dark:bg-gray-900 h-full text-white transition-all duration-300 border-none z-10 sidebar">
+    <div className="fixed flex flex-col left-0 w-14 hover:w-64 md:w-64 bg-[#1e293b] h-full text-white transition-all duration-300 border-none z-10 sidebar">
       <div className="overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow">
         <ul className="flex flex-col py-4 space-y-1">
           <li className="px-5 hidden md:block">
             <div className="flex flex-row items-center h-8">
               <div className="text-sm font-light tracking-wide text-gray-400 uppercase">
-                Main
+                Menu
               </div>
             </div>
           </li>
@@ -141,9 +141,6 @@ const Sidebar = () => {
               <span className="ml-2 text-sm tracking-wide truncate">
                 Comments
               </span>
-              <span className="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">
-                1.2k
-              </span>
             </Link>
           </li>
           <li>
@@ -167,9 +164,6 @@ const Sidebar = () => {
               </span>
               <span className="ml-2 text-sm tracking-wide truncate">
                 Activity
-              </span>
-              <span className="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">
-                1.2k
               </span>
             </Link>
           </li>
@@ -197,8 +191,13 @@ const Sidebar = () => {
               <span className="ml-2 text-sm tracking-wide truncate">
                 Email system
               </span>
-              <span className="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">
-                1.2k
+              <span className="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide">
+                <svg
+                  className="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 false"
+                  viewBox="0 0 12 12"
+                >
+                  <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z"></path>
+                </svg>
               </span>
             </a>
 
@@ -246,8 +245,13 @@ const Sidebar = () => {
               <span className="ml-2 text-sm tracking-wide truncate">
                 Poll themes
               </span>
-              <span className="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">
-                1.2k
+              <span className="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide">
+                <svg
+                  className="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 false"
+                  viewBox="0 0 12 12"
+                >
+                  <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z"></path>
+                </svg>
               </span>
             </a>
 
@@ -273,42 +277,10 @@ const Sidebar = () => {
               </li>
             </ul>
           </li>
-          <li className="px-5 hidden md:block">
-            <div className="flex flex-row items-center mt-5 h-8">
-              <div className="text-sm font-light tracking-wide text-gray-400 uppercase">
-                Settings
-              </div>
-            </div>
-          </li>
           <li>
             <a
-              href="#"
-              className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
-            >
-              <span className="inline-flex justify-center items-center ml-4">
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                  ></path>
-                </svg>
-              </span>
-              <span className="ml-2 text-sm tracking-wide truncate">
-                Profile
-              </span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
+              onClick={(e) => handleSubMenu(e)}
+              href="void:javascript()"
               className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
             >
               <span className="inline-flex justify-center items-center ml-4">
@@ -336,7 +308,46 @@ const Sidebar = () => {
               <span className="ml-2 text-sm tracking-wide truncate">
                 Settings
               </span>
+              <span className="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide">
+                <svg
+                  className="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 false"
+                  viewBox="0 0 12 12"
+                >
+                  <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z"></path>
+                </svg>
+              </span>
             </a>
+
+            {/* create submenu and consider the overall style */}
+            <ul className="hidden flex flex-col py-2 space-y-1">
+              <li className="">
+                <Link
+                  to={"/creator/settings/account"}
+                  className="relative flex flex-row items-center px-12 h-9 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+                >
+                  {" "}
+                  My Account
+                </Link>
+              </li>
+              <li className="">
+                <Link
+                  to={"/creator/emails/template/create"}
+                  className="relative flex flex-row items-center px-12 h-9 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+                >
+                  {" "}
+                  My Notifications
+                </Link>
+              </li>
+              <li className="">
+                <Link
+                  to={"/creator/settings/feedback"}
+                  className="relative flex flex-row items-center px-12 h-9 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+                >
+                  {" "}
+                  Give Feedback
+                </Link>
+              </li>
+            </ul>
           </li>
           <li>
             <button
@@ -345,24 +356,18 @@ const Sidebar = () => {
             >
               <span className="inline-flex justify-center items-center ml-4">
                 <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-arrow-right"
+                  viewBox="0 0 16 16"
                 >
+                  {" "}
                   <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 2L22 12L12 22"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M8 12H20"
-                  />
+                    fillRule="evenodd"
+                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+                  />{" "}
                 </svg>
               </span>
               <span className="ml-2 text-sm tracking-wide truncate">

@@ -3,8 +3,8 @@ import PageDetails from "../../../components/_page_details";
 import StatisticsCards from "../../../components/creator/statistics_cards";
 import RecentActivity from "../../../components/creator/recent_activities";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import 'leaflet/dist/leaflet.css';
-import 'react-leaflet-markercluster/dist/styles.min.css'; // (optional) If you are using marker clusters
+import "leaflet/dist/leaflet.css";
+import "react-leaflet-markercluster/dist/styles.min.css"; // (optional) If you are using marker clusters
 
 const geographicData = {
   totalResponses: 10,
@@ -177,9 +177,25 @@ const geographicData = {
 };
 
 const Dashboard = () => {
+  const user = JSON.parse(localStorage.getItem('user') || '');
+
   return (
     <>
       <PageDetails title={"Creator Dashboard - PollSage"} />
+
+      {/* <!-- Page Header--> */}
+      <div class="mt-6 mx-4 p-6 rounded-sm bg-indigo-500 mb-6">
+        {/* <!-- Content --> */}
+        <div class="">
+          <h1 class="text-slate-800 dark:text-slate-100 font-bold text-2xl">
+            Good afternoon, {user?.name || ''}. 👋
+          </h1>
+          <p class="text-indigo-100">
+            Here is what’s happening with your projects today:
+          </p>
+        </div>
+      </div>
+
       {/* <!-- Statistics Cards --> */}
       <StatisticsCards />
       {/* <!-- ./Statistics Cards --> */}
@@ -189,23 +205,23 @@ const Dashboard = () => {
       {/* <!-- ./Recent Activities --> */}
 
       <div className="mt-4 mx-4">
-      <MapContainer
-        center={[0, 0]} // Set the initial center of the map (latitude, longitude)
-        zoom={2} // Set the initial zoom level of the map (0 to 18)
-        style={{ height: "400px", width: "100%" }}
-      >
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" // URL of the tile layer (OpenStreetMap)
-        />
-        {geographicData.geoLocations.map((location, index) => (
-          <Marker
-            key={index}
-            position={[location.lat, location.lon]} // Latitude and Longitude of the marker
-          >
-            <Popup>{location.city}</Popup>{" "}
-          </Marker>
-        ))}
-      </MapContainer>
+        <MapContainer
+          center={[0, 0]} // Set the initial center of the map (latitude, longitude)
+          zoom={2} // Set the initial zoom level of the map (0 to 18)
+          style={{ height: "400px", width: "100%" }}
+        >
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" // URL of the tile layer (OpenStreetMap)
+          />
+          {geographicData.geoLocations.map((location, index) => (
+            <Marker
+              key={index}
+              position={[location.lat, location.lon]} // Latitude and Longitude of the marker
+            >
+              <Popup>{location.city}</Popup>{" "}
+            </Marker>
+          ))}
+        </MapContainer>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 p-4 gap-4">

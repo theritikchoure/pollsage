@@ -316,6 +316,66 @@ const PollForm = ({
               </div>
             </div>
             <div className="mb-4">
+              <label htmlFor="is_email_send" className="flex cursor-pointer">
+                <div className="relative pt-0.5">
+                  <input
+                    type="checkbox"
+                    id="is_email_send"
+                    className=""
+                    checked={formData.is_email_send}
+                    onChange={(event) =>
+                      onChangeFormData("is_email_send", event.target.checked)
+                    }
+                  />
+                </div>
+                <p className="ml-2">Send After vote email</p>
+              </label>
+            </div>
+            {formData.is_email_send && (
+              <div className="mb-4">
+                <label
+                  className="mb-2.5 block text-black dark:text-white"
+                  htmlFor="result_visibility"
+                >
+                  Result visibility
+                </label>
+                <div className="relative z-20 bg-transparent dark:bg-form-input">
+                  <select
+                    id="result_visibility"
+                    className="relative z-20 w-full appearance-none rounded border border-gray-600 
+                              bg-gray-800 py-3 px-5 outline-none transition focus:border-primary active:border-primary 
+                              dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    value={formData.result_visibility}
+                    onChange={(e) =>
+                      onChangeFormData("result_visibility", e.target.value)
+                    }
+                  >
+                    <option value={"public"}>Public</option>
+                    <option value={"private"}>Private</option>
+                  </select>
+                  <span className="absolute top-1/2 right-4 z-30 -translate-y-1/2">
+                    <svg
+                      className="fill-current"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g opacity="0.8">
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M5.29289 8.29289C5.68342 7.90237 6.31658 7.90237 6.70711 8.29289L12 13.5858L17.2929 8.29289C17.6834 7.90237 18.3166 7.90237 18.7071 8.29289C19.0976 8.68342 19.0976 9.31658 18.7071 9.70711L12.7071 15.7071C12.3166 16.0976 11.6834 16.0976 11.2929 15.7071L5.29289 9.70711C4.90237 9.31658 4.90237 8.68342 5.29289 8.29289Z"
+                          fill=""
+                        ></path>
+                      </g>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            )}
+            <div className="mb-4">
               <label htmlFor="allow_comments" className="flex cursor-pointer">
                 <div className="relative pt-0.5">
                   <input
@@ -442,7 +502,7 @@ const PollForm = ({
                             bg-gray-800 py-3 px-5 outline-none transition focus:border-primary active:border-primary 
                             dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     value={formData.light_theme}
-                    onChange={(e) =>{
+                    onChange={(e) => {
                       onChangeFormData("light_theme", e.target.value);
                       onChangeFormData("selectedTheme", e.target.value);
                     }}
@@ -451,8 +511,8 @@ const PollForm = ({
                     {themes.light_themes.map((theme) => {
                       return (
                         <option value={JSON.stringify(theme)} key={theme._id}>
-                        {theme.theme_name}
-                      </option>
+                          {theme.theme_name}
+                        </option>
                       );
                     })}
                   </select>
@@ -473,7 +533,7 @@ const PollForm = ({
                             dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     // value={formData.theme}
                     onChange={(e) => {
-                      onChangeFormData("theme", (JSON.parse(e.target.value))._id);
+                      onChangeFormData("theme", JSON.parse(e.target.value)._id);
                       onChangeFormData("selectedTheme", e.target.value);
                     }}
                   >

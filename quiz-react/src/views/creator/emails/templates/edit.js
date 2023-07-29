@@ -112,15 +112,19 @@ const CreateMailTemplate = () => {
 
       loadingToast("Creating template...");
 
+      let id = formData._id;
+      delete formData._id;
+      delete formData.is_approved;
+
       // write api call here
-      let res = await updateEmailTemplateById(formData);
+      let res = await updateEmailTemplateById(id, formData);
 
       if (res) {
         setFormData(initialState);
         setLoading(false);
         dismissToast();
-        warningToast("your template would be approved by admin and then you can use it in your mail");
-        navigate("/creator/polls");
+        successToast("Template updated successfully");
+        navigate("/creator/emails/template/list");
       }
 
       return;

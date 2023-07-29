@@ -15,21 +15,26 @@ import CreatePoll from "./views/poll/create_poll";
 import ViewPoll from "./views/poll/view_poll";
 import PollResult from "./views/poll/poll_result.js";
 import Loader from "./components/_loader";
-import Chat from "./views/chat.js"
+import Chat from "./views/chat.js";
+// import ContactUs from "./views/contact_us.js";
+import Layout from "./views/layout";
+
 
 function App() {
 
   const [isAuth, setIsAuth] = useState(false);
+  const [auth, setAuth] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
     const auth = {
-      user: localStorage.getItem("user"),
-      token: localStorage.getItem("token"),
+      user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null,
+      token: localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null,
     };
 
     if (!isEmpty(auth.user) && !isEmpty(auth.token)) {
       setIsAuth(true);
+      setAuth(auth);
     }
   }, [location]);
 
@@ -59,13 +64,14 @@ function App() {
           )}
 
           {/* Common Routes */}
-          <Route exact path="/" element={<Home />} />
+          {/* <Route exact path="/" element={<Home />} /> */}
           <Route exact path="/create-poll" element={<CreatePoll />} />
           <Route exact path="/404" element={<NotFound />} />
           <Route exact path="/poll/:pollId" element={<ViewPoll />} />
           <Route exact path="/results/:pollId" element={<PollResult />} />
 
           <Route exact path="/chat/:pollId" element={<Chat />} />
+          <Route exact path="*" element={<Layout isAuth={isAuth} auth={auth} />} />
 
           {/* <Route path="*" element={<Navigate to={'/404'} />} /> */}
         </Routes>
