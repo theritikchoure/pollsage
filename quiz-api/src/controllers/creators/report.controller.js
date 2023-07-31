@@ -5,7 +5,6 @@ const Poll = require("../../models/poll.model");
 const PollResponse = require("../../models/poll_response.model");
 const Comment = require("../../models/comment.model");
 const fs = require("fs");
-const pdf = require("html-pdf");
 
 // Module Exports
 module.exports = {
@@ -107,19 +106,6 @@ async function downloadPollReport(req, res) {
       },
     };
 
-    pdf.create(htmlContent, pdfOptions).toStream((err, stream) => {
-      if (err) {
-        res.status(500).json({ message: "Error generating PDF" });
-        return;
-      }
-
-      res.setHeader("Content-Type", "application/pdf");
-      res.setHeader(
-        "Content-Disposition",
-        'attachment; filename="poll_report.pdf"'
-      );
-      stream.pipe(res);
-    });
   } catch (e) {
     throw handleControllerError(e);
   }

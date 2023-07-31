@@ -2,6 +2,7 @@ const express = require("express");
 const pollRoutes = require("./poll.route.js");
 const commentRoutes = require("./app/comment.route.js");
 const creatorRoutes = require("./app/creator/index.route.js");
+const usersRoutes = require("./app/user/index.route.js");
 const pushNotificationRoutes = require("./push_notification.route.js");
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -15,8 +16,12 @@ router.use("/polls", pollRoutes);
 router.use("/comments", commentRoutes);
 
 /** /push-notifications - for push notifications related routes */
-router.use("/push-notifications", pushNotificationRoutes)
+router.use("/push-notifications", pushNotificationRoutes);
 
+/** /users - for users related routes */
+router.use('/users', usersRoutes);
+
+/** /creators - for creators related routes */
 router.use(
   "/creators",
   creatorRoutes

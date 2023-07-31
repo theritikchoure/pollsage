@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 module.exports = {
+    NODE_ENV: process.env.NODE_ENV,
     PORT: process.env.PORT || 3000,
     MONGO_URL: process.env.MONGO_URL,
     JWT_SECRET: process.env.JWT_SECRET,
@@ -11,6 +12,7 @@ module.exports = {
     VAPID_PUBLIC_KEY: process.env.VAPID_PUBLIC_KEY,
     VAPID_PRIVATE_KEY: process.env.VAPID_PRIVATE_KEY,
     VAPID_MAIL_ID: process.env.VAPID_MAIL_ID,
+    CORS_ORIGIN: (process.env.CORS_ORIGIN).split(','),
     // Add other environment variables as needed
 };
   

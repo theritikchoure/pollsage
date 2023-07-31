@@ -11,6 +11,7 @@ const PollResponse = require("../../models/poll_response.model");
 const {
   createPollValidation, updatePollValidation,
 } = require("../../../validations/creators/poll.validations");
+const { getDatabaseConnection } = require("../../../config/db");
 
 // Module Exports
 module.exports = {
@@ -63,6 +64,10 @@ async function addPoll(req) {
 
 async function getAllPolls(req) {
   try {
+
+    // create database connection
+    await getDatabaseConnection();
+
     const polls = await PollCreator.aggregate([
       {
         $match: { _id: req.user._id },

@@ -27,8 +27,6 @@ async function fetchPollsOverview(req) {
       "createdPolls"
     );
 
-    console.log(creator);
-
     const totalPolls = creator.createdPolls.length;
     const activePolls = creator.createdPolls.filter(
       (poll) => poll.publish_status === "published"

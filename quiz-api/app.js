@@ -13,6 +13,7 @@ const session = require("express-session");
 const cors = require("cors");
 const passport = require('./config/passport.js');
 const webpush = require('web-push');
+const requireAccessToken = require("./src/middleware/require-access-token.js");
 
 // Create the Express app
 const app = express();
@@ -31,11 +32,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: (origin, callback) => {
+    // Check if the request origin is in the allowedOrigins array
+    if (env.CORS_ORIGIN.indexOf(origin) !== -1) {
+      callback(null, true); // Allow the request
+    } else {
+      callback(new Error('Not allowed by CORS')); // Deny the request
+    }
+  },
 };
 
-// app.use(cors(corsOptions));
-app.use(cors());
+app.use(cors(corsOptions));
+// app.use(cors());
 
 // Middleware for logging
 app.use((req, res, next) => {
@@ -51,6 +59,10 @@ app.use(hpp());
 // Middleware
 app.use(express.json());
 app.use(morgan("dev"));
+
+console.log(env.NODE_ENV)
+
+env.NODE_ENV !== "local" && app.use(requireAccessToken);
 
 // Routes
 app.use("/api/v1", routes);
