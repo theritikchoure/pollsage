@@ -24,7 +24,7 @@ const PollForm = ({
 }) => {
   return (
     <form>
-      <div className="p-6">
+      <div className="">
         {step === 1 && (
           <>
             {" "}
@@ -615,35 +615,34 @@ const PollForm = ({
           </div> }
         </div> */}
 
-        {step === totalSteps && (
-          <div className="mb-4 flex flex-col gap-6 xl:flex-row">
+        <div className="mb-4 flex flex-col gap-6 xl:flex-row border-t pt-8 mt-10">
+          {step !== 1 && (
             <button
-              onClick={onSubmit}
-              className="flex cursor-pointer w-full justify-center rounded bg-gray-900 border border-gray-600 hover:bg-gray-900 p-3 font-medium text-gray"
+              className="flex cursor-pointer w-full justify-center rounded bg-slate-700 border border-gray-600 hover:bg-gray-900 p-3 font-medium text-gray"
+              onClick={() => setStep(step - 1)}
             >
-              {submitButtonText}
+              Back
             </button>
-          </div>
-        )}
-
-        {step !== totalSteps && (
-          <div className="mb-4 flex flex-col gap-6 xl:flex-row">
-            {step !== 1 && (
-              <button
-                className="flex cursor-pointer w-full justify-center rounded bg-gray-900 border border-gray-600 hover:bg-gray-900 p-3 font-medium text-gray"
-                onClick={() => setStep(step - 1)}
-              >
-                Back
-              </button>
-            )}
+          )}
+          {step !== totalSteps && (
             <button
-              className="flex cursor-pointer w-full justify-center rounded bg-gray-900 border border-gray-600 hover:bg-gray-900 p-3 font-medium text-gray"
+              className="flex cursor-pointer w-full justify-center rounded bg-indigo-500 hover:bg-indigo-600 p-3 font-medium text-gray"
               onClick={(e) => handleStepChange(e, step + 1)}
             >
               Next
             </button>
-          </div>
-        )}
+          )}
+          {step === totalSteps && (
+            <div className="mb-4 flex flex-col gap-6 xl:flex-row">
+              <button
+                onClick={onSubmit}
+                className="flex cursor-pointer w-full justify-center rounded bg-gray-900 border border-gray-600 hover:bg-gray-900 p-3 font-medium text-gray"
+              >
+                {submitButtonText}
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </form>
   );

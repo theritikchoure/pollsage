@@ -1,12 +1,13 @@
 import React from 'react';
+import { WEBSITE_NAME } from '../../global/constants';
 
 const Footer = () => {
 
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="flex items-center justify-between flex-shrink-0 p-4 border-t max-h-14">
-      <div>PollSage &copy; {currentYear}</div>
+    <footer className="flex items-center justify-between flex-shrink-0 p-4 border-t border-gray-600 bg-[#182235]">
+      <div>{WEBSITE_NAME} &copy; {currentYear}</div>
       <div className="text-sm">
         Made by{' '}
         <a

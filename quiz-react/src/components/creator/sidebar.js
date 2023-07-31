@@ -30,9 +30,22 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="fixed flex flex-col left-0 w-14 hover:w-64 md:w-64 bg-[#1e293b] h-full text-white transition-all duration-300 border-none z-10 sidebar">
+    <div className="fixed flex flex-col left-0 w-14 hover:w-64 md:w-64 bg-[#1e293b] h-full text-white transition-all duration-300 border-none z-40 sidebar">
       <div className="overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow">
         <ul className="flex flex-col py-4 space-y-1">
+          <li className="px-5 hidden md:block border-b pb-5 mb-5">
+            <Link
+              to="/"
+              className="text-lg font-semibold tracking-widest text-gray-100 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline"
+            >
+              PollSage
+            </Link>
+          </li>
+          <li className="px-5 md:hidden">
+            <Link to="/" className="flex flex-row items-center h-8">
+              <img src="/logo.png" alt="" className="w-5 h-5 mx-auto" />
+            </Link>
+          </li>
           <li className="px-5 hidden md:block">
             <div className="flex flex-row items-center h-8">
               <div className="text-sm font-light tracking-wide text-gray-400 uppercase">
@@ -67,37 +80,9 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <Link
-              to="/creator/create-poll"
-              className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
-            >
-              <span className="inline-flex justify-center items-center ml-4">
-                <svg
-                  className="w-5 h-5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <circle cx="12" cy="12" r="10" />
-                  <line x1="12" y1="8" x2="12" y2="16" />
-                  <line x1="8" y1="12" x2="16" y2="12" />
-                </svg>
-              </span>
-              <span className="ml-2 text-sm tracking-wide truncate">
-                Create poll
-              </span>
-              <span className="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-blue-500 bg-indigo-50 rounded-full">
-                New
-              </span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              to={"/creator/polls"}
+            <a
+              onClick={(e) => handleSubMenu(e)}
+              href="void:javascript()"
               className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
             >
               <span className="inline-flex justify-center items-center ml-4">
@@ -120,7 +105,37 @@ const Sidebar = () => {
                 </svg>
               </span>
               <span className="ml-2 text-sm tracking-wide truncate">Polls</span>
-            </Link>
+              <span className="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide">
+                <svg
+                  className="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 false"
+                  viewBox="0 0 12 12"
+                >
+                  <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z"></path>
+                </svg>
+              </span>
+            </a>
+
+            {/* create submenu and consider the overall style */}
+            <ul className="hidden flex flex-col py-2 space-y-1">
+              <li className="">
+                <Link
+                  to={"/creator/polls"}
+                  className="relative flex flex-row items-center px-12 h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+                >
+                  {" "}
+                  List/All Polls
+                </Link>
+              </li>
+              <li className="">
+                <Link
+                  to={"/creator/polls/create"}
+                  className="relative flex flex-row items-center px-12 h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+                >
+                  {" "}
+                  Add Poll
+                </Link>
+              </li>
+            </ul>
           </li>
           <li>
             <Link

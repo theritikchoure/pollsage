@@ -1,9 +1,6 @@
 import React, { Fragment, useState } from "react";
-import Header from "../components/header";
-import Footer from "../components/footer";
 import PageDetails from "../components/_page_details";
 import useTabVisibility from "../components/_tab_visibility";
-import axios from "axios";
 
 const Home = () => {
 
@@ -19,37 +16,37 @@ const Home = () => {
 
   const [subscription, setSubscription] = useState(null);
 
-  const handleSubscribe = async () => {
-    try {
-      const registration = await navigator.serviceWorker.register('/sw.js');
-      const subscription = await registration.pushManager.subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: 'BKyvZkw9C9pd6ByYHqASFvne96JT9nDFpH87B616fvLUVrnP_iVut-1nKHtsxi8948e3qE_J7LGi4TXpCrhcg4s',
-      });
+  // const handleSubscribe = async () => {
+  //   try {
+  //     const registration = await navigator.serviceWorker.register('/sw.js');
+  //     const subscription = await registration.pushManager.subscribe({
+  //       userVisibleOnly: true,
+  //       applicationServerKey: 'BKyvZkw9C9pd6ByYHqASFvne96JT9nDFpH87B616fvLUVrnP_iVut-1nKHtsxi8948e3qE_J7LGi4TXpCrhcg4s',
+  //     });
 
-      await axios.post('/api/v1/push-notifications', subscription);
-      setSubscription(subscription);
-    } catch (error) {
-      console.error('Error subscribing:', error);
-    }
-  };
+  //     await axios.post('/api/v1/push-notifications', subscription);
+  //     setSubscription(subscription);
+  //   } catch (error) {
+  //     console.error('Error subscribing:', error);
+  //   }
+  // };
 
-  const handleSendNotification = async () => {
-    try {
-      await axios.post('/api/v1/push-notifications/send', {
-        title: 'New Poll Available!',
-        body: 'A new poll is now available for you to vote.',
-      });
-    } catch (error) {
-      console.error('Error sending notification:', error);
-    }
-  }; 
+  // const handleSendNotification = async () => {
+  //   try {
+  //     await axios.post('/api/v1/push-notifications/send', {
+  //       title: 'New Poll Available!',
+  //       body: 'A new poll is now available for you to vote.',
+  //     });
+  //   } catch (error) {
+  //     console.error('Error sending notification:', error);
+  //   }
+  // }; 
 
   return (
     <>
     <PageDetails title="PollSage - Create polls in seconds" description="Pollsage is a free online polling platform that allows you to create polls and share them with your audience." />
     <section className="bg-gray-900 text-white">
-      <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:items-center">
+      <div className="mx-auto max-w-screen-xl px-4 py-48 lg:flex lg:items-center">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl">
           Gather Insights,
@@ -59,24 +56,6 @@ const Home = () => {
           <p className="mx-auto mt-4 max-w-xl sm:text-xl/relaxed">
           Empower Your Decision-Making with PollSage
           </p>
-
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <a
-              className="block w-full rounded border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
-              href="/create-poll"
-              // onClick={handleSubscribe}
-            >
-              Create Poll
-            </a>
-
-            <a
-              className="block w-full rounded border border-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
-              href="/creator/login"
-              // onClick={handleSendNotification}
-            >
-              Manage polls
-            </a>
-          </div>
         </div>
       </div>
     </section>

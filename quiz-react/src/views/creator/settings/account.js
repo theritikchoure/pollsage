@@ -6,7 +6,7 @@ const Account = () => {
     <>
       <div className="mt-4 mx-4">
         <CreatorPageTitle title={"Account Settings"} />
-        <div className="flex-grow bg-slate-800">
+        <div className="flex-grow bg-slate-800 mb-12">
           <div class="p-6">
             <h2 class="text-slate-800 dark:text-slate-100 font-bold text-2xl mb-5">
               My Account

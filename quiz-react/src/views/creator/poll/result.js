@@ -8,11 +8,9 @@ import {
   getPollResult,
 } from "../../../services/creator/poll.service";
 import { Link } from "react-router-dom";
-import io from "socket.io-client";
 import Loader from '../../../components/_loader';
 import { formattedDateFromNow } from "../../../helpers/common";
-
-const socket = io(); // Replace with your server URL
+import socket from "../../../services/socket.service";
 
 const PollList = () => {
   const [pollId, setPollId] = useState(null);

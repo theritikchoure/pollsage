@@ -18,6 +18,7 @@ import CreateTheme from "./themes/create";
 import Activity from "./activity";
 import Account from "./settings/account";
 import CreatorFeedback from "./settings/feedback";
+import CreatorFAQs from "./settings/faq";
 
 const CreatorLayout = () => {
   return (
@@ -28,30 +29,40 @@ const CreatorLayout = () => {
         <CreatorSidebar />
         {/* <!-- ./Sidebar --> */}
 
-        <div className="h-full ml-14 mb-10 md:ml-64">
+        <div className="h-full ml-14 md:ml-64">
           <CreatorHeader />
-          <Routes>
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/create-poll" element={<CreatePoll />} />
-            <Route path="/edit-poll/:pollId" element={<EditPoll />} />
-            <Route path="/polls" element={<PollsList />} />
-            <Route path="/poll-result/:pollId" element={<PollResult />} />
-            <Route path="/poll-comments/:pollId" element={<CommentByPoll />} />
-            <Route
-              path="/emails/template/create"
-              element={<CreateMailTemplate />}
-            />
-            <Route path="/emails/template/list" element={<MailTemplates />} />
-            <Route
-              path="/emails/template/edit/:id"
-              element={<EditMailTemplate />}
-            />
-            <Route path="/themes/create" element={<CreateTheme />} />
-            <Route path="/activity" element={<Activity />} />
-            <Route path="/settings/account" element={<Account />} />
-            <Route path="/settings/feedback" element={<CreatorFeedback />} />
-            <Route path="*" element={<Navigate to={"/creator/dashboard"} />} />
-          </Routes>
+          <div className="px-4 py-8 md:px-8">
+            <Routes>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/polls/create" element={<CreatePoll />} />
+              <Route path="/edit-poll/:pollId" element={<EditPoll />} />
+              <Route path="/polls" element={<PollsList />} />
+              <Route path="/poll-result/:pollId" element={<PollResult />} />
+              <Route
+                path="/poll-comments/:pollId"
+                element={<CommentByPoll />}
+              />
+              <Route
+                path="/emails/template/create"
+                element={<CreateMailTemplate />}
+              />
+              <Route path="/emails/template/list" element={<MailTemplates />} />
+              <Route
+                path="/emails/template/edit/:id"
+                element={<EditMailTemplate />}
+              />
+              <Route path="/themes/create" element={<CreateTheme />} />
+              <Route path="/activity" element={<Activity />} />
+              <Route path="/settings/account" element={<Account />} />
+              <Route path="/settings/feedback" element={<CreatorFeedback />} />
+              <Route path="/settings/faqs" element={<CreatorFAQs />} />
+              <Route
+                path="*"
+                element={<Navigate to={"/creator/dashboard"} />}
+              />
+            </Routes>
+          </div>
+          <CreatorFooter />
         </div>
       </div>
     </div>

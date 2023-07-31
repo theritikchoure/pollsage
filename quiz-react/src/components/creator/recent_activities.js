@@ -95,7 +95,7 @@ const RecentActivity = () => {
                 </div>
                 <ul class="my-1">
                   {recentActivity.today.map((activity, index) => (
-                    <li class="flex px-4">
+                    <li class="flex px-4" key={index}>
                      <div class="w-9 h-9 rounded-full flex-shrink-0 bg-indigo-500 my-2 mr-3">
                         <svg
                           class="w-9 h-9 fill-current text-indigo-50"
@@ -384,8 +384,8 @@ const RecentActivity = () => {
                   Yesterday
                 </div>
                 <ul class="my-1">
-                    {recentActivity.yesterday.map((activity) => (
-                        <li class="flex px-4">
+                    {recentActivity.yesterday.map((activity, index) => (
+                        <li class="flex px-4" key={index}>
                     <div class="w-9 h-9 rounded-full flex-shrink-0 bg-green-500 my-2 mr-3">
                       <svg
                         class="w-9 h-9 fill-current text-light-blue-50"

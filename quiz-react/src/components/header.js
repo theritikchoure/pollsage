@@ -7,11 +7,6 @@ const Header = ({isAuth, auth}) => {
 
   const url = window.location.pathname;
 
-  console.log(url);
-
-
-  console.log(auth)
-
   return (
     <div className="bg-slate-800 sticky top-0 z-40">
       <nav className="relative px-4 py-4 flex justify-between items-center bg-slate-900 border-b">
@@ -80,29 +75,9 @@ const Header = ({isAuth, auth}) => {
             </svg>
           </li>
           <li>
-            <Link className="text-sm text-gray-400 hover:text-gray-500" to="#">
-              Services
-            </Link>
-          </li>
-          <li className="text-gray-300">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              className="w-4 h-4 current-fill"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-              />
-            </svg>
-          </li>
-          <li>
-            <Link className="text-sm text-gray-400 hover:text-gray-500" to="#">
-              Pricing
+            <Link className={`text-sm 
+            ${url === '/contact-us' ? 'text-indigo-500 font-bold' : 'text-gray-400 hover:text-gray-500'}`} to={'/contact-us'}>
+              Contact
             </Link>
           </li>
           <li className="text-gray-300">
@@ -123,19 +98,41 @@ const Header = ({isAuth, auth}) => {
           </li>
           <li>
             <Link className={`text-sm 
-            ${url === '/contact-us' ? 'text-indigo-500 font-bold' : 'text-gray-400'}`} to={'/contact-us'}>
-              Contact
+            ${url === '/privacy' ? 'text-indigo-500 font-bold' : 'text-gray-400 hover:text-gray-500'}`} to={'/privacy'}>
+              Privacy
+            </Link>
+          </li>
+          <li className="text-gray-300">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              stroke="currentColor"
+              className="w-4 h-4 current-fill"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+              />
+            </svg>
+          </li>
+          <li>
+            <Link className={`text-sm 
+            ${url === '/terms' ? 'text-indigo-500 font-bold' : 'text-gray-400 hover:text-gray-500'}`} to={'/terms'}>
+              Terms
             </Link>
           </li>
         </ul>
         <Link
-          className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
+          className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-200 hover:bg-gray-300 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
           to={links.login}
         >
           Sign In
         </Link>
         <Link
-          className="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
+          className="hidden lg:inline-block py-2 px-6 bg-indigo-500 hover:bg-indigo-600 text-sm text-white font-bold rounded-xl transition duration-200"
           to={links.register}
         >
           Sign up

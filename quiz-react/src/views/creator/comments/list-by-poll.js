@@ -7,10 +7,8 @@ import { deletePoll } from "../../../services/creator/poll.service";
 import { Link } from "react-router-dom";
 import { getCommentsByPoll } from "../../../services/creator/comment.service";
 import { formattedDateFromNow } from "../../../helpers/common";
-import { io } from "socket.io-client";
 import { getCookie } from "../../../helpers/cookie";
-
-const socket = io();
+import socket from "../../../services/socket.service";
 
 const CommentsByPoll = () => {
   const [comments, setComments] = useState([]);

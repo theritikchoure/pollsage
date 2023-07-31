@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import { Navigate, Route, Routes } from "react-router-dom";
-import ContactUs from "./contact_us";
 import Home from "./home";
+import ContactUs from "./contact_us";
+import Privacy from "./privacy";
 
 const GeneralLayout = ({isAuth, auth}) => {
 
@@ -15,6 +16,7 @@ const GeneralLayout = ({isAuth, auth}) => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/privacy" element={<Privacy />} />
           {/* <Route path="*" element={<Navigate to={"/creator/dashboard"} />} /> */}
         </Routes>
       </main>

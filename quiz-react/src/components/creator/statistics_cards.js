@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getPollsOverview } from "../../services/creator/dashboard.service";
 import { errorToast } from "../../utils/toaster";
+import socket from "../../services/socket.service";
 
 const StatisticsCards = () => {
   const [pollsOverview, setPollsOverview] = useState(null);
+  const [liveCounter, setLiveCounter] = useState(0);
 
   useEffect(() => {
     loadData();
@@ -14,10 +16,24 @@ const StatisticsCards = () => {
       let res = await getPollsOverview();
       console.log(res);
       setPollsOverview(res.data);
+
+      // Socket.IO event listeners
+      socket.on(`user-connected`, handleUserConnect);
+
+      // Clean up the event listeners on component unmount
+      return () => {
+        socket.off(`user-connected`, handleUserConnect);
+      };
     } catch (error) {
       console.log(error);
       errorToast(error.message || error || "Something went wrong");
     }
+  };
+
+  const handleUserConnect = (data) => {
+    // Handle the updated poll result
+    console.log("Poll result updated:", data);
+    setLiveCounter(data.counter);
   };
 
   return (
@@ -119,8 +135,8 @@ const StatisticsCards = () => {
               </svg>
             </div>
             <div className="text-right">
-              <p className="text-2xl">{pollsOverview.draftPolls}</p>
-              <p>Draft polls</p>
+              <p className="text-2xl">{liveCounter}</p>
+              <p>Real time user</p>
             </div>
           </div>
         </div>

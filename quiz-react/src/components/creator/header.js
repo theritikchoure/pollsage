@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const CreatorHeader = () => {
 
@@ -374,7 +375,7 @@ const CreatorHeader = () => {
                     <li>
                       <a
                         className="font-medium text-sm text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center py-1 px-3"
-                        href="/#0"
+                        href="/creator/settings/faqs"
                       >
                         <svg
                           className="w-3 h-3 fill-current text-indigo-300 dark:text-indigo-500 shrink-0 mr-2"
@@ -382,13 +383,13 @@ const CreatorHeader = () => {
                         >
                           <path d="M10.5 0h-9A1.5 1.5 0 000 1.5v9A1.5 1.5 0 001.5 12h9a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0010.5 0zM10 7L8.207 5.207l-3 3-1.414-1.414 3-3L5 2h5v5z"></path>
                         </svg>
-                        <span>Support Site</span>
+                        <span>FAQs</span>
                       </a>
                     </li>
                     <li>
-                      <a
+                      <Link
                         className="font-medium text-sm text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center py-1 px-3"
-                        href="/#0"
+                        to="/contact-us"
                       >
                         <svg
                           className="w-3 h-3 fill-current text-indigo-300 dark:text-indigo-500 shrink-0 mr-2"
@@ -397,7 +398,7 @@ const CreatorHeader = () => {
                           <path d="M11.854.146a.5.5 0 00-.525-.116l-11 4a.5.5 0 00-.015.934l4.8 1.921 1.921 4.8A.5.5 0 007.5 12h.008a.5.5 0 00.462-.329l4-11a.5.5 0 00-.116-.525z"></path>
                         </svg>
                         <span>Contact us</span>
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -409,7 +410,6 @@ const CreatorHeader = () => {
                 name="light-switch"
                 id="light-switch"
                 className="light-switch sr-only"
-                checked=""
               />
               <label
                 className="flex items-center justify-center cursor-pointer w-8 h-8 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600/80 rounded-full"

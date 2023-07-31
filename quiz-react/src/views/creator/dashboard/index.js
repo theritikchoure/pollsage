@@ -204,7 +204,7 @@ const Dashboard = () => {
       <RecentActivity />
       {/* <!-- ./Recent Activities --> */}
 
-      <div className="mt-4 mx-4">
+      {/* <div className="mt-4 mx-4">
         <MapContainer
           center={[0, 0]} // Set the initial center of the map (latitude, longitude)
           zoom={2} // Set the initial zoom level of the map (0 to 18)
@@ -222,7 +222,7 @@ const Dashboard = () => {
             </Marker>
           ))}
         </MapContainer>
-      </div>
+      </div> */}
 
       <div class="grid grid-cols-1 lg:grid-cols-2 p-4 gap-4">
         {/* <!-- Social Traffic --> */}

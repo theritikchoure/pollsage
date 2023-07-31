@@ -13,6 +13,16 @@ import { useNavigate } from "react-router-dom";
 import Form from "./form";
 import StepProgressBar from "../../../components/stepper";
 
+const checkmarkSvg = `<svg
+class="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2.5"
+aria-hidden="true"
+xmlns="http://www.w3.org/2000/svg"
+fill="currentColor"
+viewBox="0 0 20 20"
+>
+<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+</svg>`;
+
 const CreatePoll = () => {
   const navigate = useNavigate();
   const initialState = {
@@ -25,7 +35,7 @@ const CreatePoll = () => {
     end_date: null,
     result_visibility: "public",
     password: null,
-    theme: 'dark'
+    theme: "dark",
   };
   const [formData, setFormData] = useState(initialState);
   const [loading, setLoading] = useState(false);
@@ -54,7 +64,7 @@ const CreatePoll = () => {
       try {
         let res = await getAllThemesForForm();
         let themes = separateThemesByDarkness(res.data); // separate themes by darkness
-        console.log(themes)
+        console.log(themes);
         setThemes(themes);
       } catch (error) {
         errorToast(error.message);
@@ -213,43 +223,68 @@ const CreatePoll = () => {
   return (
     <>
       <PageDetails title="Create Poll - PollSage" description="Create Poll" />
-      <div className="mt-4 mx-4">
-        <div className="w-full overflow-hidden rounded-lg shadow-xs">
-          <div className="">
-            <div className="flex flex-col gap-9">
-              <div className="rounded-sm border border-gray-600 bg-gray-800 shadow-default dark:border-strokedark dark:bg-boxdark">
-                <div className="border-b border-stroke py-4 px-6 dark:border-strokedark">
-                  <h3 className="font-medium text-black dark:text-white">
-                    Create Poll
-                  </h3>
-                </div>
-                <StepProgressBar
-                  numSteps={3}
-                  onClick={(step) => {
-                    setStep(step);
-                  }}
-                />
-                <Form
-                  formData={formData}
-                  errors={errors}
-                  onChangeFormData={onChangeFormData}
-                  onSubmit={onSubmit}
-                  booleanValue={booleanValue}
-                  onChangeBooleanValue={onChangeBooleanValue}
-                  handleOptionChange={handleOptionChange}
-                  addOption={addOption}
-                  addOtherOption={addOtherOption}
-                  removeOption={removeOption}
-                  minPollEndDate={minPollEndDate}
-                  setMinPollEndDate={setMinPollEndDate}
-                  submitButtonText={"Create poll"}
-                  step={step}
-                  setStep={setStep}
-                  totalSteps={3}
-                  handleStepChange={handleStepChange}
-                  themes={themes}
-                />
-                {/* <form onSubmit={onSubmit}>
+      <h1 className="text-slate-800 dark:text-slate-100 font-bold text-3xl">
+        Add Poll
+      </h1>
+      <div className="w-full overflow-hidden rounded-lg shadow-xs">
+        <div className="">
+          <div className="flex flex-col gap-9">
+            <div className="shadow-default dark:border-strokedark dark:bg-boxdark">
+              <ol class="flex items-center w-full pl-0 my-7 text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base">
+                <li class="flex md:w-full items-center text-blue-600 dark:text-blue-500 sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+                  <span class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
+                    {step === 1 && (
+                      <span
+                        dangerouslySetInnerHTML={{ __html: checkmarkSvg }}
+                      />
+                    )}
+                    {step !== 1 && <span className="mr-2">1</span>}
+                    Basic{" "}
+                    <span class="hidden sm:inline-flex sm:ml-2">Details</span>
+                  </span>
+                </li>
+                <li class="flex md:w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+                  <span class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
+                    {step === 2 && (
+                      <span
+                        dangerouslySetInnerHTML={{ __html: checkmarkSvg }}
+                      />
+                    )}
+                    {step !== 2 && <span className="mr-2">2</span>}
+                    Advanced{" "}
+                    <span class="hidden sm:inline-flex sm:ml-2">Details</span>
+                  </span>
+                </li>
+                <li class="flex items-center">
+                  {step === 3 && (
+                    <span dangerouslySetInnerHTML={{ __html: checkmarkSvg }} />
+                  )}
+                  {step !== 3 && <span className="mr-2">3</span>}
+                  Theme
+                </li>
+              </ol>
+
+              <Form
+                formData={formData}
+                errors={errors}
+                onChangeFormData={onChangeFormData}
+                onSubmit={onSubmit}
+                booleanValue={booleanValue}
+                onChangeBooleanValue={onChangeBooleanValue}
+                handleOptionChange={handleOptionChange}
+                addOption={addOption}
+                addOtherOption={addOtherOption}
+                removeOption={removeOption}
+                minPollEndDate={minPollEndDate}
+                setMinPollEndDate={setMinPollEndDate}
+                submitButtonText={"Create poll"}
+                step={step}
+                setStep={setStep}
+                totalSteps={3}
+                handleStepChange={handleStepChange}
+                themes={themes}
+              />
+              {/* <form onSubmit={onSubmit}>
                   <div className="p-6">
                     <div className="mb-4 flex flex-col gap-6 xl:flex-row">
                       <div className="w-full xl:w-1/2">
@@ -612,7 +647,6 @@ const CreatePoll = () => {
                     </div>
                   </div>
                 </form> */}
-              </div>
             </div>
           </div>
         </div>
