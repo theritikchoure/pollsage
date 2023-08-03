@@ -4,3 +4,7 @@ error.log
 combined.log
 
 .env
+
+config/admin-data.js
+
+logs

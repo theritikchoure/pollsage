@@ -4,6 +4,8 @@ const commentRoutes = require("./app/comment.route.js");
 const creatorRoutes = require("./app/creator/index.route.js");
 const usersRoutes = require("./app/user/index.route.js");
 const pushNotificationRoutes = require("./push_notification.route.js");
+const adminRoutes = require("./admin/index.route.js");
+const analyticsRoutes = require("./analytics/index.route.js");
 const router = express.Router(); // eslint-disable-line new-cap
 
 /** GET /health-check - Check service health */
@@ -26,5 +28,10 @@ router.use(
   "/creators",
   creatorRoutes
 );
+
+/** /admin - for admin related routes */
+router.use("/admin", adminRoutes);
+
+router.use('/analytics', analyticsRoutes);
 
 module.exports = router;

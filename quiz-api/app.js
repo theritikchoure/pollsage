@@ -62,7 +62,8 @@ app.use(morgan("dev"));
 
 console.log(env.NODE_ENV)
 
-env.NODE_ENV !== "local" && app.use(requireAccessToken);
+// env.NODE_ENV !== "local" && 
+app.use(requireAccessToken);
 
 // Routes
 app.use("/api/v1", routes);
