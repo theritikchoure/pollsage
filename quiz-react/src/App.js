@@ -26,6 +26,10 @@ import Chat from "./views/chat.js";
 // import ContactUs from "./views/contact_us.js";
 import Layout from "./views/layout";
 import socket from "./services/socket.service";
+import AdminLogin from "./views/admin/auth/login";
+import AdminLayout from "./views/admin/layout";
+import BackToTopButton from "./components/_back_to_top";
+import { trackPageView } from "./utils/tracking";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -42,6 +46,8 @@ function App() {
         : null,
     };
 
+    console.log(auth);
+
     if (!isEmpty(auth.user) && !isEmpty(auth.token)) {
       setIsAuth(true);
       setAuth(auth);
@@ -55,13 +61,17 @@ function App() {
     } else {
       // If the connection is not open, then connect
       socket.connect();
-      console.log('WebSocket connection ')
+      console.log("WebSocket connection ");
     }
 
     return () => {
       socket.disconnect();
     };
   }, []);
+
+  useEffect(() => {
+    trackPageView({ url: location.pathname, referrer: document.referrer });
+  }, [location]);
 
   return (
     <>
@@ -93,10 +103,20 @@ function App() {
           )}
 
           {/* Authenticated Routes */}
-          {isAuth && (
+          {isAuth && auth.user.role === "creator" && (
             <>
               {/* <Route exact path="/creator/login" element={<Navigate to={'/creator/dashboard'} />} /> */}
               <Route path="/creator/*" element={<CreatorLayout />} />
+            </>
+          )}
+
+          {isAuth && auth.user.role === "admin" && (
+            <>
+             <Route
+                path="/creator/*"
+                element={<Navigate to="/404" replace />}
+              />
+              <Route exact path="/admin/*" element={<AdminLayout />} />
             </>
           )}
 
@@ -109,13 +129,20 @@ function App() {
 
           <Route
             exact
+            path="/admin/loginxyz"
+            element={<AdminLogin setIsAuth={setIsAuth} setAuth={setAuth} />}
+          />
+
+          <Route
+            exact
             path="*"
             element={<Layout isAuth={isAuth} auth={auth} />}
           />
 
-          {/* <Route path="*" element={<Navigate to={'/404'} />} /> */}
         </Routes>
       </Suspense>
+
+      <BackToTopButton />
       {/* // </Router> */}
     </>
   );

@@ -18,6 +18,8 @@ const GeneralLayout = ({isAuth, auth}) => {
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/privacy" element={<Privacy />} />
           {/* <Route path="*" element={<Navigate to={"/creator/dashboard"} />} /> */}
+
+          {/* <Route path="*" element={<Navigate to={'/404'} />} /> */}
         </Routes>
       </main>
       <Footer />

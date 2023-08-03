@@ -273,6 +273,11 @@ export const replaceWhiteSpaceWithUnderscore = (str) => {
 export const getAPIResponseError = (e) => {
   if (e) {
     // console.log("Server Error:", e.response);
+
+    if(e?.response?.status === 404){
+      return { code: 404, message: "URL Not Found" };
+    }
+
     if (e.response && e.response.data) {
       let code = e.response.data?.status;
       let msg = e.response.data?.message;
@@ -593,3 +598,40 @@ export const generateUUID = () => {
 
   return uuid;
 };
+
+export const identifySource = (referrer) => {
+  // Check if the referrer is empty or null
+  if (!referrer) {
+    return "direct"; // If no referrer, it's a direct visit
+  }
+
+  // Check for common sources
+  const googleRegex = /google\./i;
+  const bingRegex = /bing\./i;
+  const facebookRegex = /facebook\./i;
+  const twitterRegex = /twitter\./i;
+  const instagramRegex = /instagram\./i;
+  const pinterestRegex = /pinterest\./i;
+  const linkedinRegex = /linkedin\./i;
+  const youtubeRegex = /youtube\./i;
+
+  if (googleRegex.test(referrer)) {
+    return "organic_google";
+  } else if (bingRegex.test(referrer)) {
+    return "organic_bing";
+  } else if (facebookRegex.test(referrer)) {
+    return "social_facebook";
+  } else if (twitterRegex.test(referrer)) {
+    return "social_twitter";
+  } else if (instagramRegex.test(referrer)) {
+    return "social_instagram";
+  } else if (pinterestRegex.test(referrer)) {
+    return "social_pinterest";
+  } else if (linkedinRegex.test(referrer)) {
+    return "social_linkedin";
+  } else if (youtubeRegex.test(referrer)) {
+    return "social_youtube";
+  } else {
+    return "referral"; // If not identified, consider it a referral
+  }
+}
