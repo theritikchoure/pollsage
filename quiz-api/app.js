@@ -13,7 +13,7 @@ const session = require("express-session");
 const cors = require("cors");
 const passport = require('./config/passport.js');
 const webpush = require('web-push');
-const requireAccessToken = require("./src/middleware/require-access-token.js");
+const setSecurityHeaders = require("./src/middleware/security-headers.js");
 
 // Create the Express app
 const app = express();
@@ -49,6 +49,9 @@ app.use((req, res, next) => {
     return next();
   }
 });
+
+// Security headers middleware
+app.use(setSecurityHeaders);
 
 // Middleware for logging
 app.use((req, res, next) => {
