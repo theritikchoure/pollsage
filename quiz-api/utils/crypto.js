@@ -1,10 +1,10 @@
 const crypto = require("crypto");
-
+const env = require('../config/env.js')
 const algorithm = "aes-256-cbc";
 const password = "yourSecretPassword"; // Replace this with your own strong password
 
 // Generate the encryption key from the password
-const hexKey = "97bade1b8adb50149d0a2c3a6163cd8bea333a48a880828a98ae9b0fe69bd54e";
+const hexKey = env.CRYPTO_KEY;
 const key = Buffer.from(hexKey, 'hex');
 
 // console.log("Key:", key.toString('hex'));

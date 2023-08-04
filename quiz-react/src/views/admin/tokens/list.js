@@ -3,11 +3,13 @@ import { errorToast, successToast } from "../../../utils/toaster";
 import PageDetails from "../../../components/_page_details";
 import {
   deleteAccessToken,
-  getAccessTokens, getAccessTokenById
+  getAccessTokens,
+  getAccessTokenById,
 } from "../../../services/admin/access_token.service";
 import { Link } from "react-router-dom";
 import PaginationComponent from "../../../components/pagination";
 import { formattedDateFromNow } from "../../../helpers/common";
+import Tooltip from "../../../components/tooltip";
 
 const AccessTokenList = () => {
   const [tokens, setTokens] = useState([]);
@@ -24,8 +26,8 @@ const AccessTokenList = () => {
     try {
       const response = await getAccessTokens(page, limit);
       setTokens(response.data.docs);
-        delete response.data.docs;
-        setPagination(response.data);
+      delete response.data.docs;
+      setPagination(response.data);
       renderList();
     } catch (error) {
       console.log(error);
@@ -64,7 +66,7 @@ const AccessTokenList = () => {
     } catch (error) {
       errorToast(error);
     }
-  }
+  };
 
   const renderList = () => {
     return tokens.map((token, index) => (
@@ -105,13 +107,15 @@ const AccessTokenList = () => {
         </td>
         <td className="px-4 py-3 text-sm">
           {formattedDateFromNow(token?.createdAt)}
-          </td>
-        <td className="px-4 py-3 text-sm">
-          <svg onClick={() => copyToken(token?._id)}
+        </td>
+        <td className="py-3 text-sm">
+        <Tooltip text="Copy the token">
+          <svg
+            onClick={() => copyToken(token?._id)}
             fill="currentColor"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 256 256"
-            className="w-6 h-6 cursor-pointer text-gray-500 hover:text-indigo-500 hover:w-7"
+            className="w-6 h-6 cursor-pointer text-gray-500 hover:text-indigo-500 hover:w-7 m-auto"
           >
             <rect />
             <polyline
@@ -134,6 +138,7 @@ const AccessTokenList = () => {
               stroke-width="14"
             />
           </svg>
+          </Tooltip>
         </td>
         <td className="px-4 py-3 text-sm flex">
           {/* Edit svg */}
@@ -185,7 +190,7 @@ const AccessTokenList = () => {
             Delete
           </button>
           <div className="relative" onMouseLeave={() => setDateFilter(false)}>
-            <button 
+            <button
               onClick={() => setDateFilter(!dateFilter)}
               class="bg-slate-800 inline-flex items-center justify-between px-4 py-1.5 border border-gray-600 rounded w-44 min-w-full"
             >
@@ -275,7 +280,7 @@ const AccessTokenList = () => {
                 <th className="px-4 py-3">Expiration time</th>
                 <th className="px-4 py-3">Status</th>
                 <th className="px-4 py-3">Created At</th>
-                <th className="px-4 py-3">Copy Token</th>
+                <th className="px-4 py-3 text-center">Copy Token</th>
                 <th className="px-4 py-3">Action</th>
               </tr>
             </thead>

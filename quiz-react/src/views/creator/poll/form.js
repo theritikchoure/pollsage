@@ -424,7 +424,7 @@ const PollForm = ({
                 Logo
                 {formData.logo && (
                   <>
-                    <a href={formData.logo} target="_blank">
+                    <a href={formData.logo} target="_blank" rel="noopener noreferrer">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"

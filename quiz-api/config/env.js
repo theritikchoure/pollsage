@@ -14,6 +14,7 @@ module.exports = {
     VAPID_MAIL_ID: process.env.VAPID_MAIL_ID,
     FRONTEND_URL: process.env.FRONTEND_URL,
     CRYPTO_KEY: process.env.CRYPTO_KEY,
+    SESSION_SECRET: process.env.SESSION_SECRET,
     // Add other environment variables as needed
 };
   

@@ -21,7 +21,7 @@ const app = express();
 // Session middleware
 app.use(
   session({
-    secret: "your-secret-key",
+    secret: env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
   })
