@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import PageDetails from "../../../components/_page_details";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-} from "recharts";
-import api from '../../../services/api.service';
+// import {
+//   BarChart,
+//   Bar,
+//   XAxis,
+//   YAxis,
+//   CartesianGrid,
+//   Tooltip,
+//   Legend,
+// } from "recharts";
+import api from "../../../services/api.service";
 
 const Dashboard = () => {
   const user = JSON.parse(localStorage.getItem("user") || "");
@@ -24,35 +24,42 @@ const Dashboard = () => {
     { name: "July", uv: 349, pv: 4300, amt: 2100 },
   ];
 
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
 
-  useEffect(async () => {
-    const res = await api.get('/admin/analytics/toppages');
-    let a = [];
-    
+  useEffect(() => {
+    getTopPageData();
+  }, []);
 
-    console.log(res.data)
+  const getTopPageData = async () => {
+    try {
+      const res = await api.get("/admin/analytics/toppages");
+      let a = [];
 
-    for (let i = 0; i < res.data.data.length; i++) {
-      let page = { name: "", uv: "" }
-      page.name = res.data.data[i]._id;
-      page.uv = res.data.data[i].count;
-      a.push(page);
+      console.log(res.data);
+
+      for (let i = 0; i < res.data.data.length; i++) {
+        let page = { name: "", uv: "" };
+        page.name = res.data.data[i]._id;
+        page.uv = res.data.data[i].count;
+        a.push(page);
+      }
+
+      console.log(a);
+
+      setData(a);
+    } catch (error) {
+      console.log(error);
     }
-
-    console.log(a)
-
-    setData(a)
-  }, [])
+  };
 
   return (
     <>
       <PageDetails title={"Admin Dashboard - PollSage"} />
 
-      <BarChart width={150} height={40} data={data}>
+      {/* <BarChart width={150} height={40} data={data}>
       <Tooltip />
           <Bar dataKey="uv" fill="#8884d8" />
-        </BarChart>
+        </BarChart> */}
 
       {/* <!-- Page Header--> */}
       <div class="mt-6 mx-4 p-6 rounded-sm bg-indigo-500 mb-6">
