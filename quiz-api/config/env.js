@@ -12,7 +12,8 @@ module.exports = {
     VAPID_PUBLIC_KEY: process.env.VAPID_PUBLIC_KEY,
     VAPID_PRIVATE_KEY: process.env.VAPID_PRIVATE_KEY,
     VAPID_MAIL_ID: process.env.VAPID_MAIL_ID,
-    CORS_ORIGIN: (process.env.CORS_ORIGIN).split(','),
+    FRONTEND_URL: process.env.FRONTEND_URL,
+    CRYPTO_KEY: process.env.CRYPTO_KEY,
     // Add other environment variables as needed
 };
   

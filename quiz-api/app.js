@@ -31,19 +31,24 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+// CORS middleware
+const frontendURL = env.FRONTEND_URL;
 const corsOptions = {
-  origin: (origin, callback) => {
-    // Check if the request origin is in the allowedOrigins array
-    if (env.CORS_ORIGIN.indexOf(origin) !== -1) {
-      callback(null, true); // Allow the request
-    } else {
-      callback(new Error('Not allowed by CORS')); // Deny the request
-    }
-  },
+  origin: frontendURL,
 };
 
-app.use(cors(corsOptions));
-// app.use(cors());
+// Use CORS middleware with custom check
+app.use((req, res, next) => {
+  const origin = req.get('origin');
+  if (origin) {
+    // Allow requests from the frontendURL
+    return cors(corsOptions)(req, res, next);
+  } else {
+
+    console.log("CORS error");
+    return next();
+  }
+});
 
 // Middleware for logging
 app.use((req, res, next) => {
@@ -54,16 +59,11 @@ app.use((req, res, next) => {
 app.use(helmet());
 app.use(hpp());
 
-// app.use(limiter);
+app.use(limiter);
 
 // Middleware
 app.use(express.json());
 app.use(morgan("dev"));
-
-console.log(env.NODE_ENV)
-
-// env.NODE_ENV !== "local" && 
-app.use(requireAccessToken);
 
 // Routes
 app.use("/api/v1", routes);

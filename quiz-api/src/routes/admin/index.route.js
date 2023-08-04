@@ -17,4 +17,6 @@ router.use('/dashboard', passport.authenticate("jwt", { session: false }),   das
 
 router.use('/analytics', passport.authenticate("jwt", { session: false }),   require('./analytics.route.js'));
 
+router.use('/access-tokens', passport.authenticate("jwt", { session: false }),   require('./access_token.route.js'));
+
 module.exports = router;
