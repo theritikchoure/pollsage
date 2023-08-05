@@ -134,7 +134,7 @@ exports.isValidId = (id) => {
    */
   exports.isNumber = (value) => {
     var number = value;
-    var myRegEx = /^(\s*[0-9]+\s*)+$/;
+    var myRegEx = /^\s*\d+(\s+\d+)*\s*$/;
     var isValid = myRegEx.test(number);
     if (isValid) {
       return true;

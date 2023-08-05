@@ -18,7 +18,7 @@ export function isStirng(value) {
  * @param {*} value // Accepts string
  */
 export function isNumber(value) {
-  var myRegEx = /^(\s*[0-9]+\s*)+$/;
+  var myRegEx = /^\s*\d+(\s+\d+)*\s*$/;
   var isValid = myRegEx.test(value);
   return isValid ? true : false;
 }
@@ -576,28 +576,11 @@ export const shuffleArray = (array) => {
 };
 
 export const generateUUID = () => {
-  const hexDigits = "0123456789abcdef";
-  let uuid = "";
-
-  for (let i = 0; i < 32; i++) {
-    const randomIndex = Math.floor(Math.random() * 16);
-    uuid += hexDigits[randomIndex];
-  }
-
-  // Insert hyphens at specific positions to form a UUID-like string
-  uuid =
-    uuid.substring(0, 8) +
-    "-" +
-    uuid.substring(8, 4) +
-    "-" +
-    uuid.substring(12, 4) +
-    "-" +
-    uuid.substring(16, 4) +
-    "-" +
-    uuid.substring(20);
-
-  return uuid;
+  const array = new Uint32Array(16);
+  window.crypto.getRandomValues(array);
+  return Array.from(array, (num) => num.toString(36)).join('');
 };
+
 
 export const identifySource = (referrer) => {
   // Check if the referrer is empty or null
