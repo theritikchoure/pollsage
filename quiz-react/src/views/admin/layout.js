@@ -8,6 +8,12 @@ import Dashboard from "./dashboard";
 import CreateAccessToken from "./tokens/create.js";
 import AccessTokenList from "./tokens/list";
 
+import PollsList from "./poll/list";
+
+import Logs from "./logs/index.js";
+
+import CPUHealth from "./cpu/index.js";
+
 const CreatorLayout = () => {
   return (
     // <!-- component -->
@@ -24,6 +30,14 @@ const CreatorLayout = () => {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/tokens/create" element={<CreateAccessToken />} />
               <Route path="/tokens/list" element={<AccessTokenList />} />
+              <Route path="/polls/list" element={<PollsList />} />
+
+              {/* /logs */}
+              <Route path="/logs" element={<Logs />} />
+
+              {/* /cpu */}
+              <Route path="/cpu" element={<CPUHealth />} />
+              
               <Route path="*" element={<Navigate to={"/404"} />} />
             </Routes>
           </div>

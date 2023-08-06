@@ -30,13 +30,16 @@ import AdminLogin from "./views/admin/auth/login";
 import AdminLayout from "./views/admin/layout";
 import BackToTopButton from "./components/_back_to_top";
 import { trackPageView } from "./utils/tracking";
+import Unsubscribe from "./views/app/unsubscribe";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
   const [auth, setAuth] = useState(null);
+  const [loading, setLoading] = useState(true);
   const location = useLocation();
 
   useEffect(() => {
+    setLoading(true);
     const auth = {
       user: localStorage.getItem("user")
         ? JSON.parse(localStorage.getItem("user"))
@@ -52,6 +55,7 @@ function App() {
       setIsAuth(true);
       setAuth(auth);
     }
+    setLoading(false);
   }, [location]);
 
   useEffect(() => {
@@ -69,60 +73,99 @@ function App() {
     };
   }, []);
 
-  useEffect(() => {
-    trackPageView({ url: location.pathname, referrer: document.referrer });
-  }, [location]);
+  // useEffect(() => {
+  //   if(location.pathname.includes("/admin")) {
+  //     return;
+  //   } else {
+  //     trackPageView({ url: location.pathname, referrer: document.referrer });
+  //   }
+  // }, [location]);
+
+  console.log(isAuth);
 
   return (
     <>
       {/* // <Router> */}
       <ToastContainer />
       <Suspense fallback={<Loader />}>
-        <Routes>
-          {/* Non-authenticated Routes */}
-          {!isAuth && (
-            <>
-              <Route
-                path="/creator/login"
-                element={<Login setIsAuth={setIsAuth} />}
-              />
-              <Route path="/creator/register" element={<Register />} />
-              <Route
-                path="/creator/verify/:token"
-                element={<EmailVerification />}
-              />
-              <Route
-                path="/creator/forget-password"
-                element={<ForgetPassword />}
-              />
-              <Route
-                path="/creator/reset-password/:token"
-                element={<ResetPassword />}
-              />
-            </>
-          )}
+        {!loading && (
+          <Routes>
+            {/* Non-authenticated Routes */}
+            {!isAuth && (
+              <>
+                <Route
+                  path="/creator/login"
+                  element={<Login setIsAuth={setIsAuth} />}
+                />
+                <Route path="/creator/register" element={<Register />} />
+                <Route
+                  path="/creator/verify/:token"
+                  element={<EmailVerification />}
+                />
+                <Route
+                  path="/creator/forget-password"
+                  element={<ForgetPassword />}
+                />
+                <Route
+                  path="/creator/reset-password/:token"
+                  element={<ResetPassword />}
+                />
 
-          {/* Authenticated Routes */}
-          {isAuth && auth.user.role === "creator" && (
+                <Route
+                  exact
+                  path="/admin/loginxyz"
+                  element={
+                    <AdminLogin setIsAuth={setIsAuth} setAuth={setAuth} />
+                  }
+                />
+
+                <Route exact path="/poll/:pollId" element={<ViewPoll />} />
+                <Route exact path="/results/:pollId" element={<PollResult />} />
+
+                <Route path="/404" element={<NotFound />} />
+                <Route exact path="*" element={<Layout />} />
+              </>
+            )}
+
+            {/* Authenticated Routes */}
+            {isAuth && (
+              <>
+                {auth.user.role === "creator" && (
+                  <Route path="/creator/*" element={<CreatorLayout />} />
+                )}
+                {auth.user.role === "admin" && (
+                  <Route exact path="/admin/*" element={<AdminLayout />} />
+                )}
+
+                <Route exact path="/poll/:pollId" element={<ViewPoll />} />
+                <Route exact path="/results/:pollId" element={<PollResult />} />
+                <Route path="/404" element={<NotFound />} />
+                <Route exact path="*" element={<Layout />} />
+              </>
+            )}
+
+            <Route exact path="/unsubscribe" element={<Unsubscribe />} />
+
+            {/* Authenticated Routes */}
+            {/* {isAuth && auth.user.role === "creator" && (
             <>
-              {/* <Route exact path="/creator/login" element={<Navigate to={'/creator/dashboard'} />} /> */}
               <Route path="/creator/*" element={<CreatorLayout />} />
             </>
-          )}
+          )} */}
 
-          {isAuth && auth.user.role === "admin" && (
+            {/* {isAuth && auth.user.role === "admin" && (
             <>
-             <Route
+              <Route
                 path="/creator/*"
                 element={<Navigate to="/404" replace />}
               />
               <Route exact path="/admin/*" element={<AdminLayout />} />
             </>
-          )}
+          )} */}
 
-          {/* Common Routes */}
-          {/* <Route exact path="/" element={<Home />} /> */}
-          <Route exact path="/create-poll" element={<CreatePoll />} />
+            {/* Common Routes */}
+            {/* <Route exact path="/" element={<Home />} /> */}
+            {/* <Route exact path="/create-poll" element={<CreatePoll />} />
           <Route exact path="/404" element={<NotFound />} />
           <Route exact path="/poll/:pollId" element={<ViewPoll />} />
           <Route exact path="/results/:pollId" element={<PollResult />} />
@@ -137,9 +180,9 @@ function App() {
             exact
             path="*"
             element={<Layout isAuth={isAuth} auth={auth} />}
-          />
-
-        </Routes>
+          /> */}
+          </Routes>
+        )}
       </Suspense>
 
       <BackToTopButton />

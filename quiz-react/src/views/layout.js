@@ -5,6 +5,8 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./home";
 import ContactUs from "./contact_us";
 import Privacy from "./privacy";
+import Terms from "./terms";
+import NotFound from "./404";
 
 const GeneralLayout = ({isAuth, auth}) => {
 
@@ -17,9 +19,10 @@ const GeneralLayout = ({isAuth, auth}) => {
           <Route path="/" element={<Home />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
           {/* <Route path="*" element={<Navigate to={"/creator/dashboard"} />} /> */}
 
-          {/* <Route path="*" element={<Navigate to={'/404'} />} /> */}
+          <Route path="*" element={<Navigate to={'/404'} />} />
         </Routes>
       </main>
       <Footer />
