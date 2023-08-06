@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const env = require("../../config/env");
 const { encrypt, decrypt } = require("../../utils/crypto");
 const AccessTokens = require("../models/access_token.model");
+const logger = require("../../config/logger");
 
 const requireAccessToken = async (req, res, next) => {
   try {
@@ -10,13 +11,15 @@ const requireAccessToken = async (req, res, next) => {
       if (req.get("origin") === env.FRONTEND_URL) {
         return next();
       } else {
-        return res.status(401).send("Unauthorized");
+        return sendError(res, "Unauthorized");
       }
     }
 
+    
+
     const accessToken = req.headers["x-access-token"];
     if (!req.get("origin") && !accessToken) {
-      return res.status(401).send("Unauthorized");
+      return sendError(res, "Unauthorized");
     }
 
     if (!req.get("origin") && accessToken) {
@@ -54,11 +57,16 @@ const requireAccessToken = async (req, res, next) => {
       return next();
     }
 
-    return res.status(401).send("Unauthorized");
+    return sendError(res, error);
   } catch (error) {
-    console.log(error);
-    return res.status(401).send("Unauthorized");
+    // console.log(error);
+    return sendError(res, error);
   }
+};
+
+const sendError = (res, error) => {
+  logger.error(`Error: ${error.message || error}`);
+  return res.status(401).send(error.message || error);
 };
 
 module.exports = requireAccessToken;

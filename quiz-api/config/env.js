@@ -15,6 +15,7 @@ module.exports = {
     FRONTEND_URL: process.env.FRONTEND_URL,
     CRYPTO_KEY: process.env.CRYPTO_KEY,
     SESSION_SECRET: process.env.SESSION_SECRET,
+    ANALYTICS_MONGO_URL: process.env.ANALYTICS_MONGO_URL,
     // Add other environment variables as needed
 };
   

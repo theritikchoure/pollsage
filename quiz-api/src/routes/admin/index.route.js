@@ -19,4 +19,8 @@ router.use('/analytics', passport.authenticate("jwt", { session: false }),   req
 
 router.use('/access-tokens', passport.authenticate("jwt", { session: false }),   require('./access_token.route.js'));
 
+router.use('/polls', passport.authenticate("jwt", { session: false }),   require('./polls.route.js'));
+
+router.use('/logs', passport.authenticate("jwt", { session: false }),   require('./logs.route.js'));
+
 module.exports = router;
