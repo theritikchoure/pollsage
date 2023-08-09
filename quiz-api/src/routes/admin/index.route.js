@@ -23,4 +23,6 @@ router.use('/polls', passport.authenticate("jwt", { session: false }),   require
 
 router.use('/logs', passport.authenticate("jwt", { session: false }),   require('./logs.route.js'));
 
+router.use('/faqs', passport.authenticate("jwt", { session: false }),   require('./faqs.route.js'));
+
 module.exports = router;

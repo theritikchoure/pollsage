@@ -7,6 +7,7 @@ const pushNotificationRoutes = require("./push_notification.route.js");
 const adminRoutes = require("./admin/index.route.js");
 const analyticsRoutes = require("./analytics/index.route.js");
 const unsubscribeRoutes = require("./app/unsubscribe.route.js");
+const faqRoutes = require("./app/faq.route.js");
 const env = require("../../config/env.js");
 const jwt = require("jsonwebtoken");
 const requireAccessToken = require("../middleware/require-access-token.js");
@@ -36,5 +37,7 @@ router.use("/admin", adminRoutes);
 router.use("/analytics", analyticsRoutes);
 
 router.use("/unsubscribe", unsubscribeRoutes);
+
+router.use('/faqs', faqRoutes)
 
 module.exports = router;
