@@ -1,15 +1,18 @@
 import React, { Fragment, useState } from "react";
 import PageDetails from "../components/_page_details";
 import useTabVisibility from "../components/_tab_visibility";
+import UserLogin from "./app/auth/login";
 
 const Home = () => {
+
+  const [otpSent, setOtpSent] = useState(false);
 
   const onTabVisible = () => {
     document.title = "PollSage - Create polls in seconds";
   };
 
   const onTabHidden = () => {
-    document.title = "Back soon!"
+    document.title = "Back soon!";
   };
 
   useTabVisibility(onTabVisible, onTabHidden);
@@ -40,45 +43,34 @@ const Home = () => {
   //   } catch (error) {
   //     console.error('Error sending notification:', error);
   //   }
-  // }; 
+  // };
 
   return (
     <>
-    <PageDetails title="PollSage - Create polls in seconds" description="Pollsage is a free online polling platform that allows you to create polls and share them with your audience." />
-    <section className="bg-gray-900 text-white">
-      <div className="mx-auto max-w-screen-xl px-4 py-48 lg:flex lg:items-center">
-        <div className="mx-auto max-w-3xl text-center">
-          <h1 className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl">
-          Gather Insights,
-            <span className="sm:block"> Make Informed Choices. </span>
-          </h1>
+      <PageDetails
+        title="PollSage - Create polls in seconds"
+        description="Pollsage is a free online polling platform that allows you to create polls and share them with your audience."
+      />
+      <section className="bg-gray-900 text-white">
+        <div className="mx-auto max-w-screen-xl px-4 py-48 lg:flex lg:items-center">
+          <div className="mx-auto max-w-3xl text-center">
+            <h1 className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl">
+              Gather Insights,
+              <span className="sm:block"> Make Informed Choices. </span>
+            </h1>
 
-          <p className="mx-auto mt-4 max-w-xl sm:text-xl/relaxed">
-          Empower Your Decision-Making with PollSage
-          </p>
+            <p className="mx-auto mt-4 max-w-xl sm:text-xl/relaxed">
+              Empower Your Decision-Making with PollSage
+            </p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+      {/* <UserLogin /> */}
     </>
   );
 };
 
 export default Home;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // --------------------------------------------------------------------------------
 // const Home = () => {
@@ -280,4 +272,3 @@ export default Home;
 //     </Fragment>
 //   );
 // };
-

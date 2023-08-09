@@ -14,6 +14,9 @@ import Logs from "./logs/index.js";
 
 import CPUHealth from "./cpu/index.js";
 
+import ListFaq from "./faq/list";
+import CreateFaq from "./faq/create";
+
 const CreatorLayout = () => {
   return (
     // <!-- component -->
@@ -37,6 +40,9 @@ const CreatorLayout = () => {
 
               {/* /cpu */}
               <Route path="/cpu" element={<CPUHealth />} />
+
+              <Route path="/faqs/create" element={<CreateFaq />} />
+              <Route path="/faqs/list" element={<ListFaq />} />
               
               <Route path="*" element={<Navigate to={"/404"} />} />
             </Routes>

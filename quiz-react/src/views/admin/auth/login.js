@@ -54,6 +54,7 @@ const AdminLogin = (props) => {
         };    
         props.setIsAuth(true);
         props.setAuth(auth);
+        // window.location.href = '/admin/dashboard';
         navigate("/admin/dashboard");
       }
     } catch (error) {
@@ -96,6 +97,7 @@ const AdminLogin = (props) => {
                     <input
                       type="text"
                       placeholder="Username"
+                      name="username"
                       className={`w-full mt-4
                     rounded-md
                     border
@@ -127,6 +129,7 @@ const AdminLogin = (props) => {
                     <input
                       type="password"
                       placeholder="Password"
+                      name="password"
                       className={`w-full mt-4
                     rounded-md
                     border
