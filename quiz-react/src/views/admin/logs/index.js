@@ -95,9 +95,9 @@ const Logs = () => {
         className="border bg-slate-800 px-8 py-4 overflow-y-auto"
         style={{ height: "500px" }}
       >
-        {logs.map((log, index) => (
+        {logs && logs.map((log, index) => (
           <p className="py-1" key={index}>
-            {log}
+            {`[${log.request_time}] - ${log.method} ${log.url} ${log.status_code} ${log.response_time} ${log.user_info}`}
           </p>
         ))}
       </div>

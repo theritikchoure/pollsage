@@ -15,9 +15,12 @@ const cors = require("cors");
 const passport = require('./config/passport.js');
 const webpush = require('web-push');
 const setSecurityHeaders = require("./src/middleware/security-headers.js");
+const requestLog = require("./src/middleware/request-log.js");
 
 // Create the Express app
 const app = express();
+
+app.use(requestLog);
 
 // Middleware for logging
 app.use((req, res, next) => {
