@@ -28,6 +28,14 @@ router.get("/", asyncHandler(getAllFAQs));
  * @returns JSON
  * @access public
  */
+router.get("/id/:id", asyncHandler(getFAQById));
+
+/**
+ * @route GET api/app/about-us
+ * @description get all about us keys
+ * @returns JSON
+ * @access public
+ */
 router.get("/:tag", asyncHandler(getFAQByTag));
 
 
@@ -51,6 +59,20 @@ async function addFAQ(req, res, next) {
 async function getAllFAQs(req, res, next) {
   try {
     let response = await faqCtrl.getAllFAQs(req);
+    if (response) return createResponse(res, resStatusCode.SUCCESS_FETCH, resMsg.SUCCESS_FETCH, response);
+    else
+      return createError(res, resStatusCode.UNABLE_FETCH, { message: resMsg.UNABLE_FETCH });
+  } catch (e) {
+    return createError(res, resStatusCode.BAD_REQUEST, e);
+  }
+}
+
+/**
+ * @description get faq by id
+ */
+async function getFAQById(req, res, next) {
+  try {
+    let response = await faqCtrl.getFAQById(req);
     if (response) return createResponse(res, resStatusCode.SUCCESS_FETCH, resMsg.SUCCESS_FETCH, response);
     else
       return createError(res, resStatusCode.UNABLE_FETCH, { message: resMsg.UNABLE_FETCH });

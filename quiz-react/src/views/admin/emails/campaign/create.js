@@ -1,17 +1,17 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { createFAQValidation } from "../../../validations/faq.js";
-import { createPoll } from "../../../services/admin/faq.service.js";
+import { emailCampaignValidation } from "../../../../validations/email_campaign.js";
+import { createPoll } from "../../../../services/admin/faq.service.js";
 import {
   dismissToast,
   errorToast,
   loadingToast,
   successToast,
-} from "../../../utils/toaster";
-import PageDetails from "../../../components/_page_details";
+} from "../../../../utils/toaster";
+import PageDetails from "../../../../components/_page_details";
 import { useNavigate } from "react-router-dom";
 import Form from "./form";
 
-const CreateFAQ = () => {
+const CreateCampaign = () => {
   const navigate = useNavigate();
   const initialState = {
     title: "",
@@ -115,7 +115,8 @@ const CreateFAQ = () => {
     try {
       e.preventDefault();
       setLoading(true);
-      const { isValid, errors } = createFAQValidation(formData);
+      console.log(formData);
+      const { isValid, errors } = emailCampaignValidation(formData);
       console.log(errors);
       if (!isValid) {
         setErrors(errors);
@@ -165,7 +166,7 @@ const CreateFAQ = () => {
                 onSubmit={onSubmit}
                 addOption={addOption}
                 removeOption={removeOption}
-                submitButtonText={"Add FAQ"}
+                submitButtonText={"Create Campaign"}
                 otherData={otherData}
               />
             </div>
@@ -176,4 +177,4 @@ const CreateFAQ = () => {
   );
 };
 
-export default CreateFAQ;
+export default CreateCampaign;

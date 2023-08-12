@@ -13,9 +13,13 @@ import PollsList from "./poll/list";
 import Logs from "./logs/index.js";
 
 import CPUHealth from "./cpu/index.js";
+import DBMng from "./db-mng/index.js";
 
 import ListFaq from "./faq/list";
 import CreateFaq from "./faq/create";
+import EditFaq from "./faq/edit";
+
+import CampaignCreate from './emails/campaign/create'
 
 const CreatorLayout = () => {
   return (
@@ -41,8 +45,14 @@ const CreatorLayout = () => {
               {/* /cpu */}
               <Route path="/cpu" element={<CPUHealth />} />
 
+              {/* /db-mng */}
+              <Route path="/db-mng" element={<DBMng />} />
+
               <Route path="/faqs/create" element={<CreateFaq />} />
               <Route path="/faqs/list" element={<ListFaq />} />
+              <Route path="/faqs/edit/:id" element={<EditFaq />} />
+
+              <Route path="/emails/campaign/create" element={<CampaignCreate />} />
               
               <Route path="*" element={<Navigate to={"/404"} />} />
             </Routes>

@@ -8,13 +8,14 @@ const adminRoutes = require("./admin/index.route.js");
 const analyticsRoutes = require("./analytics/index.route.js");
 const unsubscribeRoutes = require("./app/unsubscribe.route.js");
 const faqRoutes = require("./app/faq.route.js");
-const env = require("../../config/env.js");
-const jwt = require("jsonwebtoken");
 const requireAccessToken = require("../middleware/require-access-token.js");
 const router = express.Router(); // eslint-disable-line new-cap
 
 /** GET /health-check - Check service health */
-router.get("/health-check", (req, res) => res.send("OK"));
+router.get("/health-check", (req, res) => {
+
+   res.send("OK");
+});
 
 /** /polls - for polls related routes */
 router.use("/polls", requireAccessToken, pollRoutes);

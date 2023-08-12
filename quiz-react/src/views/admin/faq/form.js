@@ -1,6 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import ThemePreview from "../../../components/theme_preview";
 
 const PollForm = ({
   formData,
@@ -8,7 +6,6 @@ const PollForm = ({
   onChangeFormData,
   onSubmit,
   addOption,
-  addOtherOption,
   removeOption,
   submitButtonText,
   otherData,

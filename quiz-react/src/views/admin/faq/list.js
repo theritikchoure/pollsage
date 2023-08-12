@@ -108,7 +108,7 @@ const PollList = () => {
         <td className="px-4 py-3 text-sm">{poll.faqs.length}</td>
         <td className="px-4 py-3 text-sm flex">
           {/* Edit svg */}
-          <Link to={`/creator/edit-poll/${poll.pollId}`}>
+          <Link to={`/admin/faqs/edit/${poll._id}`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -127,7 +127,7 @@ const PollList = () => {
           </Link>
           {/* Delete svg */}
           <svg
-            onClick={() => handleDeletePoll(poll.pollId)}
+            onClick={() => handleDeletePoll(poll._id)}
             className="w-5 h-5 fill-current cursor-pointer ml-3 hover:text-red-800"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"

@@ -21,7 +21,7 @@ const faqValidation = Joi.object({
 
 // Module Exports
 module.exports = {
-  addFaqs, getAllFAQs, getFAQByTag
+  addFaqs, getAllFAQs, getFAQByTag, getFAQById
 };
 
 /**
@@ -76,6 +76,29 @@ async function getAllFAQs(req) {
     };
     
     return pagination;
+  } catch (e) {
+    throw handleControllerError(e);
+  }
+}
+
+/**
+ * @description get faq by id
+ */
+async function getFAQById(req) {
+  try {
+    
+    // sanity check
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      throw Error("Invalid id");
+    }
+
+    const id = new mongoose.Types.ObjectId(req.params.id);
+
+
+    const faq = await FAQ.findById(id);
+
+    return faq;
+
   } catch (e) {
     throw handleControllerError(e);
   }

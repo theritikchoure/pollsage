@@ -2,6 +2,7 @@ const express = require('express');
 const authRoutes = require('./auth.route.js');
 const dashboardRoutes = require('./dashboard.route.js');
 const passport = require("passport");
+require('../../controllers/admin/email_campaign.controller.js');
 const router = express.Router(); // eslint-disable-line new-cap
 
 /** GET /health-check - Check service health */
@@ -13,7 +14,7 @@ router.get('/health-check', (req, res) =>
 router.use('/auth', authRoutes);
 
 // /dashboard - for dashboard related routes
-router.use('/dashboard', passport.authenticate("jwt", { session: false }),   dashboardRoutes);
+router.use('/dashboard', passport.authenticate("jwt", { session: false }),   require('./dashboard.route.js'));
 
 router.use('/analytics', passport.authenticate("jwt", { session: false }),   require('./analytics.route.js'));
 
@@ -24,5 +25,7 @@ router.use('/polls', passport.authenticate("jwt", { session: false }),   require
 router.use('/logs', passport.authenticate("jwt", { session: false }),   require('./logs.route.js'));
 
 router.use('/faqs', passport.authenticate("jwt", { session: false }),   require('./faqs.route.js'));
+
+router.use('/backup', passport.authenticate("jwt", { session: false }),   require('./backup.route.js'));
 
 module.exports = router;

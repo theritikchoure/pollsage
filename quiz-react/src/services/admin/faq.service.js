@@ -13,9 +13,9 @@ const getListOfPolls = async (page, limit) => {
   }
 };
 
-const getPoll = async (pollId) => {
+const getPollById = async (pollId) => {
   try {
-    let res = await api.get(`${url}/polls/${pollId}`)
+    let res = await api.get(`${url}/faqs/id/${pollId}`)
     console.log(res.data);
     return res.data;
   } catch (error) {
@@ -71,5 +71,5 @@ const deletePoll = async (pollId) => {
 };
 
 export {
-  createPoll, getListOfPolls, submitPoll, getPollResult, deletePoll, getPoll, updatePoll
+  createPoll, getListOfPolls, submitPoll, getPollResult, deletePoll, getPollById, updatePoll
 };
