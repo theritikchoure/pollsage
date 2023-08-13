@@ -199,7 +199,7 @@ const Sidebar = () => {
             <ul className="hidden flex flex-col py-2 space-y-1">
               <li className="">
                 <Link
-                  to={"/admin/creators"}
+                  to={"/admin/creators/list"}
                   className="relative flex flex-row items-center px-12 h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
                 >
                   {" "}

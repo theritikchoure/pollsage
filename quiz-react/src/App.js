@@ -31,6 +31,7 @@ import AdminLayout from "./views/admin/layout";
 import BackToTopButton from "./components/_back_to_top";
 import { trackPageView } from "./utils/tracking";
 import Unsubscribe from "./views/app/unsubscribe";
+import { setUpToken } from "./helpers/auth_token";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -45,7 +46,7 @@ function App() {
         ? JSON.parse(localStorage.getItem("user"))
         : null,
       token: localStorage.getItem("token")
-        ? JSON.parse(localStorage.getItem("token"))
+        ? setUpToken() ? setUpToken() : null
         : null,
     };
 

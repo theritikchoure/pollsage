@@ -28,4 +28,8 @@ router.use('/faqs', passport.authenticate("jwt", { session: false }),   require(
 
 router.use('/backup', passport.authenticate("jwt", { session: false }),   require('./backup.route.js'));
 
+// router.use('/email-campaign', passport.authenticate("jwt", { session: false }),   require('./email_campaign.route.js'));
+
+router.use('/creators', passport.authenticate("jwt", { session: false }),   require('./creators.route.js'));
+
 module.exports = router;

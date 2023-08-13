@@ -1,10 +1,12 @@
 import React from "react";
-import "../../styles/creator-layout.css";
 import CreatorSidebar from "../../components/admin/sidebar";
 import CreatorHeader from "../../components/admin/header";
 import CreatorFooter from "../../components/admin/footer";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Dashboard from "./dashboard";
+
+import CreatorList from "./creators/list.js";
+
 import CreateAccessToken from "./tokens/create.js";
 import AccessTokenList from "./tokens/list";
 
@@ -19,7 +21,7 @@ import ListFaq from "./faq/list";
 import CreateFaq from "./faq/create";
 import EditFaq from "./faq/edit";
 
-import CampaignCreate from './emails/campaign/create'
+import CampaignCreate from "./emails/campaign/create";
 
 const CreatorLayout = () => {
   return (
@@ -35,6 +37,11 @@ const CreatorLayout = () => {
           <div className="px-4 py-8 md:px-8">
             <Routes>
               <Route path="/dashboard" element={<Dashboard />} />
+
+              {/* /creators */}
+              <Route path="/creators/list" element={<CreatorList />} />
+
+              {/* /tokens */}
               <Route path="/tokens/create" element={<CreateAccessToken />} />
               <Route path="/tokens/list" element={<AccessTokenList />} />
               <Route path="/polls/list" element={<PollsList />} />
@@ -52,8 +59,11 @@ const CreatorLayout = () => {
               <Route path="/faqs/list" element={<ListFaq />} />
               <Route path="/faqs/edit/:id" element={<EditFaq />} />
 
-              <Route path="/emails/campaign/create" element={<CampaignCreate />} />
-              
+              <Route
+                path="/emails/campaign/create"
+                element={<CampaignCreate />}
+              />
+
               <Route path="*" element={<Navigate to={"/404"} />} />
             </Routes>
           </div>

@@ -31,19 +31,19 @@ const PaginationComponent = ({ pagination, handlePageChange, handleLimitChange }
       </span>
       {/* <span className="col-span-2"></span> */}
       {/* Limit Dropdown */}
-      <span className="flex col-span-4 sm:mt-auto sm:col-span-2">
+      <span className="flex items-center col-span-4 sm:mt-auto sm:col-span-2">
         <label htmlFor="limit" className="mr-2">
           Show:
         </label>
         <select
           id="limit"
-          className="px-2 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
+          className="px-2 w-16 text-gray-700 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
           value={perPage}
           onChange={(e) => handleLimitChange(Number(e.target.value))}
         >
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
+          <option value="5" className="text-black">5</option>
+          <option value="10" className="text-black">10</option>
+          <option value="20" className="text-black">20</option>
         </select>
       </span>
       {/* <!-- Pagination --> */}

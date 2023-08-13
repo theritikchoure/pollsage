@@ -23,31 +23,31 @@ export const successToast = (message='', options={}) => {
 export const infoToast = (message='', options={}) => {
     if(isEmpty(message)) return;
     dismissToast();
-    return toast.info(message);
+    return toast.info(message, options);
 };
 
 export const warningToast = (message='', options={}) => {
     if(isEmpty(message)) return;
     dismissToast();
-    return toast.warning(message);
+    return toast.warning(message, options);
 };
 
 export const errorToast = (message='', options={}) => {
     if(isEmpty(message)) return;
     dismissToast();
-    return toast.error(message);
+    return toast.error(message, options);
 };
 
 export const loadingToast = (message='', options={}) => {
     if(isEmpty(message)) return;
     dismissToast();
-    return toast.loading(message);
+    return toast.loading(message, options);
 };
 
 export const defaultToast = (message='', options={}) => {
     if(isEmpty(message)) return;
     dismissToast();
-    return toast(message);
+    return toast(message, options);
 };
 
 export const dismissToast = (id=null) => {
