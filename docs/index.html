@@ -1,0 +1,20 @@
+<html>
+<head>
+    <!-- Your layout's head content here -->
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    
+    <!-- Your layout's body content here -->
+    
+    <script>
+        // Use fetch or jQuery to fetch header.html
+        fetch('header.html')
+            .then(response => response.text())
+            .then(content => {
+                // Insert header content into the placeholder div
+                document.getElementById('header-placeholder').innerHTML = content;
+            });
+    </script>
+</body>
+</html>
