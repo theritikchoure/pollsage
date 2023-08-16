@@ -133,8 +133,8 @@ const PollForm = ({
         </div>
 
         {/* create 4 column using flex and each column has one input type color */}
-        <div class="flex flex-col gap-6 xl:flex-row mb-4">
-          <div class="w-full xl:w-1/4">
+        <div className="flex flex-col gap-6 xl:flex-row mb-4">
+          <div className="w-full xl:w-1/4">
             <label
               htmlFor="pollContainerBackgroundColor"
               className="mb-2.5 block text-black dark:text-white"
@@ -154,7 +154,7 @@ const PollForm = ({
               }
             />
           </div>
-          <div class="w-full xl:w-1/4">
+          <div className="w-full xl:w-1/4">
             <label
               htmlFor="pollBoxBackgroundColor"
               className="mb-2.5 block text-black dark:text-white"
@@ -171,7 +171,7 @@ const PollForm = ({
               }
             />
           </div>
-          <div class="w-full xl:w-1/4">
+          <div className="w-full xl:w-1/4">
             <label
               htmlFor="pollQuestionColor"
               className="mb-2.5 block text-black dark:text-white"
@@ -188,7 +188,7 @@ const PollForm = ({
               }
             />
           </div>
-          <div class="w-full xl:w-1/4">
+          <div className="w-full xl:w-1/4">
             <label
               htmlFor="formLabelColor"
               className="mb-2.5 block text-black dark:text-white"
@@ -208,8 +208,8 @@ const PollForm = ({
         </div>
 
         {/* add remaining fields */}
-        <div class="flex flex-col gap-6 xl:flex-row mb-4">
-          <div class="w-full xl:w-1/4">
+        <div className="flex flex-col gap-6 xl:flex-row mb-4">
+          <div className="w-full xl:w-1/4">
             <label
               htmlFor="pollOptionsLabelColor"
               className="mb-2.5 block text-black dark:text-white"
@@ -226,7 +226,7 @@ const PollForm = ({
               }
             />
           </div>
-          <div class="w-full xl:w-1/4">
+          <div className="w-full xl:w-1/4">
             <label
               htmlFor="voteButtonBackgroundColor"
               className="mb-2.5 block text-black dark:text-white"
@@ -244,8 +244,8 @@ const PollForm = ({
           </div>
         </div>
 
-        <div class="flex flex-col gap-6 xl:flex-row mb-4">
-          <div class="w-full xl:w-1/4">
+        <div className="flex flex-col gap-6 xl:flex-row mb-4">
+          <div className="w-full xl:w-1/4">
             <label
               htmlFor="inputFieldPlaceholderColor"
               className="mb-2.5 block text-black dark:text-white"
@@ -261,7 +261,7 @@ const PollForm = ({
                 onChangeFormData("inputFieldPlaceholderColor", e.target.value, 'colors')}
             />
           </div>
-          <div class="w-full xl:w-1/4">
+          <div className="w-full xl:w-1/4">
             <label
               htmlFor="inputFieldColor"
               className="mb-2.5 block text-black dark:text-white"
@@ -277,7 +277,7 @@ const PollForm = ({
                 onChangeFormData("inputFieldColor", e.target.value, 'colors')}
             />
           </div>
-          <div class="w-full xl:w-1/4">
+          <div className="w-full xl:w-1/4">
             <label
               htmlFor="commentNameColor"
               className="mb-2.5 block text-black dark:text-white"
@@ -293,7 +293,7 @@ const PollForm = ({
                 onChangeFormData("commentNameColor", e.target.value, 'colors')}
             />
           </div>
-          <div class="w-full xl:w-1/4">
+          <div className="w-full xl:w-1/4">
             <label
               htmlFor="commentTextColor"
               className="mb-2.5 block text-black dark:text-white"

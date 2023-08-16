@@ -75,12 +75,12 @@ const AccessTokenList = () => {
         className="bg-gray-50 h-16 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-900 text-gray-700 dark:text-gray-400"
       >
         <td className="px-4 py-3">
-          <div class="flex items-center">
-            <label class="inline-flex">
-              <span class="sr-only">Select</span>
+          <div className="flex items-center">
+            <label className="inline-flex">
+              <span className="sr-only">Select</span>
               <input
                 type="checkbox"
-                class="h-4 w-4 text-indigo-600 cursor-pointer checked:bg-blue-500 checked:border-transparent"
+                className="h-4 w-4 text-indigo-600 cursor-pointer checked:bg-blue-500 checked:border-transparent"
               />
             </label>
           </div>
@@ -121,10 +121,10 @@ const AccessTokenList = () => {
             <polyline
               points="168 168 216 168 216 40 88 40 88 88"
               stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinejoin="round"
               stroke="currentColor"
               fill="none"
-              stroke-width="14"
+              strokeWidth="14"
             />
             <rect
               x="40"
@@ -134,8 +134,8 @@ const AccessTokenList = () => {
               fill="none"
               stroke="currentColor"
               stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="14"
+              strokeLinejoin="round"
+              strokeWidth="14"
             />
           </svg>
           </Tooltip>
@@ -192,11 +192,11 @@ const AccessTokenList = () => {
           <div className="relative" onMouseLeave={() => setDateFilter(false)}>
             <button
               onClick={() => setDateFilter(!dateFilter)}
-              class="bg-slate-800 inline-flex items-center justify-between px-4 py-1.5 border border-gray-600 rounded w-44 min-w-full"
+              className="bg-slate-800 inline-flex items-center justify-between px-4 py-1.5 border border-gray-600 rounded w-44 min-w-full"
             >
-              <span class="flex items-center">
+              <span className="flex items-center">
                 <svg
-                  class="h-3 w-3 shrink-0 mr-1 fill-current text-white"
+                  className="h-3 w-3 shrink-0 mr-1 fill-current text-white"
                   viewBox="0 0 16 16"
                 >
                   <path d="M15 2h-2V0h-2v2H9V0H7v2H5V0H3v2H1a1 1 0 00-1 1v12a1 1 0 001 1h14a1 1 0 001-1V3a1 1 0 00-1-1zm-1 12H2V6h12v8z"></path>
@@ -206,24 +206,24 @@ const AccessTokenList = () => {
                 </span>
               </span>
               <svg
-                class="h-3 w-3 shrink-0 ml-1 fill-current text-white"
+                className="h-3 w-3 shrink-0 ml-1 fill-current text-white"
                 viewBox="0 0 11 7"
               >
                 <path d="M5.4 6.8L0 1.4 1.4 0l4 4 4-4 1.4 1.4z"></path>
               </svg>
             </button>
             {dateFilter && (
-              <div class="bg-slate-800 border border-slate-600 rounded absolute w-44 mt-2 text-md">
-                <div class="text-md py-2">
-                  <button class="flex pl-4 items-center mb-1 text-indigo-400 w-full h-8 hover:bg-slate-900">
-                    <svg class="mr-2" fill="currentColor" width="12" height="9">
+              <div className="bg-slate-800 border border-slate-600 rounded absolute w-44 mt-2 text-md">
+                <div className="text-md py-2">
+                  <button className="flex pl-4 items-center mb-1 text-indigo-400 w-full h-8 hover:bg-slate-900">
+                    <svg className="mr-2" fill="currentColor" width="12" height="9">
                       <path d="M10.28.28L3.989 6.575 1.695 4.28A1 1 0 00.28 5.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28.28z"></path>
                     </svg>
                     <span>Today</span>
                   </button>
-                  <button class="flex pl-4 items-center mb-1 text-white w-full h-8 hover:bg-slate-900">
+                  <button className="flex pl-4 items-center mb-1 text-white w-full h-8 hover:bg-slate-900">
                     <svg
-                      class="mr-2 hidden"
+                      className="mr-2 hidden"
                       fill="currentColor"
                       width="12"
                       height="9"
@@ -232,20 +232,20 @@ const AccessTokenList = () => {
                     </svg>
                     <span>Last 7 Days</span>
                   </button>
-                  <button class="flex items-center w-full hover:bg-slate-900 h-8">
-                    <svg class="mr-2 invisible" width="12" height="9">
+                  <button className="flex items-center w-full hover:bg-slate-900 h-8">
+                    <svg className="mr-2 invisible" width="12" height="9">
                       <path d="M10.28.28L3.989 6.575 1.695 4.28A1 1 0 00.28 5.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28.28z"></path>
                     </svg>
                     <span>Last Month</span>
                   </button>
-                  <button class="flex items-center w-full hover:bg-slate-900 h-8">
-                    <svg class="mr-2 invisible" width="12" height="9">
+                  <button className="flex items-center w-full hover:bg-slate-900 h-8">
+                    <svg className="mr-2 invisible" width="12" height="9">
                       <path d="M10.28.28L3.989 6.575 1.695 4.28A1 1 0 00.28 5.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28.28z"></path>
                     </svg>
                     <span>Last 12 Months</span>
                   </button>
-                  <button class="flex items-center w-full hover:bg-slate-900 h-8">
-                    <svg class="mr-2 invisible" width="12" height="9">
+                  <button className="flex items-center w-full hover:bg-slate-900 h-8">
+                    <svg className="mr-2 invisible" width="12" height="9">
                       <path d="M10.28.28L3.989 6.575 1.695 4.28A1 1 0 00.28 5.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28.28z"></path>
                     </svg>
                     <span>All Time</span>
@@ -255,17 +255,17 @@ const AccessTokenList = () => {
             )}
           </div>
           <Link
-            class="text-white bg-indigo-500 inline-flex items-center px-6 py-1.5 rounded"
+            className="text-white bg-indigo-500 inline-flex items-center px-6 py-1.5 rounded"
             to="/admin/tokens/create"
           >
             <svg
-              class="h-3 w-3 shrink-0 mr-2"
+              className="h-3 w-3 shrink-0 mr-2"
               fill="currentColor"
               viewBox="0 0 16 16"
             >
               <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z"></path>
             </svg>
-            <span class="ml-1">Create Token</span>
+            <span className="ml-1">Create Token</span>
           </Link>
         </div>
       </div>

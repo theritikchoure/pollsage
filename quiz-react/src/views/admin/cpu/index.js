@@ -89,9 +89,9 @@ const CPUHealth = () => {
               <path
                 d="M3 12C3 16.9706 7.02944 21 12 21C14.3051 21 16.4077 20.1334 18 18.7083L21 16M21 12C21 7.02944 16.9706 3 12 3C9.69494 3 7.59227 3.86656 6 5.29168L3 8M21 21V16M21 16H16M3 3V8M3 8H8"
                 stroke="currentColor"
-                stroke-width="2"
+                strokeWidth="2"
                 stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinejoin="round"
               />
             </svg>
           </button>
@@ -115,12 +115,12 @@ const CPUHealth = () => {
                   cy="12"
                   r="10"
                   stroke="currentColor"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                 />
                 <path
                   d="M12 17V11"
                   stroke="currentColor"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke-linecap="round"
                 />
                 <circle
@@ -179,7 +179,7 @@ const CPUHealth = () => {
       </div>
 
       <div
-        class="relative flex items-center text-gray-500 cursor-pointer hover:text-gray-600"
+        className="relative flex items-center text-gray-500 cursor-pointer hover:text-gray-600"
         x-data="{ hover: false }"
       >
         <p>Hover Me</p>

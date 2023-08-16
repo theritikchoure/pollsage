@@ -21,7 +21,7 @@ const Privacy = () => {
         description="Pollsage is a free online polling platform that allows you to create polls and share them with your audience."
       />
       <section className="bg-slate-800 text-white mt-10 mx-4 p-8 lg:w-1/2 lg:mx-auto flex-grow mb-12">
-        <article class="">
+        <article className="">
           <h1 className="text-3xl font-bold">Privacy</h1>
 
           <p className="my-5">

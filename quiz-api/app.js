@@ -1,7 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
-const db = require("./config/mongoose.js");
-const analyticsDB = require("./config/db/analytics_db.js");
+require("./config/mongoose.js");
+require("./config/db/analytics_db.js");
 const errorHandler = require("./src/middlewares/error_handler.js");
 const routes = require("./src/routes/index.js");
 const env = require("./config/env.js");

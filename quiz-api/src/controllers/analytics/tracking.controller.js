@@ -10,6 +10,8 @@ const pageViewValidation = Joi.object({
   source: Joi.string()
     .default("direct")
     .valid("direct", "organic", "referral", "social", "other"),
+
+  geo_location: Joi.object().allow(null).default(null),
 });
 
 // Module Exports

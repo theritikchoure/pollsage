@@ -18,6 +18,11 @@ const customSchema = new mongoose.Schema(
       type: String,
       default: "direct",
     },
+
+    geo_location: {
+      type: Object,
+      default: null,
+    },
   },
   {
     timestamps: true,

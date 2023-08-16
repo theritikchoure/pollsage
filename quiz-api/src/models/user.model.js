@@ -4,35 +4,33 @@ const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: false,
       trim: true,
+      default: null,
+      index: true,
     },
-    username: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
-      lowercase: true,
-    },
+
     email: {
       type: String,
       required: true,
       unique: true,
       trim: true,
       lowercase: true,
+      index: true,
     },
+
     profile_image: {
       type: String,
       required: false,
       default: null,
     },
+    
+    // password field
     password: {
       type: String,
       required: true,
-    },
-    country: {
-      type: String,
-      required: false,
+      trim: true,
+      select: false,
     },
 
     // login fields
@@ -40,6 +38,7 @@ const userSchema = new mongoose.Schema(
       type: Date,
       required: false,
     },
+    
     login_count: {
       type: Number,
       required: false,
@@ -50,18 +49,6 @@ const userSchema = new mongoose.Schema(
     is_verified: {
       type: Boolean,
       default: false,
-    },
-    verification_token: {
-      type: String,
-      default: null,
-    },
-    reset_password_token: {
-      type: String,
-      default: null,
-    },
-    reset_password_token_expiration: {
-      type: Date,
-      default: null,
     },
   },
   {

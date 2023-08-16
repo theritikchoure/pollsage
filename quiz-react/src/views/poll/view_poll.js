@@ -14,10 +14,14 @@ import Comment from "../../components/comment.js";
 import { formattedDateFromNow, shuffleArray } from "../../helpers/common.js";
 import CountdownTimer from "../../components/countdown..js";
 import moment from "moment";
-// import './dark-style.css'
-// import './light-style.css';
+import { isAuthenticated, setLocalStorage } from "../../helpers/localstorage.js";
+import Header from "../../components/header.js";
 
 const ViewPoll = () => {
+
+  const [authUser, setAuthUser] = useState(isAuthenticated());
+  const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+
   const initialState = {
     optionId: "",
     ip: "",
@@ -38,6 +42,10 @@ const ViewPoll = () => {
   const [password, setPassword] = useState("");
 
   useEffect(() => {
+    console.log(authUser);
+    if(!authUser) {
+      setLocalStorage('poll_url', window.location.href);
+    }
     loadData();
   }, []);
 
@@ -118,6 +126,12 @@ const ViewPoll = () => {
   const onSubmit = async (e) => {
     try {
       e.preventDefault();
+
+      if(!authUser || authUser.role !== "user") {
+        errorToast("You must be logged in as a user to submit a poll.");
+        return;
+      }
+
       const { isValid, errors } = submitPollValidation(
         formData,
         poll.require_name
@@ -202,6 +216,7 @@ const ViewPoll = () => {
 
   return (
     <Fragment>
+      <Header/>
       <div className="min-h-screen bg-gray-900 p-0 p-12" id="poll-container">
         {/* loading... text center horizontally and vertically */}
         {loading && <Loader />}

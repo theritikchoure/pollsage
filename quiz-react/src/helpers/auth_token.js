@@ -14,6 +14,8 @@ export const setUpToken = () => {
       return token;
     }
   }
+
+  localStorage.setItem('user', null);
   return false;
 }
 

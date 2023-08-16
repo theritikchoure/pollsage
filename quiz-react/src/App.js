@@ -32,6 +32,10 @@ import BackToTopButton from "./components/_back_to_top";
 import { trackPageView } from "./utils/tracking";
 import Unsubscribe from "./views/app/unsubscribe";
 import { setUpToken } from "./helpers/auth_token";
+import { getAuthToken, getUserDetails, isAuthenticated } from "./helpers/localstorage";
+import UserLogin from "./views/user/auth/login";
+import UserRegister from "./views/user/auth/register";
+import { deleteSessionId, sessionId } from "./utils/session";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -41,20 +45,11 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
-    const auth = {
-      user: localStorage.getItem("user")
-        ? JSON.parse(localStorage.getItem("user"))
-        : null,
-      token: localStorage.getItem("token")
-        ? setUpToken() ? setUpToken() : null
-        : null,
-    };
-
-    console.log(auth);
-
-    if (!isEmpty(auth.user) && !isEmpty(auth.token)) {
+    if(isAuthenticated()) {
       setIsAuth(true);
-      setAuth(auth);
+      setAuth({
+        user: isAuthenticated(),
+      });
     }
     setLoading(false);
   }, [location]);
@@ -74,13 +69,14 @@ function App() {
     };
   }, []);
 
-  // useEffect(() => {
-  //   if(location.pathname.includes("/admin")) {
-  //     return;
-  //   } else {
-  //     trackPageView({ url: location.pathname, referrer: document.referrer });
-  //   }
-  // }, [location]);
+  useEffect(() => {
+    if(location.pathname.includes("/admin")) {
+      return;
+    } else {
+      trackPageView({ url: location.pathname, referrer: document.referrer });
+    }
+  }, [location]);
+
 
   console.log(isAuth);
 
@@ -94,6 +90,8 @@ function App() {
             {/* Non-authenticated Routes */}
             {!isAuth && (
               <>
+                <Route path="/user/login" element={<UserLogin />} />
+                <Route path="/user/register" element={<UserRegister />} />
                 <Route
                   path="/creator/login"
                   element={<Login setIsAuth={setIsAuth} />}

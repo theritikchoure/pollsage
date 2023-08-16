@@ -12,7 +12,6 @@ const env = require("../../../../config/env");
 
 // validation schemas
 const registrationSchema = Joi.object({
-  username: Joi.string().required().label("Username"),
   name: Joi.string().required().label("Name"),
   email: Joi.string().email().required(),
   password: Joi.string().min(6).required(),
@@ -62,13 +61,7 @@ async function register(req) {
       throw Error(error.details[0].message);
     }
 
-    const { name, email, password, username } = req.body;
-
-    // check if username already exists
-    const usernameExists = await User.findOne({ username });
-    if (usernameExists) {
-        throw Error("Username already exists");
-    }
+    const { name, email, password } = req.body;
 
     // Check if user already exists
     const existingUser = await User.findOne({ email });
@@ -79,30 +72,17 @@ async function register(req) {
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Generate verification token
-    const verificationToken = uuid.v4();
-
     // Create a new poll creator
     const user = new User({
       name,
       email,
       password: hashedPassword,
-      verificationToken,
     });
 
     // Save the poll creator
     await user.save();
 
-    // Send verification email
-    const verificationLink = `http://localhost:3000/user/verify/${verificationToken}`;
-    const mailOptions = {
-      to: email,
-      subject: "Verify your email",
-      html: emailVerificationTemplate(name, verificationLink),
-    };
-
-    // await sendMail(mailOptions);
-    console.log(verificationLink);
+    // TODO: Send account creation notification
 
     return true;
   } catch (e) {
@@ -137,21 +117,21 @@ async function verifyToken(req) {
 
 // Function to find the user by email or username
 async function findUserByEmailOrUsername(emailOrUsername) {
-    try {
-      const user = await User.findOne({
-        $or: [
-          { email: emailOrUsername }, // Search by email
-          { username: emailOrUsername }, // Search by username
-        ],
-      });
-  
-      return user;
-    } catch (error) {
-      // Handle the error here
-      console.error("Error finding user:", error.message);
-      throw error;
-    }
+  try {
+    const user = await User.findOne({
+      $or: [
+        { email: emailOrUsername }, // Search by email
+        { username: emailOrUsername }, // Search by username
+      ],
+    });
+
+    return user;
+  } catch (error) {
+    // Handle the error here
+    console.error("Error finding user:", error.message);
+    throw error;
   }
+}
 
 async function login(req) {
   try {
@@ -160,24 +140,20 @@ async function login(req) {
       throw Error(error.details[0].message);
     }
 
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
     // Find the user by email or username
-    let user = await findUserByEmailOrUsername(username);
+    let user = await User.findOne({ email }).select("+password");
 
     // If user not found or password is incorrect, return error
-    if (
-      !user ||
-      !(await bcrypt.compare(password, user.password)) ||
-      !user.is_verified
-    ) {
+    if (!user || !(await bcrypt.compare(password, user.password))) {
       throw Error("Invalid email or password");
     }
 
     // Generate JWT token
     const token = jwt.sign(
       { id: user._id, name: user.name, role: "user" },
-      env.JWT_SECRET,
+      env.JWT_SECRET
     );
 
     return { token };

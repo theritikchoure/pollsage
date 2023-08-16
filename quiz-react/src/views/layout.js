@@ -7,6 +7,7 @@ import ContactUs from "./contact_us";
 import Privacy from "./privacy";
 import Terms from "./terms";
 import NotFound from "./404";
+import { warningToast } from "../utils/toaster";
 
 const GeneralLayout = ({isAuth, auth}) => {
 
@@ -22,7 +23,7 @@ const GeneralLayout = ({isAuth, auth}) => {
           <Route path="/terms" element={<Terms />} />
           {/* <Route path="*" element={<Navigate to={"/creator/dashboard"} />} /> */}
 
-          <Route path="*" element={<Navigate to={'/404'} />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />

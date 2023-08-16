@@ -46,18 +46,18 @@ const Logs = () => {
               <path
                 d="M3 12C3 16.9706 7.02944 21 12 21C14.3051 21 16.4077 20.1334 18 18.7083L21 16M21 12C21 7.02944 16.9706 3 12 3C9.69494 3 7.59227 3.86656 6 5.29168L3 8M21 21V16M21 16H16M3 3V8M3 8H8"
                 stroke="currentColor"
-                stroke-width="2"
+                strokeWidth="2"
                 stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinejoin="round"
               />
             </svg>
           </button>
           <div className="relative">
-            <button class="bg-slate-800 inline-flex items-center justify-between px-4 py-1.5 border border-gray-600 rounded w-44 min-w-full">
-              <span class="flex items-center">
+            <button className="bg-slate-800 inline-flex items-center justify-between px-4 py-1.5 border border-gray-600 rounded w-44 min-w-full">
+              <span className="flex items-center">
                 <input
                   type="date"
-                  class="bg-slate-800 text-white text-sm w-32 h-8 focus:border-transparent"
+                  className="bg-slate-800 text-white text-sm w-32 h-8 focus:border-transparent"
                   onChange={(e) => {
                     console.log(e.target.value);
                   }}
@@ -66,18 +66,18 @@ const Logs = () => {
             </button>
           </div>
           <button
-            class="text-white bg-indigo-500 inline-flex items-center px-6 py-1.5 rounded"
+            className="text-white bg-indigo-500 inline-flex items-center px-6 py-1.5 rounded"
             onClick={() => {
               loadLogs(limit, page + 1);
             }}
           >
             <svg
-              class="h-4 w-4 shrink-0 mr-2"
+              className="h-4 w-4 shrink-0 mr-2"
               fill="currentColor"
               viewBox="0 0 32 32"
               version="1.1"
             >
-              <g stroke="none" stroke-width="1" fill-rule="evenodd">
+              <g stroke="none" strokeWidth="1" fillRule="evenodd">
                 <g
                   id="Icon-Set"
                   transform="translate(-256.000000, -1139.000000)"
@@ -86,7 +86,7 @@ const Logs = () => {
                 </g>
               </g>
             </svg>
-            <span class="ml-1">Fetch logs</span>
+            <span className="ml-1">Fetch logs</span>
           </button>
         </div>
       </div>

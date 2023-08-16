@@ -1,5 +1,20 @@
+import { isEmpty } from "./common";
+
 const AUTH_TOKEN_KEY = 'token';
 const USER_DETAILS_KEY = 'user';
+
+export const isAuthenticated = () => {
+  const auth = {
+    user: getUserDetails(),
+    token: getAuthToken(),
+  };
+
+  if (!isEmpty(auth.user) && !isEmpty(auth.token)) {
+    return auth.user;
+  }
+
+  return null;
+}
 
 export const saveAuthToken = (data) => {
   try {
@@ -63,3 +78,12 @@ export const deleteAllLocalData = () => {
     console.log(error.message);
   }
 };
+
+export const setLocalStorage = (key, value) => {
+  localStorage.setItem(key, value);
+  return true;
+}
+
+export const getLocalStorage = (key) => {
+  return localStorage.getItem(key);
+}

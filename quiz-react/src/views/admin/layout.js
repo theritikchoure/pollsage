@@ -16,6 +16,7 @@ import Logs from "./logs/index.js";
 
 import CPUHealth from "./cpu/index.js";
 import DBMng from "./db-mng/index.js";
+import WebAnalytics from "./web-analytics/index.js";
 
 import ListFaq from "./faq/list";
 import CreateFaq from "./faq/create";
@@ -51,6 +52,9 @@ const CreatorLayout = () => {
 
               {/* /cpu */}
               <Route path="/cpu" element={<CPUHealth />} />
+
+              {/* /web-analytics */}
+              <Route path="/web-analytics" element={<WebAnalytics />} />
 
               {/* /db-mng */}
               <Route path="/db-mng" element={<DBMng />} />

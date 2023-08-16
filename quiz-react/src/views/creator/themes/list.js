@@ -146,7 +146,7 @@ const PollList = () => {
               width="16"
               height="16"
               fill="currentColor"
-              class="w-5 h-5 fill-current cursor-pointer hover:text-blue-400 hover:w-6 hover:h-6"
+              className="w-5 h-5 fill-current cursor-pointer hover:text-blue-400 hover:w-6 hover:h-6"
               viewBox="0 0 16 16"
             >
               {" "}

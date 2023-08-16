@@ -7,8 +7,8 @@ const CreatorFeedback = () => {
       <div className="mt-4 mx-4">
         <CreatorPageTitle title={"Account Settings"} />
         <div className="flex-grow bg-slate-800">
-          <div class="p-6">
-            <h2 class="text-slate-800 dark:text-slate-100 font-bold text-2xl mb-4">
+          <div className="p-6">
+            <h2 className="text-slate-800 dark:text-slate-100 font-bold text-2xl mb-4">
               Give Feedback
             </h2>
 
@@ -18,16 +18,16 @@ const CreatorFeedback = () => {
             </div>
 
             <section className="mt-6">
-              <h3 class="text-slate-800 dark:text-slate-100 font-bold text-xl">
+              <h3 className="text-slate-800 dark:text-slate-100 font-bold text-xl">
                 How likely would you recommend us to a friend or colleague?
               </h3>
             </section>
 
             <section className="mt-6">
-              <h3 class="text-slate-800 dark:text-slate-100 font-bold text-xl">
+              <h3 className="text-slate-800 dark:text-slate-100 font-bold text-xl">
                 Subject
               </h3>
-              <label class="sr-only" for="subject">
+              <label className="sr-only" htmlFor="subject">
                 Subject
               </label>
               <input
@@ -41,10 +41,10 @@ const CreatorFeedback = () => {
             </section>
 
             <section className="mt-6">
-              <h3 class="text-slate-800 dark:text-slate-100 font-bold text-xl">
+              <h3 className="text-slate-800 dark:text-slate-100 font-bold text-xl">
                 Tell us in words
               </h3>
-              <label class="sr-only" for="description">
+              <label className="sr-only" htmlFor="description">
                 Leave a feedback
               </label>
               <textarea
@@ -58,12 +58,12 @@ const CreatorFeedback = () => {
             </section>
           </div>
           <footer>
-            <div class="flex flex-col border-slate-200 dark:border-slate-700 py-5 px-6 border-t">
-              <div class="flex self-end">
-                <button class="border px-3 py-2 rounded dark:bg-slate-800 border-slate-200 dark:border-slate-700">
+            <div className="flex flex-col border-slate-200 dark:border-slate-700 py-5 px-6 border-t">
+              <div className="flex self-end">
+                <button className="border px-3 py-2 rounded dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                   Cancel
                 </button>
-                <button class="ml-3 px-3 py-2 rounded bg-indigo-500 hover:bg-indigo-600">
+                <button className="ml-3 px-3 py-2 rounded bg-indigo-500 hover:bg-indigo-600">
                   Save Changes
                 </button>
               </div>

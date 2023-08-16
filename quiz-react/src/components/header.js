@@ -10,7 +10,7 @@ const Header = ({isAuth, auth}) => {
   return (
     <div className="bg-slate-800 sticky top-0 z-40">
       <nav className="relative px-4 py-4 flex justify-between items-center bg-slate-900 border-b">
-        <Link className="text-3xl text-white font-bold leading-none ml-5" to="#">
+        <Link className="text-3xl text-white font-bold leading-none ml-5" to="/">
           PollSage
         </Link>
         <div

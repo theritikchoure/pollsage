@@ -26,3 +26,8 @@ function generateNewSessionId() {
   window.crypto.getRandomValues(array);
   return Array.from(array, (num) => num.toString(36)).join('');
 }
+
+
+export const deleteSessionId = () => {
+  Cookies.remove(SESSION_COOKIE_NAME);
+}
