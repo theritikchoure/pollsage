@@ -259,7 +259,7 @@ export const replaceWhiteSpaceWithUnderscore = (str) => {
 
 export const getAPIResponseError = (e) => {
   if (e) {
-    // console.log("Server Error:", e.response);
+    console.log("Server Error:", e.response);
     if (e.response && e.response.data) {
       let code = e.response.data?.status;
       let msg = e.response.data?.message;

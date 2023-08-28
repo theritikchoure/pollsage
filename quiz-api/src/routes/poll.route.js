@@ -7,8 +7,8 @@ const { createResponse, createError } = require("../../utils/helpers.js");
 module.exports = router;
 
 /**
- * @route GET api/app/about-us
- * @description get all about us keys
+ * @route GET api/v1/polls
+ * @description Add Polls Question 
  * @returns JSON
  * @access public
  */

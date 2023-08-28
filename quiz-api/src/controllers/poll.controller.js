@@ -9,7 +9,7 @@ const Poll = require("../models/poll.model");
 const PollResponse = require("../models/poll_response.model");
 const { getIO } = require("../../websocket");
 
-// AboutUs Validation Schema
+// Polls Add Validation Schema
 const pollSchema = Joi.object({
   question: Joi.string().required(),
   options: Joi.array()
@@ -20,7 +20,7 @@ const pollSchema = Joi.object({
       })
     )
     .required(),
-  allowMultipleSelection: Joi.boolean().default(false),
+    allow_multiple_selection: Joi.boolean().default(false),
   // creator: Joi.string().required(),
 });
 

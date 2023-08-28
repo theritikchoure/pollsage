@@ -22,7 +22,7 @@ const ViewPoll = () => {
   const [formData, setFormData] = useState(initialState);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(true);
-  const [registerSuccess, setRegisterSuccess] = useState(false);
+  // const [registerSuccess, setRegisterSuccess] = useState(false);
   const [pollId, setPollId] = useState(null);
   const [poll, setPoll] = useState(null);
   const [pollUrl, setPollUrl] = useState(null);
@@ -122,6 +122,8 @@ const ViewPoll = () => {
       let res = await submitPoll(pollId, formData);
       if (res) {
         successToast("Poll submit successfully.");
+      }else{
+        console.log(res);
       }
     } catch (error) {
       errorToast(error);

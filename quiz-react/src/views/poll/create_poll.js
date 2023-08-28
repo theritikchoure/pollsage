@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
-import Header from "../../components/header";
-import Footer from "../../components/footer";
-import links from "../../utils/nav_link";
+// import Header from "../../components/header";
+// import Footer from "../../components/footer";
+// import links from "../../utils/nav_link";
 import { createPollValidation } from "../../validations/poll.js";
 import { createPoll } from "../../services/poll.service";
 import { errorToast, successToast } from "../../utils/toaster";
@@ -22,7 +22,7 @@ const CreatePoll = () => {
 
   const [errors, setErrors] = useState({});
 
-  const [registerSuccess, setRegisterSuccess] = useState(false);
+  // const [registerSuccess, setRegisterSuccess] = useState(false);
 
   // write on change function
   const onChangeFormData = (key, value, index = null) => {
@@ -55,7 +55,7 @@ const CreatePoll = () => {
       console.log(res)
       if (res) {
         // setFormData(initialState);
-        setRegisterSuccess(true);
+        // setRegisterSuccess(true);
         successToast("Poll created successfully."); 
         navigate(`/poll/${res.data.pollId}`)
         // window.location.href = links.creatorDashboard;
