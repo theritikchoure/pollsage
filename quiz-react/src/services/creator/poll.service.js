@@ -3,9 +3,9 @@ import api from "../api.service.js";
 
 const url = '/creators'
 
-const getListOfPolls = async () => {
+const getListOfPolls = async (page, limit) => {
   try {
-    let res = await api.get(`${url}/polls`)
+    let res = await api.get(`${url}/polls?limit=${limit}&page=${page}`)
     console.log(res.data);
     return res.data;
   } catch (error) {
@@ -35,6 +35,7 @@ const updatePoll = async (pollId, payload) => {
 
 const createPoll = async (data) => {
   try {
+    delete data.theme;
     let res = await api.post(`${url}/polls`, data);
     return res.data;
   } catch (error) {

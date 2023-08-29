@@ -1,16 +1,28 @@
-const winston = require("winston");
+const winston = require('winston');
+require('winston-daily-rotate-file');
+const { format } = require('logform');
+const os = require('os');
 
-// Configure Winston logger
+const logFormat = format.combine(
+  format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+  format.printf(({ timestamp, level, message }) => {
+    return `[${timestamp}] [${os.hostname()}] [${level.toUpperCase()}]: ${message}`;
+  })
+);
+
 const logger = winston.createLogger({
+  level: process.env.LOG_LEVEL || 'info',
+  format: logFormat,
   transports: [
     new winston.transports.Console(),
-    new winston.transports.File({ filename: "error.log", level: "error" }),
-    new winston.transports.File({ filename: "combined.log" }),
+    new winston.transports.DailyRotateFile({
+      filename: 'logs/application-%DATE%.log',
+      datePattern: 'YYYY-MM-DD',
+      zippedArchive: true,
+      maxSize: '20m',
+      maxFiles: '14d',
+    }),
   ],
-  format: winston.format.combine(
-    winston.format.timestamp(),
-    winston.format.json()
-  ),
 });
 
 module.exports = logger;

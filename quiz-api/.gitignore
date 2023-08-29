@@ -2,3 +2,11 @@ node_modules
 
 error.log
 combined.log
+
+.env
+
+config/admin-data.js
+
+logs
+
+uploads/temp

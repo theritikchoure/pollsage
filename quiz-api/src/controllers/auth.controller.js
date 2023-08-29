@@ -7,6 +7,7 @@ const { handleControllerError } = require("../../utils/helpers");
 const PollCreator = require("../models/creator.model");
 const uuid = require("uuid");
 const sendMail = require("../../config/mail");
+const env = require("../../config/env");
 
 // validation schemas
 const registrationSchema = Joi.object({
@@ -138,12 +139,20 @@ async function login(req) {
     const pollCreator = await PollCreator.findOne({ email });
 
     // If poll creator not found or password is incorrect, return error
-    if (!pollCreator || !(await bcrypt.compare(password, pollCreator.password)) || !pollCreator.isVerified) {
-      throw Error('Invalid email or password');
+    if (
+      !pollCreator ||
+      !(await bcrypt.compare(password, pollCreator.password)) ||
+      !pollCreator.isVerified
+    ) {
+      throw Error("Invalid email or password");
     }
 
     // Generate JWT token
-    const token = jwt.sign({ id: pollCreator._id, name: pollCreator.name, role: 'creator' }, 'your-secret-key');
+    const token = jwt.sign(
+      { id: pollCreator._id, name: pollCreator.name, role: "creator" },
+      env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
 
     return { token };
   } catch (e) {
@@ -165,7 +174,7 @@ async function forgetPassword(req) {
 
     // If poll creator not found or password is incorrect, return error
     if (!pollCreator) {
-      throw Error('User not found');
+      throw Error("User not found");
     }
 
     const resetToken = uuid.v4();

@@ -3,51 +3,50 @@ import 'react-toastify/dist/ReactToastify.css';
 import { isEmpty } from '../helpers/common';
 
 // example options object
-// let options = {
-    // position: top-left || top-right || top-center || bottom-left || bottom-right || bottom-center,
-    // autoClose: 5000, // 5 seconds
-    // hideProgressBar: false || true,
-    // closeOnClick: true || false,
-    // pauseOnHover: true || false,
-    // draggable: true || false,
-    // progress: undefined || ,
-    // theme: "light",
-// }
+let globalOptions = {
+    position: "top-center",
+    autoClose: 5000, // 5 seconds
+    hideProgressBar: false,
+    closeOnClick: true || false,
+    pauseOnHover: true || false,
+    draggable: true || false,
+    theme: "light",
+}
 
-export const successToast = (message='', options={}) => {
+export const successToast = (message='', options=globalOptions) => {
     if(isEmpty(message)) return;
     dismissToast();
     return toast.success(message, options);
 };
 
-export const infoToast = (message='', options={}) => {
+export const infoToast = (message='', options=globalOptions) => {
     if(isEmpty(message)) return;
     dismissToast();
-    return toast.info(message);
+    return toast.info(message, options);
 };
 
-export const warningToast = (message='', options={}) => {
+export const warningToast = (message='', options=globalOptions) => {
     if(isEmpty(message)) return;
     dismissToast();
-    return toast.warning(message);
+    return toast.warning(message, options);
 };
 
-export const errorToast = (message='', options={}) => {
+export const errorToast = (message='', options=globalOptions) => {
     if(isEmpty(message)) return;
     dismissToast();
-    return toast.error(message);
+    return toast.error(message, options);
 };
 
-export const loadingToast = (message='', options={}) => {
+export const loadingToast = (message='', options=globalOptions) => {
     if(isEmpty(message)) return;
     dismissToast();
-    return toast.loading(message);
+    return toast.loading(message, options);
 };
 
-export const defaultToast = (message='', options={}) => {
+export const defaultToast = (message='', options=globalOptions) => {
     if(isEmpty(message)) return;
     dismissToast();
-    return toast(message);
+    return toast(message, options);
 };
 
 export const dismissToast = (id=null) => {

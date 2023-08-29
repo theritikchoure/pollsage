@@ -8,6 +8,7 @@ const {
 const Poll = require("../models/poll.model");
 const PollResponse = require("../models/poll_response.model");
 const { getIO } = require("../../websocket");
+const moment = require("moment");
 
 // Polls Add Validation Schema
 const pollSchema = Joi.object({
@@ -79,6 +80,22 @@ async function getPoll(req) {
       if(poll.password !== req.query.password) {
         throw Error("Password is incorrect");
       }
+    }
+
+    // Check if start_date is valid and in the future
+    if (poll.start_date && moment(poll.start_date).isAfter(moment())) {
+      // If the start_date is in the future, add a {poll_start} key in the response with the start date and time
+      return {
+        poll_start: poll.start_date,
+      };
+    }
+
+    // Check if end_date is valid and in the past
+    if (poll.end_date && moment(poll.end_date).isBefore(moment())) {
+      // If the end_date is in the past, add a {poll_end} key in the response with the end date and time
+      return {
+        poll_expired: true,
+      };
     }
 
     // remove password field from poll object

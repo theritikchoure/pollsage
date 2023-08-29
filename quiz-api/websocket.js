@@ -1,6 +1,7 @@
 const { Server } = require("socket.io");
 
 let io;
+let counter = 0;
 
 function createWebSocketServer(server) {
   io = new Server(server);
@@ -9,6 +10,10 @@ function createWebSocketServer(server) {
   io.on('connection', (socket) => {
     // Handle events when a new client connects
     console.log('New client connected');
+
+    counter++;
+
+    io.emit(`user-connected`, {counter});
 
     socket.on('joinRoom', (room) => {
       socket.join(room);
@@ -27,6 +32,8 @@ function createWebSocketServer(server) {
     });
 
     socket.on('disconnect', () => {
+      counter--;
+      io.emit(`user-connected`, {counter});
       console.log('Client disconnected');
     });
   });

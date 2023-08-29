@@ -1,0 +1,113 @@
+/* styles.css */
+
+/* ------------- Deep Blue theme -------------------- */
+body {
+    background-color: #1a202c!important;
+}
+#poll-container {
+    background-color: #1a202c;
+  }
+  
+  #poll-question {
+    color: #e2e8f0;
+  }
+  
+  #poll-options label,
+  #poll-options input[type="radio"]::before,
+  #poll-options input[type="checkbox"]::before {
+    border-color: #cbd5e0;
+    color: #cbd5e0;
+  }
+  
+  #poll-options input[type="radio"]:checked::before,
+  #poll-options input[type="checkbox"]:checked::before {
+    background-color: #4299e1;
+  }
+  
+  #vote-button {
+    background-color: #667eea;
+  }
+  
+
+/* ------------- Dark gray theme -------------------- */
+/* body {
+    background-color: #2d3748 !important;
+}
+
+#poll-container {
+    background-color: #2d3748;
+}
+
+#poll-question {
+    color: #e2e8f0;
+}
+
+#poll-options input[type="radio"]:checked::before,
+#poll-options input[type="checkbox"]:checked::before {
+    background-color: #2f855a;
+}
+
+#vote-button {
+    background-color: #4c51bf;
+} */
+
+
+
+/* ------------- Midnight green  -------------------- */
+/* body {
+    background-color: #1a2129!important;
+}
+
+#poll-container {
+    background-color: #1a2129;
+  }
+  
+  #poll-question {
+    color: #f0f8f7;
+  }
+  
+  #poll-options label,
+  #poll-options input[type="radio"]::before,
+  #poll-options input[type="checkbox"]::before {
+    border-color: #2e3c43;
+    color: #f0f8f7;
+  }
+  
+  #poll-options input[type="radio"]:checked::before,
+  #poll-options input[type="checkbox"]:checked::before {
+    background-color: #55a630;
+  }
+  
+  #vote-button {
+    background-color: #156859;
+  }
+   */
+
+/* ------------- Dark teal -------------------- */
+/* body {
+    background-color: #2c444e!important;
+}
+
+#poll-container {
+    background-color: #2c444e;
+}
+
+#poll-question {
+    color: #e4f9f5;
+}
+
+#poll-options label,
+#poll-options input[type="radio"]::before,
+#poll-options input[type="checkbox"]::before {
+    border-color: #3ebd93;
+    color: #e4f9f5;
+}
+
+#poll-options input[type="radio"]:checked::before,
+#poll-options input[type="checkbox"]:checked::before {
+    background-color: #0f766e;
+}
+
+#vote-button {
+    background-color: #379e9e;
+} */

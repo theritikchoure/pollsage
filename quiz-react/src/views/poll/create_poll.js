@@ -6,7 +6,7 @@ import { createPollValidation } from "../../validations/poll.js";
 import { createPoll } from "../../services/poll.service";
 import { errorToast, successToast } from "../../utils/toaster";
 import PageDetails from "../../components/_page_details";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const CreatePoll = () => {
 
@@ -168,7 +168,8 @@ const CreatePoll = () => {
                       </div>
                     </div>
                     <div className="pt-4 flex items-center space-x-4">
-                      <button className="bg-white text-purple-800 flex justify-center items-center w-full text-gray-900 px-4 py-3 rounded-md focus:outline-none hover:text-white hover:bg-purple-800">
+                      <Link to={'/'}
+                      className="bg-white text-purple-800 flex justify-center items-center w-full text-gray-900 px-4 py-3 rounded-md focus:outline-none hover:text-white hover:bg-purple-800">
                         <svg
                           className="w-6 h-6 mr-3"
                           fill="none"
@@ -184,7 +185,7 @@ const CreatePoll = () => {
                           ></path>
                         </svg>{" "}
                         Cancel
-                      </button>
+                      </Link>
                       <input
                         type="submit"
                         value={"Create Poll"}

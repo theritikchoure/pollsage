@@ -14,3 +14,44 @@
     line-height: 1.25rem;
     font-weight: 500;
 }
+
+.required-field::after {
+    content: '*';
+    color: red;
+    margin-left: 2px;
+    /* Adjust the spacing between the field label and asterisk as needed */
+}
+/* 
+.rdw-editor-main {
+    background-color: #333;
+    color: #fff;
+}
+
+.rdw-option-wrapper, .rdw-dropdown-wrapper {
+    background-color: #1f2937!important;
+    color: #fff;
+}
+
+.rdw-editor-toolbar {
+    background: #1f2937!important;
+} */
+
+.rdw-dropdown-optionwrapper {
+    background-color: #1f2937!important;
+    color: #fff;
+}
+
+.rdw-dropdownoption-active {
+    background-color: #6B7280!important;
+    color: #fff;
+}
+
+.rdw-dropdownoption-highlighted {
+    background-color: #6B7280!important;
+    color: #fff;
+} 
+
+.rdw-dropdown-selectedtext {
+    border: 1px solid black;
+    color: black;
+}

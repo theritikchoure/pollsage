@@ -1,5 +1,7 @@
 // constant variables
 
+export const WEBSITE_NAME = 'PollSage - Create Polls in Seconds';
+
 // Default Messages
 export const ADD_SUCCESS_MSG = 'Data added successfully';
 export const UPDATE_SUCCESS_MSG = 'Data updated successfully';

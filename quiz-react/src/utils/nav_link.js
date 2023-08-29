@@ -11,7 +11,6 @@ const links = {
     viewPollResults: "/creator/view-poll-results",
     viewPollResponses: "/creator/view-poll-responses",
     viewPollResponse: "/creator/view-poll-response",
-
 }
 
 

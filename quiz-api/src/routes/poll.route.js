@@ -65,6 +65,8 @@ async function addPoll(req, res, next) {
  */
 async function getPoll(req, res, next) {
   try {
+    // Set cache-control headers
+    res.setHeader('Cache-Control', 'no-store');
     let response = await pollCtrl.getPoll(req);
     if (response) return createResponse(res, resStatusCode.SUCCESS_FETCH, resMsg.SUCCESS_FETCH, response);
     else

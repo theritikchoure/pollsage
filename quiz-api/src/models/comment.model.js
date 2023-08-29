@@ -20,9 +20,27 @@ const customSchema = new mongoose.Schema(
         ref: "Comment",
       },
     ],
-    like_count: {
-      type: Number,
-      default: 0,
+    likes: [
+      {
+        type: String,
+        required: false,
+      },
+    ],
+    ip: {
+      type: String,
+      // required: true,
+    },
+    is_active: {
+      type: Boolean,
+      default: true,
+    },
+    geo_location: {
+      type: Object,
+      default: {},
+    },
+    sentiment: {
+      type: Object,
+      default: {},
     },
   },
   {
@@ -31,4 +49,4 @@ const customSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("comments", customSchema);
+module.exports = mongoose.model("Comment", customSchema);

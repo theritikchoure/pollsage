@@ -1,0 +1,210 @@
+/* ------------- Soft pink theme ------------------- */
+/* styles.css */
+body {
+  background-color: #fdf2f8 !important;
+}
+
+#poll-container {
+  background-color: #fdf2f8;
+}
+
+#poll-box, #comment-box {
+  background-color: #fff5f7;
+}
+
+#poll-question, #comment-heading, .comment-svg-color {
+  color: #9f0072!important;
+}
+
+form label {
+  color: #9f0072 !important;
+}
+
+#poll-options label,
+#poll-options input[type="radio"]::before,
+#poll-options input[type="checkbox"]::before {
+  border-color: #f9a8d4;
+  color: #9f0072;
+}
+
+#poll-options input[type="radio"]:checked::before,
+#poll-options input[type="checkbox"]:checked::before {
+  background-color: #f472b6;
+}
+
+#vote-button, #post-comment-button {
+  background-color: #dc185b;
+}
+
+.input-field::placeholder {
+  color: #000!important;
+}
+
+.input-field {
+  color: #9f0072!important;
+}
+
+.comment-name {
+  color: #9f0072!important;
+}
+
+.comment-text {
+  color: #000!important;
+}
+
+
+
+/* ------------- Sunny yellow ------------------- */
+/* body {
+    background-color: #fef3c7 !important;
+}
+
+#poll-container {
+    background-color: #fef3c7;
+}
+
+#poll-box {
+    background-color: #fffbeb;
+}
+
+#poll-question {
+    color: #000000;
+}
+
+form label {
+    color: #000000 !important;
+}
+
+#poll-options label,
+#poll-options input[type="radio"]::before,
+#poll-options input[type="checkbox"]::before {
+    border-color: #facc15;
+    color: #000000;
+}
+
+#poll-options input[type="radio"]:checked::before,
+#poll-options input[type="checkbox"]:checked::before {
+    background-color: #f59e0b;
+}
+
+#vote-button {
+    background-color: #f59e0b;
+} */
+
+
+
+/* ------------- Minty fresh theme ------------------- */
+/* body {
+    background-color: #f0fff4!important;
+}
+
+#poll-container {
+    background-color: #f0fff4;
+  }
+
+
+    #poll-box {
+        background-color: #e6fffa;
+    }
+  
+  #poll-question {
+    color: #000;
+  }
+
+    form label {
+        color: #000!important;
+    }
+  
+  #poll-options label,
+  #poll-options input[type="radio"]::before,
+  #poll-options input[type="checkbox"]::before {
+    border-color: #34d399;
+    color: #047857;
+  }
+  
+  #poll-options input[type="radio"]:checked::before,
+  #poll-options input[type="checkbox"]:checked::before {
+    background-color: #10b981;
+  }
+  
+  #vote-button {
+    background-color: #059669;
+  }
+   */
+
+/* ------------- Classic light ------------------- */
+/* body {
+    background-color: #f3f4f6!important;
+}
+
+#poll-container {
+    background-color: #f3f4f6;
+  }
+
+  #poll-box {
+    background-color: #ececec;
+  }
+  
+  #poll-question {
+    color: #1f2937;
+  }
+
+  form label {
+    color: #374151!important;
+  }
+  
+  #poll-options label,
+  #poll-options input[type="radio"]::before,
+  #poll-options input[type="checkbox"]::before {
+    border-color: #d1d5db;
+    color: #374151;
+  }
+  
+  #poll-options input[type="radio"]:checked::before,
+  #poll-options input[type="checkbox"]:checked::before {
+    background-color: #2563eb;
+  }
+  
+  #vote-button {
+    background-color: #60a5fa;
+  }
+   */
+
+/* ------------- Soothing sky ------------------- */
+
+/* body {
+    background-color: #ebf8ff!important;
+}
+
+#poll-container {
+    background-color: #ebf8ff;
+  }
+  
+    #poll-box {
+        background-color: #fffaf0;
+    }
+
+  #poll-question {
+    color: #1e3a8a;
+  }
+
+  form label {
+    color: #1e3a8a!important;
+  }
+  
+  
+  #poll-options label,
+  #poll-options input[type="radio"]::before,
+  #poll-options input[type="checkbox"]::before {
+    border-color: #a5b4fc;
+    color: #1e3a8a;
+  }
+  
+  #poll-options input[type="radio"]:checked::before,
+  #poll-options input[type="checkbox"]:checked::before {
+    background-color: #1e3a8a;
+  }
+  
+  #vote-button {
+    background-color: #3b82f6;
+  } */
