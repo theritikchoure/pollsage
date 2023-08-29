@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { submitPollValidation } from "../../validations/poll.js";
 import { getPollResult, submitPoll } from "../../services/poll.service";
 import { errorToast, successToast } from "../../utils/toaster";
@@ -17,7 +17,7 @@ const PollResult = () => {
   const [formData, setFormData] = useState(initialState);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(true);
-  const [registerSuccess, setRegisterSuccess] = useState(false);
+  // const [registerSuccess, setRegisterSuccess] = useState(false);
   const [pollId, setPollId] = useState(null);
   const [poll, setPoll] = useState(null);
   const [pollUrl, setPollUrl] = useState(null);
@@ -69,24 +69,24 @@ const PollResult = () => {
     setFormData({ ...formData, [key]: value });
   };
 
-  const onSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      const { isValid, errors } = submitPollValidation(formData);
-      if (!isValid) {
-        setErrors(errors);
-        return;
-      }
+  // const onSubmit = async (e) => {
+  //   try {
+  //     e.preventDefault();
+  //     const { isValid, errors } = submitPollValidation(formData);
+  //     if (!isValid) {
+  //       setErrors(errors);
+  //       return;
+  //     }
 
-      setErrors({});
-      let res = await submitPoll(pollId, formData);
-      if (res) {
-        successToast("Poll submit successfully.");
-      }
-    } catch (error) {
-      errorToast(error);
-    }
-  };
+  //     setErrors({});
+  //     let res = await submitPoll(pollId, formData);
+  //     if (res) {
+  //       successToast("Poll submit successfully.");
+  //     }
+  //   } catch (error) {
+  //     errorToast(error);
+  //   }
+  // };
 
   const handleOptionChange = (event) => {
     onChangeFormData("optionId", event.target.value);
