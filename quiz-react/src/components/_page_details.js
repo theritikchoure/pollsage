@@ -5,11 +5,11 @@ import { generateUUID } from "../helpers/common";
 const PageDetails = (props) => {
   useEffect(() => {
     // alert('Please add your page details here.')
-    document.title = props.title;
+    document.title = `${props.title} - PollSage`;
 
     // get meta description tag and change it to the meta description
     let metaDescription = document.querySelector('meta[name="description"]');
-    metaDescription.setAttribute("content", props.description);
+    metaDescription.setAttribute("content", `${props.description} - PollSage`);
 
     if(!getCookie('user_info')) {
       loadUserInfo();

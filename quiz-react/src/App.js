@@ -2,13 +2,10 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link,
-  Navigate,
   useLocation,
 } from "react-router-dom";
 import "./App.css";
 import { ToastContainer } from "react-toastify";
-import Home from "./views/home.js";
 import EmailVerification from "./views/creator/auth/email_verification.js";
 import Login from "./views/creator/auth/login";
 import Register from "./views/creator/auth/register";

@@ -74,15 +74,7 @@ This command will build the images and start the containers for MongoDB, Redis, 
 
 ## Screenshots
 
-![Home Page](./screenshots/home.png)
-![Poll Page](https://user-images.githubusercontent.com/54600664/132952422-4b5b8b0a-0b0a-4b0a-8b0a-9b0a0b0a0b0a.png)
-![Poll Results](https://user-images.githubusercontent.com/54600664/132952423-4b5b8b0a-0b0a-4b0a-8b0a-9b0a0b0a0b0a.png)
-![Poll Analytics](https://user-images.githubusercontent.com/54600664/132952424-4b5b8b0a-0b0a-4b0a-8b0a-9b0a0b0a0b0a.png)
-![Poll Comments](https://user-images.githubusercontent.com/54600664/132952425-4b5b8b0a-0b0a-4b0a-8b0a-9b0a0b0a0b0a.png)
-![Poll Creation](https://user-images.githubusercontent.com/54600664/132952426-4b5b8b0a-0b0a-4b0a-8b0a-9b0a0b0a0b0a.png)
-![Poll Settings](https://user-images.githubusercontent.com/54600664/132952427-4b5b8b0a-0b0a-4b0a-8b0a-9b0a0b0a0b0a.png)
-![Poll Sharing](https://user-images.githubusercontent.com/54600664/132952428-4b5b8b0a-0b0a-4b0a-8b0a-9b0a0b0a0b0a.png)
-![Poll Drafts](https://user-images.githubusercontent.com/54600664/132952429-4b5b8b0a-0b0a-4b0a-8b0a-9b0a0b0a0b0a.png)
+![Home Page](./docs/screenshots/home.png)
 
 ## License
 

@@ -25,7 +25,6 @@ const customSchema = new mongoose.Schema(
       },
       user_info: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
         default: null, // Allow user_info to be null if the request is not authenticated
       },
   },

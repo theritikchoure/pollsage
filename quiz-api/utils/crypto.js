@@ -1,19 +1,10 @@
 const crypto = require("crypto");
 const env = require('../config/env.js')
 const algorithm = "aes-256-cbc";
-const password = "yourSecretPassword"; // Replace this with your own strong password
 
 // Generate the encryption key from the password
 const hexKey = env.CRYPTO_KEY;
 const key = Buffer.from(hexKey, 'hex');
-
-// console.log("Key:", key.toString('hex'));
-
-// Function to generate a secure key from the password
-function generateKey(password) {
-  const salt = crypto.randomBytes(16);
-  return crypto.scryptSync(password, salt, 32);
-}
 
 // Function to encrypt data
 function encrypt(text) {

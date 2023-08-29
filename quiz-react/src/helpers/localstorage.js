@@ -1,4 +1,5 @@
 import { isEmpty } from "./common";
+import jwt_decode from 'jwt-decode';
 
 const AUTH_TOKEN_KEY = 'token';
 const USER_DETAILS_KEY = 'user';
@@ -9,11 +10,18 @@ export const isAuthenticated = () => {
     token: getAuthToken(),
   };
 
-  if (!isEmpty(auth.user) && !isEmpty(auth.token)) {
-    return auth.user;
+  if(!isEmpty(auth.token)) {
+    const token = auth.token;
+    const decoded = jwt_decode(token);
+    const currentTime = Date.now() / 1000;
+  
+    if (decoded.exp > currentTime) {
+      return auth.user;
+    } else {
+      deleteAllLocalData();
+      return null;
+    }
   }
-
-  return null;
 }
 
 export const saveAuthToken = (data) => {

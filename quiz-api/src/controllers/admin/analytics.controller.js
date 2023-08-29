@@ -144,13 +144,28 @@ async function getToppages(req) {
       {
         $group: {
           _id: null,
-          totalSessions: { $sum: "$sessionCount" },
+          totalSessions: { $sum: 1 }, // Count total sessions
+          totalVisits: { $sum: "$sessionCount" }, // Count total visits across all sessions
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          totalSessions: 1,
+          totalVisits: 1,
+          averageVisitsPerSession: {
+            $round: [
+              { $divide: ["$totalVisits", "$totalSessions"] },
+              2, // Number of decimal places
+            ],
+          },
         },
       },
     ]);
 
-    const totalSessions =
-      sessionStats.length > 0 ? sessionStats[0].totalSessions : 0;
+    const bounceRate = await calculateBounceStats();
+
+    sessionStats[0].bounceRate = bounceRate;
 
     const startDate = moment().startOf("day").toDate();
     const endDate = moment().endOf("day").toDate();
@@ -169,10 +184,52 @@ async function getToppages(req) {
         timezoneStats: geo_location[0].timezoneStats, // Top timezones
       },
       pageViews, // Page views for the last 30 days
-      totalSessions, // Total number of sessions
+      sessionStats: sessionStats[0], // Session stats (average visits per session)
       todayUrlVisits, // Total number of visits today
     };
   } catch (e) {
     throw handleControllerError(e);
+  }
+}
+
+async function calculateBounceStats() {
+  try {
+    // Calculate total sessions
+    const totalSessions = await PageView.distinct("session_id").countDocuments({
+      session_id: { $ne: null },
+    });
+
+    // Calculate total visits
+    const totalVisits = await PageView.countDocuments({
+      session_id: { $ne: null },
+    });
+
+    // Calculate bounce sessions (sessions with only one page view)
+    const bounceSessions = await PageView.aggregate([
+      {
+        $group: {
+          _id: "$session_id",
+          pageCount: { $sum: 1 }, // Count the number of page views in each session
+        },
+      },
+      {
+        $match: {
+          pageCount: 1, // Only consider sessions with one page view
+        },
+      },
+      {
+        $count: "bounceSessions", // Count the sessions with one page view
+      },
+    ]);
+
+    // Extract the count of bounce sessions or set it to 0 if there are no bounce sessions
+    const bounceSessionCount = bounceSessions[0]?.bounceSessions || 0;
+
+    // Calculate the bounce rate
+    const bounceRate = (bounceSessionCount / totalSessions) * 100;
+
+    return Math.round(bounceRate * 100) / 100 // Round to 2 decimal places
+  } catch (error) {
+    throw error;
   }
 }

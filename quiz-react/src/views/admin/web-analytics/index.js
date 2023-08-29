@@ -30,7 +30,7 @@ const COLORS = [
 ];
 
 const WebAnalytics = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
 
   const [visibleUrlStats, setVisibleUrlStats] = useState(10);
 
@@ -45,10 +45,8 @@ const WebAnalytics = () => {
   const getTopPageData = async () => {
     try {
       const res = await api.get("/admin/analytics/toppages");
-      console.log(res.data);
 
       res.data.data.urlStats.sort((a, b) => {
-        console.log(a.totalVisits, b.totalVisits);
         return b.totalVisits - a.totalVisits;
       });
 
@@ -93,7 +91,10 @@ const WebAnalytics = () => {
 
   return (
     <>
-      <PageDetails title="Poll list - PollSage" description="Create Poll" />
+      <PageDetails
+        title="Website Analytics"
+        description="Website Analytic - PollSage"
+      />
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-slate-800 dark:text-slate-100 font-bold text-3xl">
           Website Analytics ✨
@@ -105,6 +106,98 @@ const WebAnalytics = () => {
 
       {data && (
         <>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
+            {/* <!-- Card --> */}
+            <div className="border border-slate-600 rounded-sm shadow-sm p-6">
+              <div className="flex-shrink-0">
+                <svg
+                  className="ml-4 mb-3 h-9 w-9 text-white"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    opacity="0.15"
+                    d="M12 11C13.6569 11 15 9.65685 15 8C15 6.34315 13.6569 5 12 5C10.3431 5 9 6.34315 9 8C9 9.65685 10.3431 11 12 11Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M3 19H1V18C1 16.1362 2.27477 14.5701 4 14.126M6 10.8293C4.83481 10.4175 4 9.30621 4 7.99999C4 6.69378 4.83481 5.58254 6 5.1707M21 19H23V18C23 16.1362 21.7252 14.5701 20 14.126M18 5.1707C19.1652 5.58254 20 6.69378 20 7.99999C20 9.30621 19.1652 10.4175 18 10.8293M10 14H14C16.2091 14 18 15.7909 18 18V19H6V18C6 15.7909 7.79086 14 10 14ZM15 8C15 9.65685 13.6569 11 12 11C10.3431 11 9 9.65685 9 8C9 6.34315 10.3431 5 12 5C13.6569 5 15 6.34315 15 8Z"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+              <div className="ml-4">
+                <p className="text-2xl font-semibold text-gray-600 dark:text-gray-400">
+                  Total Visits
+                </p>
+                <p className="text-3xl font-bold text-gray-700 dark:text-gray-200">
+                  {data.sessionStats?.totalVisits}
+                </p>
+              </div>
+            </div>
+            <div className="border border-slate-600 rounded-sm shadow-sm p-6">
+              <div className="flex-shrink-0">
+                <svg
+                  fill="currentColor"
+                  className="ml-4 mb-3 h-9 w-9 text-white"
+                  viewBox="0 0 24 24"
+                  version="1.1"
+                >
+                  <g
+                    stroke="none"
+                    strokeWidth="1"
+                    fill="none"
+                    fillRule="evenodd"
+                  >
+                    <g fill="currentColor" fillRule="nonzero">
+                      <path d="M11.7518706,1.99956021 C13.2716867,1.99956021 14.5037411,3.23161462 14.5037411,4.75143076 L14.5037411,19.2499651 C14.5037411,20.7697812 13.2716867,22.0018356 11.7518706,22.0018356 C10.2320544,22.0018356 9,20.7697812 9,19.2499651 L9,4.75143076 C9,3.23161462 10.2320544,1.99956021 11.7518706,1.99956021 Z M18.7518706,6.99956021 C20.2716867,6.99956021 21.5037411,8.23161462 21.5037411,9.75143076 L21.5037411,19.2499651 C21.5037411,20.7697812 20.2716867,22.0018356 18.7518706,22.0018356 C17.2320544,22.0018356 16,20.7697812 16,19.2499651 L16,9.75143076 C16,8.23161462 17.2320544,6.99956021 18.7518706,6.99956021 Z M4.75187055,11.9995602 C6.27168669,11.9995602 7.5037411,13.2316146 7.5037411,14.7514308 L7.5037411,19.2499651 C7.5037411,20.7697812 6.27168669,22.0018356 4.75187055,22.0018356 C3.23205441,22.0018356 2,20.7697812 2,19.2499651 L2,14.7514308 C2,13.2316146 3.23205441,11.9995602 4.75187055,11.9995602 Z M11.7518706,3.49956021 C11.0604815,3.49956021 10.5,4.06004175 10.5,4.75143076 L10.5,19.2499651 C10.5,19.9413541 11.0604815,20.5018356 11.7518706,20.5018356 C12.4432596,20.5018356 13.0037411,19.9413541 13.0037411,19.2499651 L13.0037411,4.75143076 C13.0037411,4.06004175 12.4432596,3.49956021 11.7518706,3.49956021 Z M18.7518706,8.49956021 C18.0604815,8.49956021 17.5,9.06004175 17.5,9.75143076 L17.5,19.2499651 C17.5,19.9413541 18.0604815,20.5018356 18.7518706,20.5018356 C19.4432596,20.5018356 20.0037411,19.9413541 20.0037411,19.2499651 L20.0037411,9.75143076 C20.0037411,9.06004175 19.4432596,8.49956021 18.7518706,8.49956021 Z M4.75187055,13.4995602 C4.06048154,13.4995602 3.5,14.0600417 3.5,14.7514308 L3.5,19.2499651 C3.5,19.9413541 4.06048154,20.5018356 4.75187055,20.5018356 C5.44325957,20.5018356 6.0037411,19.9413541 6.0037411,19.2499651 L6.0037411,14.7514308 C6.0037411,14.0600417 5.44325957,13.4995602 4.75187055,13.4995602 Z"></path>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+              <div className="ml-4">
+                <p className="text-2xl font-semibold text-gray-600 dark:text-gray-400">
+                  Total Sessions
+                </p>
+                <p className="text-3xl font-bold text-gray-700 dark:text-gray-200">
+                  {data.sessionStats?.totalSessions}
+                </p>
+              </div>
+            </div>
+            <div className="border border-slate-600 rounded-sm shadow-sm p-6">
+              <div className="flex-shrink-0">
+                <svg
+                  className="ml-4 mb-3 h-9 w-9 text-white"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g>
+                    <path
+                      d="M17 20C17 18.3431 14.7614 17 12 17C9.23858 17 7 18.3431 7 20M21 17.0004C21 15.7702 19.7659 14.7129 18 14.25M3 17.0004C3 15.7702 4.2341 14.7129 6 14.25M18 10.2361C18.6137 9.68679 19 8.8885 19 8C19 6.34315 17.6569 5 16 5C15.2316 5 14.5308 5.28885 14 5.76389M6 10.2361C5.38625 9.68679 5 8.8885 5 8C5 6.34315 6.34315 5 8 5C8.76835 5 9.46924 5.28885 10 5.76389M12 14C10.3431 14 9 12.6569 9 11C9 9.34315 10.3431 8 12 8C13.6569 8 15 9.34315 15 11C15 12.6569 13.6569 14 12 14Z"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </g>
+                </svg>
+              </div>
+              <div className="ml-4">
+                <p className="text-2xl font-semibold text-gray-600 dark:text-gray-400">
+                  Avg. Visits per Session
+                </p>
+                <p className="text-3xl font-bold text-gray-700 dark:text-gray-200">
+                  {data.sessionStats?.averageVisitsPerSession}
+                </p>
+              </div>
+            </div>
+          </div>
+
           <div className="my-5">
             <h2 className="text-lg mb-7 font-bold">
               Date-wise Page Views in the Last 30 Days
@@ -131,9 +224,9 @@ const WebAnalytics = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {/* <!-- Social Traffic --> */}
-            <div className="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-slate-800 w-full shadow-lg rounded">
-              <div className="rounded-t mb-0 px-0 border-0">
-                <div className="flex flex-wrap items-center px-4 py-2">
+            <div className="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-slate-800 border border-slate-600 w-full shadow-lg">
+              <div className="mb-0 px-0 border-slate-600">
+                <div className="flex flex-wrap items-center px-5 py-4">
                   <div className="relative w-full max-w-full flex-grow flex-1">
                     <h3 className="font-semibold text-base text-gray-900 dark:text-gray-50">
                       Most Visited Pages
@@ -141,7 +234,7 @@ const WebAnalytics = () => {
                   </div>
                   <div className="relative w-full max-w-full flex-grow flex-1 text-right">
                     <button
-                      className="bg-blue-500 dark:bg-gray-100 text-white active:bg-blue-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      className="bg-indigo-500 cursor-pointer text-xs font-bold uppercase px-3 py-1 rounded-sm mr-1 mb-1 hover:bg-indigo-600"
                       type="button"
                     >
                       See all
@@ -149,24 +242,24 @@ const WebAnalytics = () => {
                   </div>
                 </div>
                 <div className="block w-full overflow-x-auto">
-                  <table className="items-center w-full bg-transparent border-collapse px-4">
+                  <table className="items-center w-full bg-transparent border-collapse px-5">
                     <thead>
                       <tr>
-                        <th className="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        <th className="px-4 bg-slate-900 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                           Referral
                         </th>
-                        <th className="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-right">
+                        <th className="px-4 bg-slate-900 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-right">
                           Visitors
                         </th>
                       </tr>
                     </thead>
                     <tbody>
-                      {data?.mostVisitedPages?.map((page) => (
-                        <tr className="text-gray-700 dark:text-gray-100">
-                          <th className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                      {data?.mostVisitedPages?.map((page, index) => (
+                        <tr className="text-gray-700 dark:text-gray-100" key={index}>
+                          <th className="border-t-0 px-5 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
                             {page?._id}
                           </th>
-                          <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
+                          <td className="border-t-0 px-5 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
                             {page?.totalVisits}
                           </td>
                         </tr>
@@ -179,9 +272,9 @@ const WebAnalytics = () => {
             {/* <!-- ./Social Traffic --> */}
 
             {/* <!-- Recent Activities --> */}
-            <div className="relative flex flex-col min-w-0 break-words bg-slate-800 w-full shadow-lg rounded">
+            <div className="relative flex flex-col min-w-0 break-words bg-slate-800 w-full shadow-lg border border-slate-600">
               <div className="rounded-t mb-0 px-0 border-0">
-                <div className="flex flex-wrap items-center px-4 py-2 border-b border-solid border-gray-200">
+                <div className="flex flex-wrap items-center px-5 py-4 border-b border-solid border-slate-600">
                   <div className="relative w-full max-w-full flex-grow flex-1">
                     <h3 className="font-semibold text-base text-gray-900 dark:text-gray-50">
                       Source Stats
@@ -219,9 +312,9 @@ const WebAnalytics = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
             {/* <!-- Recent Activities --> */}
-            <div className="relative flex flex-col min-w-0 break-words bg-slate-800 w-full shadow-lg rounded">
+            <div className="relative flex flex-col min-w-0 break-words bg-slate-800 w-full shadow-lg border border-slate-600">
               <div className="rounded-t mb-0 px-0 border-0">
-                <div className="flex flex-wrap items-center px-4 py-2 border-b border-solid border-gray-200">
+                <div className="flex flex-wrap items-center px-5 py-4 border-b border-solid border-slate-600">
                   <div className="relative w-full max-w-full flex-grow flex-1">
                     <h3 className="font-semibold text-base text-gray-900 dark:text-gray-50">
                       Country wise stats
@@ -257,9 +350,9 @@ const WebAnalytics = () => {
             {/* <!-- ./Recent Activities --> */}
 
             {/* <!-- Recent Activities --> */}
-            <div className="relative flex flex-col min-w-0 break-words bg-slate-800 w-full shadow-lg rounded">
+            <div className="relative flex flex-col min-w-0 break-words bg-slate-800 w-full shadow-lg border border-slate-600">
               <div className="rounded-t mb-0 px-0 border-0">
-                <div className="flex flex-wrap items-center px-4 py-2 border-b border-solid border-gray-200">
+                <div className="flex flex-wrap items-center px-5 py-4 border-b border-solid border-slate-600">
                   <div className="relative w-full max-w-full flex-grow flex-1">
                     <h3 className="font-semibold text-base text-gray-900 dark:text-gray-50">
                       Timezone wise stats
@@ -297,9 +390,9 @@ const WebAnalytics = () => {
             {/* <!-- ./Recent Activities --> */}
           </div>
 
-          <div className="relative flex flex-col min-w-0 mb-4 mt-4 lg:mb-0 break-words bg-slate-800 w-full shadow-lg rounded">
+          <div className="relative flex flex-col min-w-0 mb-4 mt-4 lg:mb-0 break-words bg-slate-800 w-full shadow-lg border border-slate-600">
             <div className="rounded-t mb-0 px-0 border-0">
-              <div className="flex flex-wrap items-center px-4 py-2">
+              <div className="flex flex-wrap items-center px-5 py-4">
                 <div className="relative w-full max-w-full flex-grow flex-1">
                   <h3 className="font-semibold text-base text-gray-900 dark:text-gray-50">
                     URL Stats
@@ -348,30 +441,36 @@ const WebAnalytics = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {data?.urlStats?.slice(0, visibleUrlStats).map((page, index) => (
-                      <tr className="text-gray-700 dark:text-gray-100 border-y hover:bg-slate-900 cursor-pointer">
-                        <th className="px-7 w-1 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">
-                          {index+1}
-                        </th>
-                        <th className="px-7 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">
-                          <a
-                            href={`${page?._id}`}
-                            target="_blank"
-                            className="text-indigo-500 hover:text-indigo-600"
-                          >
-                            {page?._id}
-                          </a>
-                        </th>
-                        <td className="px-7 align-middle text-sm whitespace-nowrap p-4 text-right">
-                          {page?.totalVisits}
-                        </td>
-                      </tr>
-                    ))}
+                    {data?.urlStats
+                      ?.slice(0, visibleUrlStats)
+                      .map((page, index) => (
+                        <tr className="text-gray-700 dark:text-gray-100 border-y hover:bg-slate-900 cursor-pointer" key={index}>
+                          <th className="px-7 w-1 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">
+                            {index + 1}
+                          </th>
+                          <th className="px-7 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">
+                            <a
+                              href={`${page?._id}`}
+                              target="_blank"
+                              className="text-indigo-500 hover:text-indigo-600"
+                              rel="noopener noreferrer"
+                            >
+                              {page?._id}
+                            </a>
+                          </th>
+                          <td className="px-7 align-middle text-sm whitespace-nowrap p-4 text-right">
+                            {page?.totalVisits}
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                   {data?.urlStats?.length > visibleUrlStats && (
                     <tfoot>
                       <tr>
-                        <td colSpan="3" className="text-center py-4 bg-slate-900 border border-t-0">
+                        <td
+                          colSpan="3"
+                          className="text-center py-4 bg-slate-900 border border-t-0"
+                        >
                           <button
                             className="text-indigo-500 hover:text-indigo-600 cursor-pointer"
                             onClick={handleLoadMore}

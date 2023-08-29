@@ -4,7 +4,7 @@ const { identifySource } = require('../helpers/common.js');
 const { getUserIp } = require("./user_ip");
 
 // Function to send page views data to the server
-async function trackPageView(data) {
+export const trackPageView = async (data) => {
   try {
     // get the user geo location
     let geo = await getUserIp();
@@ -26,5 +26,3 @@ async function trackPageView(data) {
     console.error(error);
   }
 }
-
-module.exports = { trackPageView };

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-import { deleteAuthToken, getAuthToken, saveAuthToken } from './localstorage';
+import { deleteAuthToken, getAuthToken, saveAuthToken, deleteAllLocalData } from './localstorage';
 
 export const setUpToken = () => {
   const token = getAuthToken();
@@ -12,6 +12,9 @@ export const setUpToken = () => {
     if (decoded.exp > currentTime) {
       setAuthToken(token);
       return token;
+    } else {
+      deleteAllLocalData();
+      clearToken();
     }
   }
 
