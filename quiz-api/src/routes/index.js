@@ -17,6 +17,16 @@ router.get("/health-check", (req, res) => {
    res.send("OK");
 });
 
+router.get('/contributors', (req, res) => {
+   const contributors = require("../../utils/others/contributors.js");
+
+   return res.status(200).json({
+      status: 200,
+      message: "Successfully retrieved",
+      data: contributors,
+    });
+})
+
 /** /polls - for polls related routes */
 router.use("/polls", requireAccessToken, pollRoutes);
 
