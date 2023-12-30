@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PollSage Email Verification</title>
+    <style>
+      /* Add your custom styling here */
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f7f7f7;
+      }
+      .logo {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .button {
+        display: inline-block;
+        background-color: #007bff;
+        color: #ffffff;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 4px;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">
+        <h1>PollSage</h1>
+      </div>
+      <p>Hi [Username],</p>
+      <p>
+        Thank you for registering with PollSage! Please click the button below
+        to verify your email address:
+      </p>
+      <p>
+        <a href="[VerificationLink]" class="button">Verify Email</a>
+      </p>
+      <p>
+        If you did not create an account on PollSage, you can safely ignore this
+        email.
+      </p>
+      <div class="footer">
+        <p>Best Regards,</p>
+        <p>The PollSage Team</p>
+      </div>
+    </div>
+
+    <script>
+      // write api call with fetch and async await
+      async function callApi() {
+        let res = await fetch("http://localhost:5000/api/v1/polls/yUgGS2", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        let data = await res.json();
+        console.log(data);
+      }
+
+      callApi();
+    </script>
+  </body>
+</html>

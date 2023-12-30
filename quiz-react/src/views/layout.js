@@ -7,6 +7,7 @@ import ContactUs from "./contact_us";
 import Privacy from "./privacy";
 import Terms from "./terms";
 import NotFound from "./404";
+import Contributors from "./app/contributors";
 import { warningToast } from "../utils/toaster";
 
 const GeneralLayout = ({isAuth, auth}) => {
@@ -21,6 +22,7 @@ const GeneralLayout = ({isAuth, auth}) => {
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="/contributors" element={<Contributors />} />
           {/* <Route path="*" element={<Navigate to={"/creator/dashboard"} />} /> */}
 
           <Route path="*" element={<NotFound />} />

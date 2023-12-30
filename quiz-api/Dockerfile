@@ -19,5 +19,7 @@ COPY . .
 # Expose the backend port (change it to the actual port your backend listens on)
 EXPOSE 5000
 
+RUN node /usr/src/app/utils/others/generate_keys.js
+
 # Command to start the backend server
 CMD ["npm", "start"]

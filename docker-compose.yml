@@ -4,36 +4,38 @@ services:
     build:
       context: ./quiz-api
       dockerfile: Dockerfile
+    env_file:
+      - ./quiz-api/.env
     ports:
       - 5000:5000
-    # depends_on:
-    #   - redis
+    depends_on:
+      - redis
     networks:
       - app-network
     volumes:
       - ./quiz-api:/app
     command: npm run dev
 
-  # frontend:
-  #   build:
-  #     context: ./quiz-react
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - 80:80
-  #   depends_on:
-  #     - backend
-  #   networks:
-  #     - app-network
-  #   volumes:
-  #     - ./quiz-react:/app
+  frontend:
+    build:
+      context: ./quiz-react
+      dockerfile: Dockerfile
+    ports:
+      - 3000:80
+    depends_on:
+      - backend
+    networks:
+      - app-network
+    volumes:
+      - ./quiz-react:/app
 
   # If Redis installed in Local, Comment out this part
-  # redis:
-  #   image: redis:latest
-  #   ports:
-  #     - 6379:6379
-  #   networks:
-  #     - app-network
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
+    networks:
+      - app-network
  # End Here 
 
   #Pulling mongo (mongo:latest)... 
@@ -44,16 +46,16 @@ services:
     networks:
       - app-network
 
-  # nginx:
-  #   image: nginx:1.21
-  #   ports:
-  #     - 8080:80
-  #   volumes:
-  #     - ./quiz-react/nginx/default.conf:/etc/nginx/conf.d/default.conf
-  #   depends_on:
-  #     - frontend
-  #   networks:
-  #     - app-network
+  nginx:
+    image: nginx:alpine
+    ports:
+      - 8080:80
+    volumes:
+      - ./quiz-react/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - frontend
+    networks:
+      - app-network
 
 networks:
   app-network:

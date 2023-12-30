@@ -25,7 +25,6 @@ const envLocalFilePath = '.env.local';
 if (!fs.existsSync(envFilePath)) {
   try {
     // Copy .env.local to .env
-    fs.copyFileSync(envLocalFilePath, envFilePath);
     console.log('.env file created by copying from .env.local');
   } catch (err) {
     console.error('Error copying .env.local to .env:', err.message);
@@ -33,6 +32,7 @@ if (!fs.existsSync(envFilePath)) {
 } else {
   console.log('.env file already exists, no action needed.');
 }
+fs.copyFileSync(envLocalFilePath, envFilePath);
 
 // Read the existing .env file
 const envData = fs.readFileSync(envFilePath, 'utf8');
