@@ -17,10 +17,10 @@ const Header = ({ isAuth, auth }) => {
   const url = window.location.pathname;
 
   return (
-    <div className="bg-slate-800 sticky top-0 z-40">
-      <nav className="relative px-4 py-4 flex justify-between items-center bg-slate-900 border-b border-slate-600">
+    <div className="bg-gray-50 sticky top-0 z-40  border-b border-slate-600">
+      <nav className="relative px-4 py-4 flex justify-between items-center max-w-7xl mx-auto">
         <Link
-          className="text-3xl text-white font-bold leading-none ml-5"
+          className="text-3xl text-black font-bold leading-none ml-5"
           to="/"
         >
           PollSage
@@ -29,7 +29,7 @@ const Header = ({ isAuth, auth }) => {
           className="lg:hidden"
           onClick={() => setMobileMenuHidden(!mobileMenuHidden)}
         >
-          <button className="navbar-burger flex items-center text-blue-600 p-3">
+          <button className="navbar-burger flex items-center text-black p-3">
             <svg
               className="block h-4 w-4 fill-current"
               viewBox="0 0 20 20"
@@ -40,95 +40,50 @@ const Header = ({ isAuth, auth }) => {
             </svg>
           </button>
         </div>
-        <ul className="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
+        <ul className="hidden absolute top-1/2 right-0 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6 gap-6">
           <li>
             <Link
-              className={`text-sm
-            ${url === "/" ? "text-indigo-500 font-bold" : "text-gray-400"}`}
+              className={`
+            ${url === "/" ? "text-gray-500 font-bold" : "text-gray-400"}`}
               to={links.home}
             >
               Home
             </Link>
           </li>
-          <li className="text-gray-300">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              className="w-4 h-4 current-fill"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-              />
-            </svg>
-          </li>
-          <li>
+          {/* <li>
             <Link
               className="text-sm text-gray-400 hover:text-gray-500"
-              to={
-                isAuth && auth.user.role === "admin"
-                  ? "/creator/create-poll"
-                  : "/login"
-              }
+              // to={
+              //   isAuth && auth.user.role === "admin"
+              //     ? "/creator/create-poll"
+              //     : "/login"
+              // }
+
+              to={`/create-poll`}
             >
               Create poll
             </Link>
-          </li>
-          <li className="text-gray-300">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              className="w-4 h-4 current-fill"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-              />
-            </svg>
-          </li>
+          </li> */}
           <li>
             <Link
-              className={`text-sm 
+              className={` 
             ${
               url === "/contact-us"
-                ? "text-indigo-500 font-bold"
+                ? "text-gray-500 font-bold"
                 : "text-gray-400 hover:text-gray-500"
             }`}
-              to={"/contact-us"}
+              to={"/#contact-us"}
             >
               Contact
             </Link>
           </li>
-          <li className="text-gray-300">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              className="w-4 h-4 current-fill"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-              />
-            </svg>
-          </li>
+
           <li>
             <Link
-              className={`text-sm 
+              className={` 
             ${
               url === "/privacy"
-                ? "text-indigo-500 font-bold"
+                ? "text-gray-500 font-bold"
                 : "text-gray-400 hover:text-gray-500"
             }`}
               to={"/privacy"}
@@ -136,28 +91,13 @@ const Header = ({ isAuth, auth }) => {
               Privacy
             </Link>
           </li>
-          <li className="text-gray-300">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              className="w-4 h-4 current-fill"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-              />
-            </svg>
-          </li>
+
           <li>
             <Link
-              className={`text-sm 
+              className={` 
             ${
               url === "/terms"
-                ? "text-indigo-500 font-bold"
+                ? "text-gray-500 font-bold"
                 : "text-gray-400 hover:text-gray-500"
             }`}
               to={"/terms"}
@@ -165,28 +105,12 @@ const Header = ({ isAuth, auth }) => {
               Terms
             </Link>
           </li>
-          <li className="text-gray-300">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              className="w-4 h-4 current-fill"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-              />
-            </svg>
-          </li>
           <li>
             <Link
-              className={`text-sm 
+              className={` 
             ${
               url === "/contributors"
-                ? "text-indigo-500 font-bold"
+                ? "text-gray-500 font-bold"
                 : "text-gray-400 hover:text-gray-500"
             }`}
               to={"/contributors"}
@@ -196,27 +120,27 @@ const Header = ({ isAuth, auth }) => {
           </li>
         </ul>
         {!user && (
-          <>
+          <div className="ml-4">
             <Link
-              className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-200 hover:bg-gray-300 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
+              className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-200 hover:bg-gray-300 text-sm text-gray-900 font-bold  transition duration-200"
               to={links.login}
             >
               Sign In
             </Link>
             <Link
-              className="hidden lg:inline-block py-2 px-6 bg-indigo-500 hover:bg-indigo-600 text-sm text-white font-bold rounded-xl transition duration-200"
+              className="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-400 text-sm text-white font-bold transition duration-200"
               to={links.register}
             >
               Sign up
             </Link>
-          </>
+          </div>
         )}
 
-        {user && user.role === "admin" && (
+        {user && user.role && (
           <>
             <Link
-              className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-200 hover:bg-gray-300 text-sm text-gray-900 font-semibold rounded-sm"
-              to={'/admin/dashboard'}
+              className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-blue-500 hover:bg-blue-400 text-sm text-white font-semibold rounded-sm"
+              to={`/${user.role}/dashboard`}
             >
               Dashboard
             </Link>

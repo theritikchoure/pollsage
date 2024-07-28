@@ -21,261 +21,310 @@ const PollForm = ({
   totalSteps,
   handleStepChange,
   themes,
+  themeSetting,
+  onChangeThemeSetting,
 }) => {
   return (
     <form>
-      <div className="">
-        {step === 1 && (
-          <>
-            {" "}
-            <div className="mb-4 flex flex-col gap-6 xl:flex-row">
-              <div className="w-full xl:w-1/3">
-                <label
-                  htmlFor="question"
-                  className="mb-2.5 block text-black dark:text-white"
-                >
-                  Question
-                </label>
-                <input
-                  type="text"
-                  id="question"
-                  placeholder="Enter your question"
-                  className={`w-full rounded border-[1.5px] bg-transparent py-3 px-5 font-medium outline-none 
-                          transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter 
-                          dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary
+      <div className="mt-8">
+        <>
+          {" "}
+          <div className="mb-4 flex flex-col gap-6 xl:flex-row">
+            <div className="w-full xl:w-1/3">
+              <label htmlFor="question" className="mb-2.5 block text-black">
+                Question
+              </label>
+              <input
+                type="text"
+                id="question"
+                placeholder="Enter your question"
+                className={`w-full text-black rounded border-[1.5px] bg-white py-3 px-5 outline-none 
+                          transition focus:border-primary active:border-primary
                           ${
                             errors.question
                               ? "border-red-500"
                               : "border-gray-600"
                           }`}
-                  value={formData.question || ""}
-                  onChange={(e) => onChangeFormData("question", e.target.value)}
-                />
-                {errors.question && (
-                  <p className="text-red-500 text-sm mt-1 text-left italic">
-                    {errors.question}
-                  </p>
-                )}
-              </div>
-              <div className="w-full xl:w-1/3">
-                <label className="mb-2.5 block text-black dark:text-white">
-                  Voting type
-                </label>
-                <div className="relative z-20 bg-transparent dark:bg-form-input">
-                  <select
-                    className="relative z-20 w-full appearance-none rounded border border-gray-600 
-                          bg-gray-800 py-3 px-5 outline-none transition focus:border-primary active:border-primary 
-                          dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                    value={formData.allow_multiple_selection}
-                    onChange={(e) =>
-                      onChangeFormData(
-                        "allow_multiple_selection",
-                        e.target.value
-                      )
-                    }
-                  >
-                    <option value={false}>Single</option>
-                    <option value={true}>Multiple</option>
-                  </select>
-                  <span className="absolute top-1/2 right-4 z-30 -translate-y-1/2">
-                    <svg
-                      className="fill-current"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <g opacity="0.8">
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M5.29289 8.29289C5.68342 7.90237 6.31658 7.90237 6.70711 8.29289L12 13.5858L17.2929 8.29289C17.6834 7.90237 18.3166 7.90237 18.7071 8.29289C19.0976 8.68342 19.0976 9.31658 18.7071 9.70711L12.7071 15.7071C12.3166 16.0976 11.6834 16.0976 11.2929 15.7071L5.29289 9.70711C4.90237 9.31658 4.90237 8.68342 5.29289 8.29289Z"
-                          fill=""
-                        ></path>
-                      </g>
-                    </svg>
-                  </span>
-                </div>
-              </div>
-              <div className="w-full xl:w-1/3">
-                <label className="mb-2.5 block text-black dark:text-white">
-                  Publish status
-                </label>
-                <div className="relative z-20 bg-transparent dark:bg-form-input">
-                  <select
-                    className="relative z-20 w-full appearance-none rounded border border-gray-600 
-                          bg-gray-800 py-3 px-5 outline-none transition focus:border-primary active:border-primary 
-                          dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                    value={formData.publish_status}
-                    onChange={(e) =>
-                      onChangeFormData("publish_status", e.target.value)
-                    }
-                  >
-                    <option value={"draft"}>Draft</option>
-                    <option value={"published"}>Published</option>
-                    <option value={"archived"}>Archived</option>
-                  </select>
-                  <span className="absolute top-1/2 right-4 z-30 -translate-y-1/2">
-                    <svg
-                      className="fill-current"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <g opacity="0.8">
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M5.29289 8.29289C5.68342 7.90237 6.31658 7.90237 6.70711 8.29289L12 13.5858L17.2929 8.29289C17.6834 7.90237 18.3166 7.90237 18.7071 8.29289C19.0976 8.68342 19.0976 9.31658 18.7071 9.70711L12.7071 15.7071C12.3166 16.0976 11.6834 16.0976 11.2929 15.7071L5.29289 9.70711C4.90237 9.31658 4.90237 8.68342 5.29289 8.29289Z"
-                          fill=""
-                        ></path>
-                      </g>
-                    </svg>
-                  </span>
-                </div>
-              </div>
+                value={formData.question || ""}
+                onChange={(e) => onChangeFormData("question", e.target.value)}
+              />
+              {errors.question && (
+                <p className="text-red-500 text-sm mt-1 text-left italic">
+                  {errors.question}
+                </p>
+              )}
             </div>
-            {!booleanValue.showDescription && (
-              <span
-                className="text-gray-500 cursor-pointer mb-5"
-                onClick={(e) =>
-                  onChangeBooleanValue(
-                    "showDescription",
-                    !booleanValue.showDescription
-                  )
-                }
-              >
-                + Add description
-              </span>
-            )}
-            {booleanValue.showDescription && (
-              <div className="mb-4">
-                <label className="mb-2.5 block text-black dark:text-white">
-                  Description
-                </label>
-                <textarea
-                  placeholder="Enter your description"
-                  className="w-full rounded border-[1.5px] border-gray-600 bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                  value={formData.description || ""}
+            <div className="w-full xl:w-1/3">
+              <label className="mb-2.5 block text-black">Voting type</label>
+              <div className="relative z-20 bg-transparent dark:bg-form-input">
+                <select
+                  className="relative text-black z-20 w-full appearance-none rounded border border-gray-600 
+                          bg-white py-3 px-5 outline-none transition focus:border-primary active:border-primary "
+                  value={formData.allow_multiple_selection}
                   onChange={(e) =>
-                    onChangeFormData("description", e.target.value)
+                    onChangeFormData("allow_multiple_selection", e.target.value)
                   }
-                />
-                <span
-                  className="text-red-500 text-sm cursor-pointer"
-                  onClick={() => onChangeBooleanValue("showDescription", false)}
                 >
-                  Remove description
+                  <option value={false}>Single</option>
+                  <option value={true}>Multiple</option>
+                </select>
+                <span className="absolute top-1/2 right-4 z-30 -translate-y-1/2">
+                  <svg
+                    className="fill-current"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g opacity="0.8">
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M5.29289 8.29289C5.68342 7.90237 6.31658 7.90237 6.70711 8.29289L12 13.5858L17.2929 8.29289C17.6834 7.90237 18.3166 7.90237 18.7071 8.29289C19.0976 8.68342 19.0976 9.31658 18.7071 9.70711L12.7071 15.7071C12.3166 16.0976 11.6834 16.0976 11.2929 15.7071L5.29289 9.70711C4.90237 9.31658 4.90237 8.68342 5.29289 8.29289Z"
+                        fill=""
+                      ></path>
+                    </g>
+                  </svg>
                 </span>
               </div>
-            )}
-            <div className="mb-4 mt-4">
-              <label className="mb-2.5 block text-black dark:text-white">
-                Answer options
-              </label>
-              {formData.options.map((option, index) => (
-                <div className="my-2" key={index}>
+            </div>
+            <div className="w-full xl:w-1/3">
+              <label className="mb-2.5 block text-black">Publish status</label>
+              <div className="relative z-20 bg-transparent dark:bg-form-input">
+                <select
+                  className="relative text-black z-20 w-full appearance-none rounded border border-gray-600 
+                          bg-white py-3 px-5 outline-none transition focus:border-primary active:border-primary "
+                  value={formData.publish_status}
+                  onChange={(e) =>
+                    onChangeFormData("publish_status", e.target.value)
+                  }
+                >
+                  <option value={"draft"}>Draft</option>
+                  <option value={"published"}>Published</option>
+                  <option value={"archived"}>Archived</option>
+                </select>
+                <span className="absolute top-1/2 right-4 z-30 -translate-y-1/2">
+                  <svg
+                    className="fill-current"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g opacity="0.8">
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M5.29289 8.29289C5.68342 7.90237 6.31658 7.90237 6.70711 8.29289L12 13.5858L17.2929 8.29289C17.6834 7.90237 18.3166 7.90237 18.7071 8.29289C19.0976 8.68342 19.0976 9.31658 18.7071 9.70711L12.7071 15.7071C12.3166 16.0976 11.6834 16.0976 11.2929 15.7071L5.29289 9.70711C4.90237 9.31658 4.90237 8.68342 5.29289 8.29289Z"
+                        fill=""
+                      ></path>
+                    </g>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </div>
+          {!booleanValue.showDescription && (
+            <span
+              className="text-gray-500 cursor-pointer mb-5"
+              onClick={(e) =>
+                onChangeBooleanValue(
+                  "showDescription",
+                  !booleanValue.showDescription
+                )
+              }
+            >
+              + Add description
+            </span>
+          )}
+          {booleanValue.showDescription && (
+            <div className="mb-4">
+              <label className="mb-2.5 block text-black">Description</label>
+              <textarea
+                placeholder="Enter your description"
+                className="w-full text-black rounded border-[1.5px] border-gray-600 bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter"
+                value={formData.description || ""}
+                onChange={(e) =>
+                  onChangeFormData("description", e.target.value)
+                }
+              />
+              <span
+                className="text-red-500 text-sm cursor-pointer"
+                onClick={() => onChangeBooleanValue("showDescription", false)}
+              >
+                Remove description
+              </span>
+            </div>
+          )}
+          <div className="mb-4 mt-4">
+            <label className="mb-2.5 block text-black">Answer options</label>
+            {formData.options.map((option, index) => (
+              <div className="mb-6">
+                <div
+                  className={`my-2 flex items-center rounded border-[1.5px] border-gray-600 ${
+                    errors[`option${index}`]
+                      ? "border-red-500"
+                      : "border-gray-600"
+                  }`}
+                  key={index}
+                >
                   <input
                     type="text"
                     placeholder={`Option ${index + 1}`}
-                    className={`w-full rounded border-[1.5px] border-gray-600 bg-transparent py-3 px-5 font-medium outline-none transition 
-                            focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark 
-                            dark:bg-form-input dark:focus:border-primary
-                            ${
-                              errors[`option${index}`]
-                                ? "border-red-500"
-                                : "border-gray-600"
-                            }`}
+                    className={`w-full text-black  bg-transparent py-3 px-5 outline-none transition 
+                            focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter`}
                     value={option.text}
                     onChange={(event) =>
                       handleOptionChange(index, event.target.value)
                     }
                   />
-                  <div className="sm:flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      {errors[`option${index}`] && (
-                        <p className="text-red-500 text-sm mt-1 text-left italic">
-                          {errors[`option${index}`]}
-                        </p>
-                      )}
-                      <span
-                        className="text-red-500 text-sm cursor-pointer"
-                        onClick={() => removeOption(index)}
-                      >
-                        Remove {`Option ${index + 1}`}
-                      </span>
-                    </div>
-                  </div>
+                  <button
+                    type="button"
+                    className="mr-2 text-red-500 hover:text-red-700 focus:outline-none"
+                    onClick={() => removeOption(index)}
+                    aria-label={`Remove Option ${index + 1}`}
+                  >
+                    <svg
+                      className="h-6 w-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
                 </div>
-              ))}
-              <button
-                className="text-gray-200 font-bold bg-gray-600 px-4 py-2 rounded"
-                onClick={addOption}
-              >
-                Add option
-              </button>
-              {!formData.options.some(
-                (option) => option.text.toLowerCase() === "other"
-              ) && (
-                <button
-                  className="text-purple-400 font-bold ml-4"
-                  onClick={addOtherOption}
-                >
-                  Add "Other"
-                </button>
-              )}
-            </div>{" "}
-          </>
-        )}
-
-        {step === 2 && (
-          <>
-            {" "}
-            <div className="mb-4 flex flex-col gap-6 xl:flex-row">
-              <div className="w-full xl:w-1/2">
-                <label
-                  className="mb-2.5 block text-black dark:text-white"
-                  htmlFor="start_date"
-                >
-                  Start poll date
-                </label>
-                <input
-                  type="datetime-local"
-                  id="start_date"
-                  className="w-full rounded border-[1.5px] border-gray-600 bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                  min={new Date().toISOString().slice(0, 16)}
-                  value={formData.start_date || ""}
-                  onChange={(e) => {
-                    onChangeFormData("start_date", e.target.value || null);
-                    setMinPollEndDate(e.target.value);
-                  }}
-                />
+                {errors[`option${index}`] && (
+                  <p className="text-red-500 text-sm text-left italic">
+                    {errors[`option${index}`]}
+                  </p>
+                )}
               </div>
-              <div className="w-full xl:w-1/2">
-                <label
-                  className="mb-2.5 block text-black dark:text-white"
-                  htmlFor="end_date"
+            ))}
+            <button
+              className="text-gray-200 font-bold bg-gray-600 px-4 py-2 rounded"
+              onClick={addOption}
+            >
+              Add option
+            </button>
+            {!formData.options.some(
+              (option) => option.text.toLowerCase() === "other"
+            ) && (
+              <button
+                className="text-purple-400 font-bold ml-4"
+                onClick={addOtherOption}
+              >
+                Add "Others"
+              </button>
+            )}
+          </div>{" "}
+        </>
+
+        <>
+          {" "}
+          <div className="mb-4 flex flex-col gap-6 xl:flex-row">
+            <div className="w-full xl:w-1/2">
+              <label className="mb-2.5 block text-black" htmlFor="start_date">
+                Start poll date
+              </label>
+              <input
+                type="datetime-local"
+                id="start_date"
+                className="w-full text-black rounded border-[1.5px] border-gray-600 bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                min={new Date().toISOString().slice(0, 16)}
+                value={formData.start_date || ""}
+                onChange={(e) => {
+                  onChangeFormData("start_date", e.target.value || null);
+                  setMinPollEndDate(e.target.value);
+                }}
+              />
+            </div>
+            <div className="w-full xl:w-1/2">
+              <label className="mb-2.5 block text-black" htmlFor="end_date">
+                End poll date
+              </label>
+              <input
+                type="datetime-local"
+                id="end_date"
+                className="w-full text-black rounded border-[1.5px] border-gray-600 bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                min={minPollEndDate}
+                value={formData.end_date || ""}
+                onChange={(e) =>
+                  onChangeFormData("end_date", e.target.value || null)
+                }
+              />
+            </div>
+          </div>
+          <div className="mb-4">
+            <label
+              className="mb-2.5 block text-black"
+              htmlFor="result_visibility"
+            >
+              Result visibility
+            </label>
+            <div className="relative z-20 bg-transparent dark:bg-form-input">
+              <select
+                id="result_visibility"
+                className="relative text-black z-20 w-full appearance-none rounded border border-gray-600 
+                              bg-white py-3 px-5 outline-none transition focus:border-primary active:border-primary 
+                              dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                value={formData.result_visibility}
+                onChange={(e) =>
+                  onChangeFormData("result_visibility", e.target.value)
+                }
+              >
+                <option value={"public"}>Public</option>
+                <option value={"private"}>Private</option>
+              </select>
+              <span className="absolute top-1/2 right-4 z-30 -translate-y-1/2">
+                <svg
+                  className="fill-current"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  End poll date
-                </label>
+                  <g opacity="0.8">
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M5.29289 8.29289C5.68342 7.90237 6.31658 7.90237 6.70711 8.29289L12 13.5858L17.2929 8.29289C17.6834 7.90237 18.3166 7.90237 18.7071 8.29289C19.0976 8.68342 19.0976 9.31658 18.7071 9.70711L12.7071 15.7071C12.3166 16.0976 11.6834 16.0976 11.2929 15.7071L5.29289 9.70711C4.90237 9.31658 4.90237 8.68342 5.29289 8.29289Z"
+                      fill=""
+                    ></path>
+                  </g>
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div className="mb-4">
+            <label htmlFor="is_email_send" className="flex cursor-pointer">
+              <div className="relative pt-0.5">
                 <input
-                  type="datetime-local"
-                  id="end_date"
-                  className="w-full rounded border-[1.5px] border-gray-600 bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                  min={minPollEndDate}
-                  value={formData.end_date || ""}
-                  onChange={(e) =>
-                    onChangeFormData("end_date", e.target.value || null)
+                  type="checkbox"
+                  id="is_email_send"
+                  className="text-black"
+                  checked={formData.is_email_send}
+                  onChange={(event) =>
+                    onChangeFormData("is_email_send", event.target.checked)
                   }
                 />
               </div>
-            </div>
+              <p className="ml-2 text-black">Send After vote email</p>
+            </label>
+          </div>
+          {formData.is_email_send && (
             <div className="mb-4">
               <label
-                className="mb-2.5 block text-black dark:text-white"
+                className="mb-2.5 block text-black"
                 htmlFor="result_visibility"
               >
                 Result visibility
@@ -283,8 +332,8 @@ const PollForm = ({
               <div className="relative z-20 bg-transparent dark:bg-form-input">
                 <select
                   id="result_visibility"
-                  className="relative z-20 w-full appearance-none rounded border border-gray-600 
-                              bg-gray-800 py-3 px-5 outline-none transition focus:border-primary active:border-primary 
+                  className="relative text-black z-20 w-full appearance-none rounded border border-gray-600 
+                              bg-white py-3 px-5 outline-none transition focus:border-primary active:border-primary 
                               dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                   value={formData.result_visibility}
                   onChange={(e) =>
@@ -315,116 +364,108 @@ const PollForm = ({
                 </span>
               </div>
             </div>
-            <div className="mb-4">
-              <label htmlFor="is_email_send" className="flex cursor-pointer">
-                <div className="relative pt-0.5">
-                  <input
-                    type="checkbox"
-                    id="is_email_send"
-                    className=""
-                    checked={formData.is_email_send}
-                    onChange={(event) =>
-                      onChangeFormData("is_email_send", event.target.checked)
-                    }
-                  />
-                </div>
-                <p className="ml-2">Send After vote email</p>
-              </label>
-            </div>
-            {formData.is_email_send && (
-              <div className="mb-4">
-                <label
-                  className="mb-2.5 block text-black dark:text-white"
-                  htmlFor="result_visibility"
-                >
-                  Result visibility
-                </label>
-                <div className="relative z-20 bg-transparent dark:bg-form-input">
-                  <select
-                    id="result_visibility"
-                    className="relative z-20 w-full appearance-none rounded border border-gray-600 
-                              bg-gray-800 py-3 px-5 outline-none transition focus:border-primary active:border-primary 
-                              dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                    value={formData.result_visibility}
-                    onChange={(e) =>
-                      onChangeFormData("result_visibility", e.target.value)
-                    }
-                  >
-                    <option value={"public"}>Public</option>
-                    <option value={"private"}>Private</option>
-                  </select>
-                  <span className="absolute top-1/2 right-4 z-30 -translate-y-1/2">
-                    <svg
-                      className="fill-current"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <g opacity="0.8">
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M5.29289 8.29289C5.68342 7.90237 6.31658 7.90237 6.70711 8.29289L12 13.5858L17.2929 8.29289C17.6834 7.90237 18.3166 7.90237 18.7071 8.29289C19.0976 8.68342 19.0976 9.31658 18.7071 9.70711L12.7071 15.7071C12.3166 16.0976 11.6834 16.0976 11.2929 15.7071L5.29289 9.70711C4.90237 9.31658 4.90237 8.68342 5.29289 8.29289Z"
-                          fill=""
-                        ></path>
-                      </g>
-                    </svg>
-                  </span>
-                </div>
+          )}
+          <div className="mb-4">
+            <label htmlFor="allow_comments" className="flex cursor-pointer">
+              <div className="relative pt-0.5">
+                <input
+                  type="checkbox"
+                  id="allow_comments"
+                  className=""
+                  checked={formData.allow_comments}
+                  onChange={(event) =>
+                    onChangeFormData("allow_comments", event.target.checked)
+                  }
+                />
               </div>
-            )}
+              <p className="ml-2 text-black">Allow comments</p>
+            </label>
+          </div>
+          <div className="mb-4">
+            <label htmlFor="require_name" className="flex cursor-pointer">
+              <div className="relative pt-0.5">
+                <input
+                  type="checkbox"
+                  id="require_name"
+                  className=""
+                  checked={formData.require_name}
+                  onChange={(event) =>
+                    onChangeFormData("require_name", event.target.checked)
+                  }
+                />
+              </div>
+              <p className="ml-2 text-black">Require participants' names</p>
+            </label>
+          </div>
+        </>
+
+        <span
+          className="text-blue-500 text-base font-medium cursor-pointer mb-5 flex items-center"
+          onClick={(e) =>
+            onChangeBooleanValue(
+              "showAdvancedSettings",
+              !booleanValue.showAdvancedSettings
+            )
+          }
+        >
+          {booleanValue.showAdvancedSettings ? (
+            <svg
+              className="h-5 w-5 mr-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          ) : (
+            <svg
+              className="h-5 w-5 mr-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          )}
+          {booleanValue.showAdvancedSettings
+            ? "Hide advanced settings"
+            : "Show advanced settings"}
+        </span>
+
+        {booleanValue.showAdvancedSettings && (
+          <div className="mt-6">
             <div className="mb-4">
-              <label htmlFor="allow_comments" className="flex cursor-pointer">
-                <div className="relative pt-0.5">
-                  <input
-                    type="checkbox"
-                    id="allow_comments"
-                    className=""
-                    checked={formData.allow_comments}
-                    onChange={(event) =>
-                      onChangeFormData("allow_comments", event.target.checked)
-                    }
-                  />
-                </div>
-                <p className="ml-2">Allow comments</p>
-              </label>
-            </div>
-            <div className="mb-4">
-              <label htmlFor="require_name" className="flex cursor-pointer">
-                <div className="relative pt-0.5">
-                  <input
-                    type="checkbox"
-                    id="require_name"
-                    className=""
-                    checked={formData.require_name}
-                    onChange={(event) =>
-                      onChangeFormData("require_name", event.target.checked)
-                    }
-                  />
-                </div>
-                <p className="ml-2">Require participants' names</p>
-              </label>
-            </div>
-            <div className="mb-4">
-              <label className="mb-2.5 block text-black dark:text-white">
-                Password
-              </label>
+              <label className="mb-2.5 block text-black">Password</label>
               <input
                 type="text"
                 placeholder="Enter your password"
-                className="w-full rounded border-[1.5px] border-gray-600 bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                className="w-full text-black rounded border-[1.5px] border-gray-600 bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                 value={formData.password || ""}
                 onChange={(e) => onChangeFormData("password", e.target.value)}
               />
             </div>{" "}
             <div className="mb-4">
-              <label className="mb-2.5 flex items-center justify-between text-black dark:text-white">
+              <label className="mb-2.5 flex items-center justify-between text-black">
                 Logo
                 {formData.logo && (
                   <>
-                    <a href={formData.logo} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={formData.logo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -463,48 +504,40 @@ const PollForm = ({
                 }}
               />
             </div>
-          </>
-        )}
-
-        {step === 3 && (
-          <>
             <div className="mb-4 flex flex-col gap-6 xl:flex-row">
               <div className="w-full xl:w-1/2">
-                <label
-                  htmlFor="theme"
-                  className="mb-2.5 block text-black dark:text-white"
-                >
+                <label htmlFor="theme" className="mb-2.5 block text-black">
                   Select Theme
                 </label>
                 <select
                   id="theme"
-                  className="relative z-20 w-full appearance-none rounded border border-gray-600 
-                          bg-gray-800 py-3 px-5 outline-none transition focus:border-primary active:border-primary 
-                          dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                  value={formData.theme || "light"}
-                  onChange={(e) => onChangeFormData("theme", e.target.value)}
+                  className="relative text-black z-20 w-full appearance-none rounded border border-gray-600 
+                          bg-white py-3 px-5 outline-none transition focus:border-primary active:border-primary"
+                  value={themeSetting.theme || "light"}
+                  onChange={(e) =>
+                    onChangeThemeSetting("theme", e.target.value)
+                  }
                 >
                   <option value="light">Light Theme</option>
                   <option value="dark">Dark Theme</option>
                 </select>
               </div>
-              {formData.theme === "light" && (
+              {themeSetting.theme === "light" && (
                 <div className="w-full xl:w-1/2">
                   <label
                     htmlFor="light_theme"
-                    className="mb-2.5 block text-black dark:text-white"
+                    className="mb-2.5 block text-black"
                   >
                     Select Predefined Light Theme
                   </label>
                   <select
                     id="light_theme"
-                    className="relative z-20 w-full appearance-none rounded border border-gray-600 
-                            bg-gray-800 py-3 px-5 outline-none transition focus:border-primary active:border-primary 
-                            dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                    value={formData.light_theme}
+                    className="relative text-black z-20 w-full appearance-none rounded border border-gray-600 
+                            bg-white py-3 px-5 outline-none transition focus:border-primary active:border-primary "
+                    value={themeSetting.light_theme}
                     onChange={(e) => {
-                      onChangeFormData("light_theme", e.target.value);
-                      onChangeFormData("selectedTheme", e.target.value);
+                      onChangeThemeSetting("light_theme", e.target.value);
+                      onChangeThemeSetting("selectedTheme", e.target.value);
                     }}
                   >
                     {/* List of predefined light themes */}
@@ -518,27 +551,26 @@ const PollForm = ({
                   </select>
                 </div>
               )}
-              {formData.theme === "dark" && (
+              {themeSetting.theme === "dark" && (
                 <div className="w-full xl:w-1/2">
                   <label
                     htmlFor="dark_theme"
-                    className="mb-2.5 block text-black dark:text-white"
+                    className="mb-2.5 block text-black"
                   >
                     Select Predefined Dark Theme
                   </label>
                   <select
                     id="dark_theme"
-                    className="relative z-20 w-full appearance-none rounded border border-gray-600 
-                            bg-gray-800 py-3 px-5 outline-none transition focus:border-primary active:border-primary 
-                            dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    className="relative text-black z-20 w-full appearance-none rounded border border-gray-600 
+                            bg-white py-3 px-5 outline-none transition focus:border-primary active:border-primary "
                     // value={formData.theme}
                     onChange={(e) => {
-                      onChangeFormData("theme", JSON.parse(e.target.value)._id);
-                      onChangeFormData("selectedTheme", e.target.value);
+                      onChangeThemeSetting("dark_theme", e.target.value);
+                      onChangeThemeSetting("selectedTheme", e.target.value);
                     }}
                   >
                     {/* List of predefined dark themes */}
-                    {themes.dark_themes.map((theme) => {
+                    {themes?.dark_themes?.map((theme) => {
                       return (
                         <option value={JSON.stringify(theme)} key={theme._id}>
                           {theme.theme_name}
@@ -550,98 +582,17 @@ const PollForm = ({
               )}
             </div>
             {/* Add other fields related to the theme, if needed */}
-            <ThemePreview selectedTheme={formData.selectedTheme} />
-          </>
+            <ThemePreview selectedTheme={themeSetting.selectedTheme} />
+          </div>
         )}
 
-        {/* <div className="mb-4 flex flex-col gap-6 xl:flex-row">
-          <div className="w-full xl:w-1/2">
-            <label htmlFor="send_mail" className="flex cursor-pointer">
-              <div className="relative pt-0.5">
-                <input
-                  type="checkbox"
-                  id="send_mail"
-                  className=""
-                  checked={formData.send_mail}
-                  onChange={(event) =>
-                    onChangeFormData("send_mail", event.target.checked)
-                  }
-                />
-              </div>
-              <p className="ml-2">Send mail to participants after poll submission</p>
-            </label>
-          </div>
-          {formData.send_mail && <div className="w-full xl:w-1/2">
-            <label
-              className="mb-2.5 block text-black dark:text-white"
-              htmlFor="mail_template"
-            >
-              Select mail template
-            </label>
-            <div className="relative z-20 bg-transparent dark:bg-form-input">
-              <select
-                id="mail_template"
-                className="relative z-20 w-full appearance-none rounded border border-gray-600 
-                              bg-gray-800 py-3 px-5 outline-none transition focus:border-primary active:border-primary 
-                              dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                value={formData.mail_template}
-                onChange={(e) =>
-                  onChangeFormData("mail_template", e.target.value)
-                }
-              >
-                <option value={"public"}>Public</option>
-                <option value={"private"}>Private</option>
-              </select>
-              <span className="absolute top-1/2 right-4 z-30 -translate-y-1/2">
-                <svg
-                  className="fill-current"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g opacity="0.8">
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M5.29289 8.29289C5.68342 7.90237 6.31658 7.90237 6.70711 8.29289L12 13.5858L17.2929 8.29289C17.6834 7.90237 18.3166 7.90237 18.7071 8.29289C19.0976 8.68342 19.0976 9.31658 18.7071 9.70711L12.7071 15.7071C12.3166 16.0976 11.6834 16.0976 11.2929 15.7071L5.29289 9.70711C4.90237 9.31658 4.90237 8.68342 5.29289 8.29289Z"
-                      fill=""
-                    ></path>
-                  </g>
-                </svg>
-              </span>
-            </div>
-          </div> }
-        </div> */}
-
         <div className="mb-4 flex flex-col gap-6 xl:flex-row border-t pt-8 mt-10">
-          {step !== 1 && (
-            <button
-              className="flex cursor-pointer w-full justify-center rounded bg-slate-700 border border-gray-600 hover:bg-gray-900 p-3 font-medium text-gray"
-              onClick={() => setStep(step - 1)}
-            >
-              Back
-            </button>
-          )}
-          {step !== totalSteps && (
-            <button
-              className="flex cursor-pointer w-full justify-center rounded bg-indigo-500 hover:bg-indigo-600 p-3 font-medium text-gray"
-              onClick={(e) => handleStepChange(e, step + 1)}
-            >
-              Next
-            </button>
-          )}
-          {step === totalSteps && (
-            <div className="mb-4 flex flex-col gap-6 xl:flex-row">
-              <button
-                onClick={onSubmit}
-                className="flex cursor-pointer w-full justify-center rounded bg-gray-900 border border-gray-600 hover:bg-gray-900 p-3 font-medium text-gray"
-              >
-                {submitButtonText}
-              </button>
-            </div>
-          )}
+          <button
+            onClick={onSubmit}
+            className="flex cursor-pointer w-full justify-center rounded bg-blue-500  hover:bg-blue-400 p-3 font-medium text-white"
+          >
+            {submitButtonText}
+          </button>
         </div>
       </div>
     </form>

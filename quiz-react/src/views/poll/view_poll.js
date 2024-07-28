@@ -127,10 +127,10 @@ const ViewPoll = () => {
     try {
       e.preventDefault();
 
-      if(!authUser || authUser.role !== "user") {
-        errorToast("You must be logged in as a user to submit a poll.");
-        return;
-      }
+      // if(!authUser || authUser.role !== "user") {
+      //   errorToast("You must be logged in as a user to submit a poll.");
+      //   return;
+      // }
 
       const { isValid, errors } = submitPollValidation(
         formData,
@@ -209,31 +209,54 @@ const ViewPoll = () => {
     );
   }
 
-  const ManageTheme = ({pollContainer}) => {
-    if(pollContainer) {
-      document.body.style.backgroundColor = pollContainer;
-      document.getElementById("poll-container").style.backgroundColor = pollContainer;
+  const ManageTheme = ({ colors }) => {
+    if (colors) {
+      document.body.style.backgroundColor = colors.pollContainerBackgroundColor;
+      document.getElementById("poll-container").style.backgroundColor =
+        colors.pollContainerBackgroundColor; 
+      
+      // const pollOptions = document.getElementsByClassName("poll-option");
+      // const voteButton = document.getElementById("vote-button");
+      // const oneVoteMsg = document.getElementById("one-vote-msg-preview");
+
+      // // comment
+      // const commentBox = document.getElementById("comment-box");
+
+      // // get input-field class name
+      // const inputFields = document.getElementsByClassName("input-field");
+      // const formLabel = document.getElementsByClassName("form-label");
     }
-  }
+  };
 
   return (
     <Fragment>
-      <Header/>
+      <Header />
       <div className="min-h-screen bg-gray-900 p-0 p-12" id="poll-container">
         {/* loading... text center horizontally and vertically */}
         {loading && <Loader />}
         {!loading && poll && (
           <>
             <PageDetails title={poll.question} />
-            {/* <ManageTheme pollContainer={'#015c6e'} /> */}
+            <ManageTheme colors={poll.selected_theme.colors} />
             {/* Display your custom logo */}
             {poll.logo && (
               <div className="flex justify-center mb-4">
                 <img src={poll.logo} alt="Custom Logo" className="h-16" />
               </div>
             )}
-            <div className="mx-auto max-w-md px-6 py-12 bg-gray-800 border-0 shadow-lg rounded-xl" id="poll-box" >
-              <h1 className="text-2xl font-bold mb-4 text-gray-100" id="poll-question" >
+            <div
+              className="mx-auto max-w-md px-6 py-12 bg-gray-800 border-0 shadow-lg rounded-xl"
+              id="poll-box"
+              style={{
+                backgroundColor:
+                  poll.selected_theme.colors.pollBoxBackgroundColor,
+              }}
+            >
+              <h1
+                className="text-2xl font-bold mb-4 text-gray-100"
+                id="poll-question"
+                style={{ color: poll.selected_theme.colors.pollQuestionColor }}
+              >
                 {poll.question}
               </h1>
               <p className="text-gray-400 mb-4">
@@ -242,18 +265,39 @@ const ViewPoll = () => {
 
               <form onSubmit={onSubmit}>
                 {!poll.allow_multiple_selection && (
-                  <fieldset className="relative z-0 w-full p-px mb-2" id="poll-options" >
+                  <fieldset
+                    className="relative z-0 w-full p-px mb-2"
+                    id="poll-options"
+                  >
                     <div className="block pt-3 pb-2">
                       {poll.options.map((option, index) => (
                         <div className="mb-4" key={index}>
-                          <label className="text-gray-100 cursor-pointer">
+                          <label
+                            className="cursor-pointer"
+                            style={{
+                              color:
+                                poll.selected_theme.colors
+                                  .pollOptionsLabelColor,
+                            }}
+                          >
                             <input
                               type="radio"
                               name="radio"
                               value={option._id}
-                              className="mr-2 text-gray-100 border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
+                              className="mr-2 border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
                               checked={formData.optionId === option._id}
                               onChange={handleOptionChange}
+                              style={{
+                                color:
+                                  poll.selected_theme.colors
+                                    .pollOptionsInputColor,
+                                borderColor:
+                                  poll.selected_theme.colors
+                                    .pollOptionsInputColor,
+                                backgroundColor:
+                                  poll.selected_theme.colors
+                                    .pollOptionsCheckedColor,
+                              }}
                             />
                             {option.text}
                           </label>
@@ -272,7 +316,13 @@ const ViewPoll = () => {
                   <fieldset className="relative z-0 w-full p-px mb-2">
                     {poll.options.map((option, index) => (
                       <div className="mb-4" key={index}>
-                        <label className="text-gray-100">
+                        <label
+                          className="text-gray-100"
+                          style={{
+                            color:
+                              poll.selected_theme.colors.pollOptionsLabelColor,
+                          }}
+                        >
                           <input
                             type="checkbox"
                             name="checkbox"
@@ -280,6 +330,17 @@ const ViewPoll = () => {
                             className="mr-2 text-gray-100 border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
                             checked={formData.optionIds.includes(option._id)}
                             onChange={handleMultiSelectOptionChange}
+                            style={{
+                              color:
+                                poll.selected_theme.colors
+                                  .pollOptionsInputColor,
+                              borderColor:
+                                poll.selected_theme.colors
+                                  .pollOptionsInputColor,
+                              backgroundColor:
+                                poll.selected_theme.colors
+                                  .pollOptionsCheckedColor,
+                            }}
                           />
                           {option.text}
                         </label>
@@ -295,7 +356,12 @@ const ViewPoll = () => {
 
                 {poll.require_name && (
                   <div className="mb-4">
-                    <label className="mb-2.5 block text-black dark:text-white">
+                    <label
+                      className="mb-2.5 block text-black dark:text-white"
+                      style={{
+                        color: poll.selected_theme.colors.formLabelColor,
+                      }}
+                    >
                       Require participant's name
                     </label>
                     <input
@@ -308,6 +374,9 @@ const ViewPoll = () => {
                       ${errors.name ? "border-red-500" : "border-gray-600"}`}
                       value={formData.name || ""}
                       onChange={(e) => onChangeFormData("name", e.target.value)}
+                      style={{
+                        color: poll.selected_theme.colors.pollOptionsInputColor,
+                      }}
                     />
                     {errors.name && (
                       <p className="text-red-500 text-sm mt-1 text-left italic">
@@ -318,6 +387,10 @@ const ViewPoll = () => {
                 )}
 
                 <input
+                  style={{
+                    backgroundColor:
+                      poll.selected_theme.colors.voteButtonBackgroundColor,
+                  }}
                   id="vote-button"
                   type="submit"
                   value={"Vote"}
@@ -365,7 +438,10 @@ const ViewPoll = () => {
                 </div>
               </form>
             </div>
-            <div className="flex justify-center items-center mt-5 text-gray-100">
+            <div
+              className="flex justify-center items-center mt-5 text-gray-100"
+              style={{ color: poll.selected_theme.colors.pollQuestionColor }}
+            >
               <svg
                 className="h-4 w-4 -ml-1 mr-2 "
                 xmlns="http://www.w3.org/2000/svg"
@@ -382,6 +458,8 @@ const ViewPoll = () => {
 
               <span>One vote per IP-Address allowed.</span>
             </div>
+
+            {/* <ManageTheme colors={poll.selected_theme.colors} /> */}
 
             {poll.allow_comments && <Comment pollId={pollId} />}
           </>

@@ -109,6 +109,7 @@ async function pollResult(req, res, next) {
  */
 async function checkPasswordProtection(req, res, next) {
   try {
+    console.log("checkk")
     let response = await pollCtrl.checkPasswordProtection(req);
     if (response) return createResponse(res, resStatusCode.SUCCESS, resMsg.SUCCESS, response);
     else

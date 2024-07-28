@@ -63,7 +63,7 @@ async function getPoll(req) {
     }
 
     // find poll by pollId and publish status, exclude password field
-    const poll = await Poll.findOne({ pollId: req.params.pollId, publish_status: 'published' });
+    const poll = await Poll.findOne({ pollId: req.params.pollId, publish_status: 'published' }).populate('selected_theme');
 
     // check poll is exist or not
     if (!poll) {
@@ -101,6 +101,10 @@ async function getPoll(req) {
     // remove password field from poll object
     const response = poll.toObject();
     delete response.password;
+
+    if (poll?.selected_theme && !poll?.selected_theme.is_active) {
+      delete response.selected_theme;
+    }
 
     return response;
   } catch (e) {
@@ -151,11 +155,11 @@ async function submitPoll(req) {
 
     // save the poll response
     await new PollResponse({
-      name: req.body.name || 'Guest',
+      name: req.body.name || "Guest",
       poll: poll._id,
       ipAddress: req.body.ip,
       optionId: optionId,
-      country: req.body.country,
+      country: req.body.geo_location.country,
       geo_location: req.body.geo_location,
     }).save();
 

@@ -21,7 +21,7 @@ const ContactUs = () => {
         title="PollSage - Create polls in seconds"
         description="Pollsage is a free online polling platform that allows you to create polls and share them with your audience."
       />
-      <section className="bg-slate-800 text-white mt-10 mx-4 p-8 lg:w-1/2 lg:mx-auto flex-grow">
+      <section className="bg-white text-black mt-10 mx-4 p-8 lg:w-1/2 lg:mx-auto flex-grow">
         <article className="">
           <h1 className="text-3xl font-bold">Contact Us</h1>
 

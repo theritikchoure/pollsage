@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { creatorRegisterValidation } from "../../../validations/creator_auth";
 import { creatorRegister } from "../../../services/creator_auth.service";
 import { errorToast, successToast } from "../../../utils/toaster";
+import { Link } from "react-router-dom";
+import links from "../../../utils/nav_link";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -36,9 +38,14 @@ const Register = () => {
 
       // write api call here
       let res = await creatorRegister(formData);
-      
-      if(res) {
-        setFormData({name: "", email: "", password: "", confirm_password: ""});
+
+      if (res) {
+        setFormData({
+          name: "",
+          email: "",
+          password: "",
+          confirm_password: "",
+        });
         setRegisterSuccess(true);
         successToast("Account created successfully");
       }
@@ -48,10 +55,13 @@ const Register = () => {
   };
 
   return (
-    <section className="bg-[#F4F7FF] py-20 lg:py-[80px]">
-      <div className="container">
-        <div className="flex flex-wrap -mx-4">
-          <div className="w-full px-4">
+    <section
+      className="bg-gray-100 py-20 lg:py-[80px]"
+      style={{ height: "100vh" }}
+    >
+      <div className="container mx-auto px-4">
+        <div className="flex justify-center">
+          <div className="w-full max-w-[525px]">
             <div
               className="
                max-w-[525px]
@@ -75,13 +85,18 @@ const Register = () => {
                   Sign up to your pollsage account
                 </h1>
               </div>
-              {registerSuccess && <p className="mb-4 text-green-600">Please verify your email before proceeding. Check your inbox for a verification email.</p>}
+              {registerSuccess && (
+                <p className="mb-4 text-green-600">
+                  Please verify your email before proceeding. Check your inbox
+                  for a verification email.
+                </p>
+              )}
               <form onSubmit={onRegister}>
                 <div className="mb-2">
                   <input
                     type="text"
                     placeholder="Name"
-                    className={`w-full rounded-md border bordder-[#E9EDF4] py-3 px-5 bg-[#FCFDFE] text-base text-body-color
+                    className={`w-full rounded-md border border-[#E9EDF4] py-3 px-5 bg-[#FCFDFE] text-base text-body-color
                         placeholder-[#ACB6BE] outline-none focus-visible:shadow-none focus:border-primary ${
                           errors.name ? "border-red-500" : "border-[#E9EDF4]"
                         }`}
@@ -180,15 +195,15 @@ const Register = () => {
                   />
                 </div>
               </form>
-              
+
               <p className="text-base text-[#adadad]">
                 Already a member? &nbsp;
-                <a
-                  href="/creator/login"
+                <Link
+                 to={links.login}
                   className="text-primary hover:underline"
                 >
                   Sign In
-                </a>
+                </Link>
               </p>
             </div>
           </div>

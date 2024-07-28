@@ -13,7 +13,7 @@ import { warningToast } from "../utils/toaster";
 const GeneralLayout = ({isAuth, auth}) => {
 
   return (
-    <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-slate-900 text-black dark:text-white">
+    <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased text-black dark:text-white">
       <Header isAuth={isAuth} auth={auth} />
       {/* Main content */}
       <main className="flex-1 flex-grow mx-auto  w-full">

@@ -79,6 +79,12 @@ const pollSchema = new mongoose.Schema(
       required: false,
       default: null,
     },
+    selected_theme: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Theme",
+      required: false,
+      default: null
+    },
   },
   {
     versionKey: false,

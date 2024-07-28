@@ -4,7 +4,7 @@ import { isEmpty } from '../helpers/common';
 
 // example options object
 let globalOptions = {
-    position: "top-center",
+    position: "bottom-center",
     autoClose: 5000, // 5 seconds
     hideProgressBar: false,
     closeOnClick: true || false,

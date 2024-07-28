@@ -1,16 +1,16 @@
 const links = {
     home: "/",
-    login: "/creator/login",
-    register: "/creator/register",
-    verify: "/creator/verify",
-    creatorForgetPassword: "/creator/forget-password",
-    creatorDashboard: "/creator/dashboard",
-    createPoll: "/creator/create-poll",
-    editPoll: "/creator/edit-poll",
-    viewPoll: "/creator/view-poll",
-    viewPollResults: "/creator/view-poll-results",
-    viewPollResponses: "/creator/view-poll-responses",
-    viewPollResponse: "/creator/view-poll-response",
+    login: "/login",
+    register: "/register",
+    verify: "/verify",
+    creatorForgetPassword: "/forgot-password",
+    creatorDashboard: "/dashboard",
+    createPoll: "/create-poll",
+    editPoll: "/edit-poll",
+    viewPoll: "/view-poll",
+    viewPollResults: "/view-poll-results",
+    viewPollResponses: "/view-poll-responses",
+    viewPollResponse: "/view-poll-response",
 }
 
 

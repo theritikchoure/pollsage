@@ -28,7 +28,8 @@ router.get('/contributors', (req, res) => {
 })
 
 /** /polls - for polls related routes */
-router.use("/polls", requireAccessToken, pollRoutes);
+// router.use("/polls", requireAccessToken, pollRoutes);
+router.use("/polls", pollRoutes);
 
 /** /comments - for comments related routes */
 router.use("/comments", commentRoutes);

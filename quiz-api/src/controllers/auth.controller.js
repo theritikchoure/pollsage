@@ -141,8 +141,8 @@ async function login(req) {
     // If poll creator not found or password is incorrect, return error
     if (
       !pollCreator ||
-      !(await bcrypt.compare(password, pollCreator.password)) ||
-      !pollCreator.isVerified
+      !(await bcrypt.compare(password, pollCreator.password))
+      // || !pollCreator.isVerified
     ) {
       throw Error("Invalid email or password");
     }

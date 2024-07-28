@@ -28,10 +28,9 @@ import AdminLayout from "./views/admin/layout";
 import BackToTopButton from "./components/_back_to_top";
 import { trackPageView } from "./utils/tracking";
 import Unsubscribe from "./views/app/unsubscribe";
-import { setUpToken } from "./helpers/auth_token";
-import { getAuthToken, getUserDetails, isAuthenticated } from "./helpers/localstorage";
-import UserLogin from "./views/user/auth/login";
-import UserRegister from "./views/user/auth/register";
+import {
+  isAuthenticated,
+} from "./helpers/localstorage";
 import { deleteSessionId, sessionId } from "./utils/session";
 
 function App() {
@@ -42,7 +41,7 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
-    if(isAuthenticated()) {
+    if (isAuthenticated()) {
       setIsAuth(true);
       setAuth({
         user: isAuthenticated(),
@@ -52,11 +51,19 @@ function App() {
   }, [location]);
 
   useEffect(() => {
-    // Check if the WebSocket connection is already open
+    if (isAuth) {
+      setIsAuth(true);
+      setAuth({
+        user: isAuthenticated(),
+      });
+    }
+    setLoading(false);
+  }, [isAuth]);
+
+  useEffect(() => {
     if (socket.readyState === WebSocket.OPEN) {
       console.log("WebSocket connection is already open.");
     } else {
-      // If the connection is not open, then connect
       socket.connect();
       console.log("WebSocket connection ");
     }
@@ -67,19 +74,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if(location.pathname.includes("/admin")) {
-      return;
-    } else {
+    if (!location.pathname.includes("/admin")) {
       trackPageView({ url: location.pathname, referrer: document.referrer });
     }
   }, [location]);
 
-
-  console.log(isAuth);
-
   return (
     <>
-      {/* // <Router> */}
       <ToastContainer />
       <Suspense fallback={<Loader />}>
         {!loading && (
@@ -87,26 +88,17 @@ function App() {
             {/* Non-authenticated Routes */}
             {!isAuth && (
               <>
-                <Route path="/user/login" element={<UserLogin />} />
-                <Route path="/user/register" element={<UserRegister />} />
                 <Route
-                  path="/creator/login"
+                  path="/login"
                   element={<Login setIsAuth={setIsAuth} />}
                 />
-                <Route path="/creator/register" element={<Register />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/verify/:token" element={<EmailVerification />} />
+                <Route path="/forgot-password" element={<ForgetPassword />} />
                 <Route
-                  path="/creator/verify/:token"
-                  element={<EmailVerification />}
-                />
-                <Route
-                  path="/creator/forget-password"
-                  element={<ForgetPassword />}
-                />
-                <Route
-                  path="/creator/reset-password/:token"
+                  path="/reset-password/:token"
                   element={<ResetPassword />}
                 />
-
                 <Route
                   exact
                   path="/admin/loginxyz"
@@ -114,17 +106,15 @@ function App() {
                     <AdminLogin setIsAuth={setIsAuth} setAuth={setAuth} />
                   }
                 />
-
                 <Route exact path="/poll/:pollId" element={<ViewPoll />} />
                 <Route exact path="/results/:pollId" element={<PollResult />} />
-
                 <Route path="/404" element={<NotFound />} />
                 <Route exact path="*" element={<Layout />} />
               </>
             )}
 
             {/* Authenticated Routes */}
-            {isAuth && (
+            {isAuth && auth && auth.user && (
               <>
                 {auth.user.role === "creator" && (
                   <Route path="/creator/*" element={<CreatorLayout />} />
@@ -132,7 +122,6 @@ function App() {
                 {auth.user.role === "admin" && (
                   <Route exact path="/admin/*" element={<AdminLayout />} />
                 )}
-
                 <Route exact path="/poll/:pollId" element={<ViewPoll />} />
                 <Route exact path="/results/:pollId" element={<PollResult />} />
                 <Route path="/404" element={<NotFound />} />
@@ -141,48 +130,11 @@ function App() {
             )}
 
             <Route exact path="/unsubscribe" element={<Unsubscribe />} />
-
-            {/* Authenticated Routes */}
-            {/* {isAuth && auth.user.role === "creator" && (
-            <>
-              <Route path="/creator/*" element={<CreatorLayout />} />
-            </>
-          )} */}
-
-            {/* {isAuth && auth.user.role === "admin" && (
-            <>
-              <Route
-                path="/creator/*"
-                element={<Navigate to="/404" replace />}
-              />
-              <Route exact path="/admin/*" element={<AdminLayout />} />
-            </>
-          )} */}
-
-            {/* Common Routes */}
-            {/* <Route exact path="/" element={<Home />} /> */}
-            {/* <Route exact path="/create-poll" element={<CreatePoll />} />
-          <Route exact path="/404" element={<NotFound />} />
-          <Route exact path="/poll/:pollId" element={<ViewPoll />} />
-          <Route exact path="/results/:pollId" element={<PollResult />} />
-
-          <Route
-            exact
-            path="/admin/loginxyz"
-            element={<AdminLogin setIsAuth={setIsAuth} setAuth={setAuth} />}
-          />
-
-          <Route
-            exact
-            path="*"
-            element={<Layout isAuth={isAuth} auth={auth} />}
-          /> */}
           </Routes>
         )}
       </Suspense>
 
       <BackToTopButton />
-      {/* // </Router> */}
     </>
   );
 }

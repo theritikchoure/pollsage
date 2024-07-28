@@ -77,7 +77,7 @@ const PollList = () => {
     return polls.map((poll, index) => (
       <tr
         key={index}
-        className="bg-gray-50 h-16 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-900 text-gray-700 dark:text-gray-400"
+        className="bg-gray-50 h-16 hover:bg-gray-100 text-gray-700 "
       >
         <td className="px-4 py-3">
           <div className="flex items-center">
@@ -99,7 +99,7 @@ const PollList = () => {
         </td>
         <td className="px-4 py-3 text-sm">{poll.pollId}</td>
         <td className="px-4 py-3 text-xs">
-          <span className="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+          <span className="px-2 py-1 font-semibold leading-tight text-white bg-green-700 rounded-full">
             {" "}
             {poll.publish_status}{" "}
           </span>
@@ -130,7 +130,7 @@ const PollList = () => {
               {" "}
               <path
                 d="M15.985 8.5H8.207l-5.5 5.5a8 8 0 0 0 13.277-5.5zM2 13.292A8 8 0 0 1 7.5.015v7.778l-5.5 5.5zM8.5.015V7.5h7.485A8.001 8.001 0 0 0 8.5.015z"
-                fill="white"
+                fill="black"
               ></path>{" "}
             </svg>
           </Link>
@@ -211,16 +211,16 @@ const PollList = () => {
     <>
       <PageDetails title="Poll list - PollSage" description="Create Poll" />
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-slate-800 dark:text-slate-100 font-bold text-3xl">
+        <h1 className="text-slate-800 font-bold text-3xl">
           Poll list
         </h1>
         <div className="grid auto-cols-max justify-end grid-flow-col gap-3">
-          <button className="text-red-500 bg-slate-800 border border-gray-600 px-9 rounded items-center hover:bg-slate-900">Delete</button>
+          <button className="text-red-500 bg-gray-100 border border-gray-600 px-9 rounded items-center hover:bg-gray-200">Delete</button>
           <div className="relative">
-            <button className="bg-slate-800 inline-flex items-center justify-between px-4 py-1.5 border border-gray-600 rounded w-44 min-w-full">
+            <button className="bg-gray-100 text-black inline-flex items-center justify-between px-4 py-1.5 border border-gray-600 rounded w-44 min-w-full">
               <span className="flex items-center">
                 <svg
-                  className="h-3 w-3 shrink-0 mr-1 fill-current text-white"
+                  className="h-3 w-3 shrink-0 mr-1 fill-current text-black"
                   viewBox="0 0 16 16"
                 >
                   <path d="M15 2h-2V0h-2v2H9V0H7v2H5V0H3v2H1a1 1 0 00-1 1v12a1 1 0 001 1h14a1 1 0 001-1V3a1 1 0 00-1-1zm-1 12H2V6h12v8z"></path>
@@ -236,40 +236,40 @@ const PollList = () => {
                 <path d="M5.4 6.8L0 1.4 1.4 0l4 4 4-4 1.4 1.4z"></path>
               </svg>
             </button>
-            <div className="bg-slate-800 border border-slate-600 rounded absolute w-44 mt-2 text-md">
+            {/* <div className="bg-gray-100 text-black border border-slate-600 rounded absolute w-44 mt-2 text-md">
               <div className="text-md py-2">
-                <button className="flex pl-4 items-center mb-1 text-indigo-400 w-full h-8 hover:bg-slate-900">
+                <button className="flex pl-4 items-center mb-1 text-indigo-400 w-full h-8 hover:bg-gray-200">
                   <svg className="mr-2" fill="currentColor" width="12" height="9">
                     <path d="M10.28.28L3.989 6.575 1.695 4.28A1 1 0 00.28 5.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28.28z"></path>
                   </svg>
                   <span>Today</span>
                 </button>
-                <button className="flex items-center w-full hover:bg-slate-900 h-8">
+                <button className="flex items-center w-full hover:bg-gray-200 h-8">
                   <svg className="mr-2 invisible" width="12" height="9">
                     <path d="M10.28.28L3.989 6.575 1.695 4.28A1 1 0 00.28 5.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28.28z"></path>
                   </svg>
                   <span>Last 7 Days</span>
                 </button>
-                <button className="flex items-center w-full hover:bg-slate-900 h-8">
+                <button className="flex items-center w-full hover:bg-gray-200 h-8">
                   <svg className="mr-2 invisible" width="12" height="9">
                     <path d="M10.28.28L3.989 6.575 1.695 4.28A1 1 0 00.28 5.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28.28z"></path>
                   </svg>
                   <span>Last Month</span>
                 </button>
-                <button className="flex items-center w-full hover:bg-slate-900 h-8">
+                <button className="flex items-center w-full hover:bg-gray-200 h-8">
                   <svg className="mr-2 invisible" width="12" height="9">
                     <path d="M10.28.28L3.989 6.575 1.695 4.28A1 1 0 00.28 5.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28.28z"></path>
                   </svg>
                   <span>Last 12 Months</span>
                 </button>
-                <button className="flex items-center w-full hover:bg-slate-900 h-8">
+                <button className="flex items-center w-full hover:bg-gray-200 h-8">
                   <svg className="mr-2 invisible" width="12" height="9">
                     <path d="M10.28.28L3.989 6.575 1.695 4.28A1 1 0 00.28 5.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28.28z"></path>
                   </svg>
                   <span>All Time</span>
                 </button>
               </div>
-            </div>
+            </div> */}
           </div>
           <Link className="text-white bg-indigo-500 inline-flex items-center px-6 py-1.5 rounded"
             to="/creator/polls/create"
@@ -289,7 +289,7 @@ const PollList = () => {
         <div className="w-full overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="text-xs font-semibold h-16 tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+              <tr className="text-xs font-semibold h-16 tracking-wide text-left text-gray-500 uppercase border-b bg-gray-100 ">
                 <th className="px-4 py-3">Index</th>
                 <th className="px-4 py-3">Question</th>
                 <th className="px-4 py-3">Poll id</th>
@@ -301,7 +301,7 @@ const PollList = () => {
                 <th className="px-4 py-3">Action</th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-slate-800">
+            <tbody className="bg-white divide-y">
               {polls && renderList()}
             </tbody>
           </table>

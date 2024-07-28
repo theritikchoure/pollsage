@@ -30,13 +30,13 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="fixed flex flex-col left-0 w-14 hover:w-64 md:w-64 bg-[#1e293b] h-full text-white transition-all duration-300 border-none z-40 sidebar">
+    <div className="fixed flex flex-col left-0 w-14 hover:w-64 md:w-64 bg-gray-100 h-full text-black transition-all duration-300 border-none z-40 sidebar">
       <div className="overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow">
         <ul className="flex flex-col py-4 space-y-1">
           <li className="px-5 hidden md:block border-b pb-5 mb-5">
             <Link
               to="/"
-              className="text-lg font-semibold tracking-widest text-gray-100 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline"
+              className="text-lg font-semibold tracking-widest text-black uppercase rounded-lg focus:outline-none focus:shadow-outline"
             >
               PollSage
             </Link>
@@ -56,7 +56,7 @@ const Sidebar = () => {
           <li>
             <Link
               to="/creator/dashboard"
-              className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+              className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-indigo-300 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
             >
               <span className="inline-flex justify-center items-center ml-4">
                 <svg
@@ -83,7 +83,7 @@ const Sidebar = () => {
             <a
               onClick={(e) => handleSubMenu(e)}
               href="void:javascript()"
-              className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+              className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-indigo-300 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
             >
               <span className="inline-flex justify-center items-center ml-4">
                 <svg
@@ -120,7 +120,7 @@ const Sidebar = () => {
               <li className="">
                 <Link
                   to={"/creator/polls"}
-                  className="relative flex flex-row items-center px-12 h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+                  className="relative flex flex-row items-center px-12 h-11 focus:outline-none hover:bg-indigo-300 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
                 >
                   {" "}
                   List/All Polls
@@ -129,7 +129,7 @@ const Sidebar = () => {
               <li className="">
                 <Link
                   to={"/creator/polls/create"}
-                  className="relative flex flex-row items-center px-12 h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+                  className="relative flex flex-row items-center px-12 h-11 focus:outline-none hover:bg-indigo-300 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
                 >
                   {" "}
                   Add Poll
@@ -139,29 +139,8 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              to={"/creator/comments"}
-              className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
-            >
-              <span className="inline-flex justify-center items-center ml-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  className="w-5 h-5"
-                  viewBox="0 0 16 16"
-                >
-                  {" "}
-                  <path d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />{" "}
-                </svg>
-              </span>
-              <span className="ml-2 text-sm tracking-wide truncate">
-                Comments
-              </span>
-            </Link>
-          </li>
-          <li>
-            <Link
               to={"/creator/activity"}
-              className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+              className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-indigo-300 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
             >
               <span className="inline-flex justify-center items-center ml-4">
                 <svg
@@ -186,7 +165,7 @@ const Sidebar = () => {
             <a
               onClick={(e) => handleSubMenu(e)}
               href="void:javascript()"
-              className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+              className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-indigo-300 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
             >
               <span className="inline-flex justify-center items-center ml-4">
                 <svg
@@ -221,7 +200,7 @@ const Sidebar = () => {
               <li className="">
                 <Link
                   to={"/creator/emails/template/list"}
-                  className="relative flex flex-row items-center px-12 h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+                  className="relative flex flex-row items-center px-12 h-11 focus:outline-none hover:bg-indigo-300 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
                 >
                   {" "}
                   Email templates
@@ -230,7 +209,7 @@ const Sidebar = () => {
               <li className="">
                 <Link
                   to={"/creator/emails/template/create"}
-                  className="relative flex flex-row items-center px-12 h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+                  className="relative flex flex-row items-center px-12 h-11 focus:outline-none hover:bg-indigo-300 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
                 >
                   {" "}
                   Create templates
@@ -242,7 +221,7 @@ const Sidebar = () => {
             <a
               onClick={(e) => handleSubMenu(e)}
               href="#"
-              className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+              className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-indigo-300 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
             >
               <span className="inline-flex justify-center items-center ml-4">
                 <svg
@@ -275,7 +254,7 @@ const Sidebar = () => {
               <li className="">
                 <a
                   href="#"
-                  className="relative flex flex-row items-center px-12 h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+                  className="relative flex flex-row items-center px-12 h-11 focus:outline-none hover:bg-indigo-300 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
                 >
                   {" "}
                   Themes
@@ -284,7 +263,7 @@ const Sidebar = () => {
               <li className="">
                 <Link
                   to={"/creator/themes/create"}
-                  className="relative flex flex-row items-center px-12 h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+                  className="relative flex flex-row items-center px-12 h-11 focus:outline-none hover:bg-indigo-300 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
                 >
                   {" "}
                   Create theme
@@ -296,7 +275,7 @@ const Sidebar = () => {
             <a
               onClick={(e) => handleSubMenu(e)}
               href="void:javascript()"
-              className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+              className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-indigo-300 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
             >
               <span className="inline-flex justify-center items-center ml-4">
                 <svg
@@ -338,7 +317,7 @@ const Sidebar = () => {
               <li className="">
                 <Link
                   to={"/creator/settings/account"}
-                  className="relative flex flex-row items-center px-12 h-9 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+                  className="relative flex flex-row items-center px-12 h-9 focus:outline-none hover:bg-indigo-300 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
                 >
                   {" "}
                   My Account
@@ -347,7 +326,7 @@ const Sidebar = () => {
               <li className="">
                 <Link
                   to={"/creator/emails/template/create"}
-                  className="relative flex flex-row items-center px-12 h-9 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+                  className="relative flex flex-row items-center px-12 h-9 focus:outline-none hover:bg-indigo-300 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
                 >
                   {" "}
                   My Notifications
@@ -356,7 +335,7 @@ const Sidebar = () => {
               <li className="">
                 <Link
                   to={"/creator/settings/feedback"}
-                  className="relative flex flex-row items-center px-12 h-9 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+                  className="relative flex flex-row items-center px-12 h-9 focus:outline-none hover:bg-indigo-300 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
                 >
                   {" "}
                   Give Feedback
@@ -367,7 +346,7 @@ const Sidebar = () => {
           <li>
             <button
               onClick={handleLogout}
-              className="relative w-full flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+              className="relative w-full flex flex-row items-center h-11 focus:outline-none hover:bg-indigo-300 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
             >
               <span className="inline-flex justify-center items-center ml-4">
                 <svg
@@ -389,6 +368,86 @@ const Sidebar = () => {
                 Logout
               </span>
             </button>
+          </li>
+          <li className="px-5 hidden md:block">
+            <div className="flex flex-row items-center h-8">
+              <div className="text-sm font-light tracking-wide text-gray-500 uppercase">
+                Others
+              </div>
+            </div>
+          </li>
+          <li>
+            <Link
+              to="/creator/dashboard"
+              className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-indigo-300 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
+            >
+              <span className="inline-flex justify-center items-center ml-4">
+                <svg
+                  className="w-5 h-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 10.4V20M12 10.4C12 8.15979 12 7.03969 11.564 6.18404C11.1805 5.43139 10.5686 4.81947 9.81596 4.43597C8.96031 4 7.84021 4 5.6 4H4.6C4.03995 4 3.75992 4 3.54601 4.10899C3.35785 4.20487 3.20487 4.35785 3.10899 4.54601C3 4.75992 3 5.03995 3 5.6V16.4C3 16.9601 3 17.2401 3.10899 17.454C3.20487 17.6422 3.35785 17.7951 3.54601 17.891C3.75992 18 4.03995 18 4.6 18H7.54668C8.08687 18 8.35696 18 8.61814 18.0466C8.84995 18.0879 9.0761 18.1563 9.29191 18.2506C9.53504 18.3567 9.75977 18.5065 10.2092 18.8062L12 20M12 10.4C12 8.15979 12 7.03969 12.436 6.18404C12.8195 5.43139 13.4314 4.81947 14.184 4.43597C15.0397 4 16.1598 4 18.4 4H19.4C19.9601 4 20.2401 4 20.454 4.10899C20.6422 4.20487 20.7951 4.35785 20.891 4.54601C21 4.75992 21 5.03995 21 5.6V16.4C21 16.9601 21 17.2401 20.891 17.454C20.7951 17.6422 20.6422 17.7951 20.454 17.891C20.2401 18 19.9601 18 19.4 18H16.4533C15.9131 18 15.643 18 15.3819 18.0466C15.15 18.0879 14.9239 18.1563 14.7081 18.2506C14.465 18.3567 14.2402 18.5065 13.7908 18.8062L12 20"
+                    stroke="#000000"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+              <span className="ml-2 text-sm tracking-wide truncate">
+                Help center
+              </span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/creator/dashboard"
+              className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-indigo-300 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
+            >
+              <span className="inline-flex justify-center items-center ml-4">
+                <svg
+                  className="w-5 h-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 3C7.04 3 3 7.04 3 12C3 16.96 7.04 21 12 21C16.96 21 21 16.96 21 12C21 7.04 16.96 3 12 3ZM12 19.5C7.86 19.5 4.5 16.14 4.5 12C4.5 7.86 7.86 4.5 12 4.5C16.14 4.5 19.5 7.86 19.5 12C19.5 16.14 16.14 19.5 12 19.5ZM14.3 7.7C14.91 8.31 15.25 9.13 15.25 10C15.25 10.87 14.91 11.68 14.3 12.3C13.87 12.73 13.33 13.03 12.75 13.16V13.5C12.75 13.91 12.41 14.25 12 14.25C11.59 14.25 11.25 13.91 11.25 13.5V12.5C11.25 12.09 11.59 11.75 12 11.75C12.47 11.75 12.91 11.57 13.24 11.24C13.57 10.91 13.75 10.47 13.75 10C13.75 9.53 13.57 9.09 13.24 8.76C12.58 8.1 11.43 8.1 10.77 8.76C10.44 9.09 10.26 9.53 10.26 10C10.26 10.41 9.92 10.75 9.51 10.75C9.1 10.75 8.76 10.41 8.76 10C8.76 9.13 9.1 8.32 9.71 7.7C10.94 6.47 13.08 6.47 14.31 7.7H14.3ZM13 16.25C13 16.8 12.55 17.25 12 17.25C11.45 17.25 11 16.8 11 16.25C11 15.7 11.45 15.25 12 15.25C12.55 15.25 13 15.7 13 16.25Z"
+                    fill="#000000"
+                  />
+                </svg>
+              </span>
+              <span className="ml-2 text-sm tracking-wide truncate">FAQs</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/creator/dashboard"
+              className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-indigo-300 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6"
+            >
+              <span className="inline-flex justify-center items-center ml-4">
+                <svg
+                  className="w-5 h-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9 12L11 14L15 9.99999M20 12C20 16.4611 14.54 19.6937 12.6414 20.683C12.4361 20.79 12.3334 20.8435 12.191 20.8712C12.08 20.8928 11.92 20.8928 11.809 20.8712C11.6666 20.8435 11.5639 20.79 11.3586 20.683C9.45996 19.6937 4 16.4611 4 12V8.21759C4 7.41808 4 7.01833 4.13076 6.6747C4.24627 6.37113 4.43398 6.10027 4.67766 5.88552C4.9535 5.64243 5.3278 5.50207 6.0764 5.22134L11.4382 3.21067C11.6461 3.13271 11.75 3.09373 11.857 3.07827C11.9518 3.06457 12.0482 3.06457 12.143 3.07827C12.25 3.09373 12.3539 3.13271 12.5618 3.21067L17.9236 5.22134C18.6722 5.50207 19.0465 5.64243 19.3223 5.88552C19.566 6.10027 19.7537 6.37113 19.8692 6.6747C20 7.01833 20 7.41808 20 8.21759V12Z"
+                    stroke="#000000"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+              <span className="ml-2 text-sm tracking-wide truncate">
+                Privacy
+              </span>
+            </Link>
           </li>
         </ul>
       </div>

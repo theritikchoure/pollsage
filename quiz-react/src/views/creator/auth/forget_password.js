@@ -45,10 +45,13 @@ const Login = () => {
     }
   };
   return (
-    <section className="bg-[#F4F7FF] py-20 lg:py-[80px]">
-      <div className="container">
-        <div className="flex flex-wrap -mx-4">
-          <div className="w-full px-4">
+    <section
+      className="bg-gray-100 py-20 lg:py-[80px]"
+      style={{ height: "100vh" }}
+    >
+      <div className="container mx-auto px-4">
+        <div className="flex justify-center">
+          <div className="w-full max-w-[525px]">
             <div
               className="
                max-w-[525px]
@@ -131,12 +134,12 @@ const Login = () => {
               </Link>
               <p className="text-base text-[#adadad]">
                 Not a member yet? &nbsp;
-                <a
-                  href="/creator/register"
+                <Link
+                  to={links.register}
                   className="text-primary hover:underline"
                 >
                   Sign Up
-                </a>
+                </Link>
               </p>
             </div>
           </div>

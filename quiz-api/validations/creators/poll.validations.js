@@ -23,6 +23,7 @@ const createPollValidation = Joi.object({
   thank_you_message: Joi.string().allow(null).default(null),
   send_mail: Joi.boolean().default(false),
   logo: Joi.string().allow(null).default(null),
+  selected_theme: Joi.string().allow(null).default(null),
 });
 
 const updatePollValidation = Joi.object({
@@ -50,6 +51,7 @@ const updatePollValidation = Joi.object({
   thank_you_message: Joi.string().allow(null).default(null),
   send_mail: Joi.boolean().default(false),
   logo: Joi.string().allow(null).default(null),
+  selected_theme: Joi.string().allow(null).default(null),
 });
 
 module.exports = { createPollValidation, updatePollValidation };

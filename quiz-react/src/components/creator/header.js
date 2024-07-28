@@ -15,7 +15,7 @@ const CreatorHeader = () => {
   }
 
   return (
-    <header className="sticky top-0 bg-white dark:bg-[#182235] border-b border-slate-200 dark:border-slate-700 z-30">
+    <header className="sticky top-0 bg-gray-100 border-b border-slate-200 z-30">
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center h-16 pt-4">
           {/* <div className="flex"> */}

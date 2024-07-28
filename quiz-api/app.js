@@ -29,23 +29,7 @@ app.use((req, res, next) => {
 });
 
 // CORS middleware
-const frontendURL = env.FRONTEND_URL;
-const corsOptions = {
-  origin: frontendURL,
-};
-
-// Use CORS middleware with custom check
-app.use((req, res, next) => {
-  const origin = req.get('origin');
-  if (origin) {
-    // Allow requests from the frontendURL
-    return cors(corsOptions)(req, res, next);
-  } else {
-
-    console.log("CORS error");
-    return next();
-  }
-});
+app.use(cors());
 
 // Security headers middleware
 app.use(setSecurityHeaders);
@@ -67,7 +51,7 @@ app.use(passport.session());
 app.use(helmet());
 app.use(hpp());
 
-app.use(limiter);
+// app.use(limiter);
 
 // Middleware
 app.use(express.json());

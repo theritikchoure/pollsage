@@ -24,7 +24,7 @@ const CreatorLayout = () => {
   return (
     // <!-- component -->
     <div x-data="setup()">
-      <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-slate-900 text-black dark:text-white">
+      <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white text-black dark:text-white">
         {/* <!-- Sidebar --> */}
         <CreatorSidebar />
         {/* <!-- ./Sidebar --> */}

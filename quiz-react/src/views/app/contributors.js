@@ -76,7 +76,7 @@ const Home = () => {
         <div className="lg:px-48 lg:py-10">
           <div
             id="contributorsContainer"
-            class="grid grid-cols-2 lg:grid-cols-4 gap-4 mx-4 mb-4"
+            className="grid grid-cols-2 lg:grid-cols-4 gap-4 mx-4 mb-4"
           >
             {contributors.map((contributor) => {
               return (

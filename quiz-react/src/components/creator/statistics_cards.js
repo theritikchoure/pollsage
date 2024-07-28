@@ -47,7 +47,7 @@ const StatisticsCards = () => {
       )}
       {pollsOverview && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
-          <div className="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
+          <div className="bg-gray-100 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-200 text-black font-medium group">
             <div className="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
               <svg
                 width="30"
@@ -70,7 +70,7 @@ const StatisticsCards = () => {
               <p>Polls created</p>
             </div>
           </div>
-          <div className="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
+          <div className="bg-gray-100 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-200 text-black font-medium group">
             <div className="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
               <svg
                 width="30"
@@ -93,7 +93,7 @@ const StatisticsCards = () => {
               <p>Active polls</p>
             </div>
           </div>
-          <div className="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
+          <div className="bg-gray-100 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-200 text-black font-medium group">
             <div className="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
               <svg
                 width="30"
@@ -116,7 +116,7 @@ const StatisticsCards = () => {
               <p>Archived Polls</p>
             </div>
           </div>
-          <div className="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
+          <div className="bg-gray-100 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-200 text-black font-medium group">
             <div className="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
               <svg
                 width="30"
